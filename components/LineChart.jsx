@@ -18,14 +18,15 @@ const LineChart = ({ labels, values, title }) => {
     const [chartData, setChartData] = useState(null);
 
     const options = {
-        responsive: true,
-        plugins: {
-            legend: { position: 'top' },
-            title: {
-                display: !!title,
-                text: title,
-            },
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top' },
+        title: {
+          display: !!title,
+          text: title,
         },
+      },
     };
 
     useEffect(() => {
