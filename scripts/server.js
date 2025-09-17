@@ -28,7 +28,7 @@ db.connect(err => {
 
 app.get('/api/getAvgDataByYear', (req, res) => {
   const year = req.query.year;
-  const sqlQuery = 'SELECT * FROM hdb_resale_avg WHERE transact_year = ?';
+  const sqlQuery = 'SELECT * FROM hdb_resale_avg_year WHERE transact_year = ?';
   db.query(sqlQuery, [year], (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -36,7 +36,24 @@ app.get('/api/getAvgDataByYear', (req, res) => {
 });
 
 app.get('/api/getYear', (req, res) => {
-  const sqlQuery = 'SELECT DISTINCT(transact_year) FROM hdb_resale_avg ORDER BY transact_year DESC';
+  const sqlQuery = 'SELECT DISTINCT(transact_year) FROM hdb_resale_avg_year ORDER BY transact_year DESC';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getAvgDataByTown', (req, res) => {
+  const town = req.query.town;
+  const sqlQuery = 'SELECT * FROM hdb_resale_avg_town WHERE town = ?';
+  db.query(sqlQuery, [town], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getTown', (req, res) => {
+  const sqlQuery = 'SELECT DISTINCT(town) FROM hdb_resale_avg_town ORDER BY town ASC';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
