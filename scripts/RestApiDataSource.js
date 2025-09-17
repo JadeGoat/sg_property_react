@@ -1,8 +1,16 @@
-import React from 'react'
 import axios from 'axios';
 
 export const getAvgDataByYear = async (year, setData) => {
-    axios.get(`http://localhost:3001/api/data?year=${year}`)
+    axios.get(`http://localhost:3001/api/getAvgData?year=${year}`)
          .then(response => setData(response.data))
-         .catch(error => console.error('Error loading chart data:', error))
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
+export const getYear = async (setData) => {
+    axios.get(`http://localhost:3001/api/getYear`)
+         .then(response => {
+            const data = response.data;
+            setData(data.map(item => item.transact_year));
+         })
+         .catch(error => console.error('Error retrieving year data:', error))
 }

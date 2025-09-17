@@ -1,28 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getYear } from '../scripts/RestApiDataSource.js'
 import PlotAvgResalePriceChart from './PlotAvgResalePriceChart'
 
 const ViewResaleByYear = () => {
 
-    const [selectedYear, setSelectedYear] = useState('2025');
+    const [options, setOptions] = useState(null);
+    const [selectedYear, setSelectedYear] = useState('');
+
+    useEffect(() => {
+        getYear(setOptions);
+    }, []);
+
+    useEffect(() => {
+        if (options) {
+            setSelectedYear(options[0]);
+        }
+    }, [options]);
 
     const handleChange = (e) => {
         setSelectedYear(e.target.value);
     };
-
+    console.log(options);
     return (
         <div>
             <label htmlFor="year-select">Select Year:</label>
-            <select id="year-select" value={selectedYear} onChange={handleChange}>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-            <option value="2025">2025</option>
-            </select>
+            {options ?
+                <select id="year-select" value={selectedYear} onChange={handleChange}> 
+                    {options.map((year, index) => (
+                        <option key={index} value={year}>
+                            {year}
+                        </option>
+                    ))}
+                </select> : 
+                <p>Loading dropdown...</p>}
             <PlotAvgResalePriceChart year={selectedYear} />
         </div>
     )
