@@ -9,7 +9,7 @@ const ViewResaleByYear = () => {
     return (
         <div>
             <YearDropDown setParentComponentYear={setSelectedYear} />
-            <PlotAvgResalePriceHeatmap year={selectedYear}/>
+            <PlotAvgResalePriceHeatmap year={selectedYear} normalizeFlag={false}/>
             <PlotAvgResalePriceBarChart year={selectedYear} />
         </div>
     )
