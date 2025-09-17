@@ -1,4 +1,4 @@
-import ViewResaleByYear from '../pages/ViewResaleByYear'
+import Viewer from '../pages/Viewer'
 import './App.css'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <>
       <div>
         <h1>SG Property Viewer</h1>
-        <ViewResaleByYear/>
+        <Viewer/>
       </div>
     </>
   )
