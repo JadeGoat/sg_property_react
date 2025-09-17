@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import DropDownTown from '../components/DropDownTown'
+import PlotAvgResalePriceLineChart from './PlotAvgResalePriceLineChart'
 
 const ViewResaleByTown = () => {
 
-  const [selectedTown, setSelectedTown] = useState("");
-  return (
-    <div>
-      <h2>Under Construction</h2>
-      <DropDownTown setParentComponentTown={setSelectedTown} />
-    </div>
-  )
+    const [selectedTown, setSelectedTown] = useState("");
+    return (
+      <div>
+          <DropDownTown setParentComponentTown={setSelectedTown} />
+          <PlotAvgResalePriceLineChart year={selectedTown} />
+      </div>
+    )
 }
 
 export default ViewResaleByTown
