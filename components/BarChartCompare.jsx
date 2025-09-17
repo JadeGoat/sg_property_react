@@ -53,8 +53,7 @@ const BarChartCompare = ({ labels, values1, values2 }) => {
             backgroundColor: 'rgba(235, 54, 54, 1)',
             borderColor: 'rgba(235, 75, 54, 0.96)',
             borderWidth: 1
-        }
-        ]
+        }]
     });
   }, [labels, values1, values2]);
 
