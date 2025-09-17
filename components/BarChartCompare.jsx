@@ -14,7 +14,9 @@ import '../css/BarChartCompare.css'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const BarChartCompare = ({ labels, values1, values2 }) => {
+
   const [chartData, setChartData] = useState(null);
+  
   const options = {
     responsive: true,
     maintainAspectRatio: false,
