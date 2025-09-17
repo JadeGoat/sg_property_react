@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getAvgDataByYear } from '../scripts/RestApiDataSource.js'
-import Heatmap from '../components/Heatmap';
+import Heatmap from '../components/Heatmap.jsx';
 
-const PlotHeatmap = ({ year }) => {
+const PlotAvgResalePriceHeatmap = ({ year }) => {
 
   const [data, setData] = useState(null);
   const [heatmapPoints, setHeatmapPoints] = useState(null);
@@ -36,4 +36,4 @@ const PlotHeatmap = ({ year }) => {
   )
 }
 
-export default PlotHeatmap
+export default PlotAvgResalePriceHeatmap

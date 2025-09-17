@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAvgDataByYear } from '../scripts/RestApiDataSource.js'
 import BarChartCompare from '../components/BarChartCompare';
 
-const PlotAvgResalePriceChart = ({ year }) => {
+const PlotAvgResalePriceBarChart = ({ year }) => {
     const [data, setData] = useState(null);
     const [labels, setLabels] = useState(null);
     const [meanPrice, setMeanPrice] = useState(null);
@@ -65,4 +65,4 @@ const PlotAvgResalePriceChart = ({ year }) => {
   );
 };
 
-export default PlotAvgResalePriceChart;
+export default PlotAvgResalePriceBarChart;

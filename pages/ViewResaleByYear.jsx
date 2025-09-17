@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import YearDropDown from '../components/YearDropDown'
-import PlotAvgResalePriceChart from './PlotAvgResalePriceChart'
-import PlotHeatmap from './PlotHeatmap';
+import PlotAvgResalePriceBarChart from './PlotAvgResalePriceBarChart'
+import PlotAvgResalePriceHeatmap from './PlotAvgResalePriceHeatmap';
 
 const ViewResaleByYear = () => {
 
@@ -9,8 +9,8 @@ const ViewResaleByYear = () => {
     return (
         <div>
             <YearDropDown setParentComponentYear={setSelectedYear} />
-            <PlotHeatmap year={selectedYear}/>
-            <PlotAvgResalePriceChart year={selectedYear} />
+            <PlotAvgResalePriceHeatmap year={selectedYear}/>
+            <PlotAvgResalePriceBarChart year={selectedYear} />
         </div>
     )
 }
