@@ -13,7 +13,7 @@ import '../css/BarChartCompare.css'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChartCompare = ({ labels, values1, values2 }) => {
+const BarChartCompare = ({ labels, mean_values, median_values }) => {
 
   const [chartData, setChartData] = useState(null);
   
@@ -21,7 +21,7 @@ const BarChartCompare = ({ labels, values1, values2 }) => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { display: false },
+      legend: { position: 'top' },
       tooltip: { enabled: true }
     },
     scales: {
@@ -41,21 +41,21 @@ const BarChartCompare = ({ labels, values1, values2 }) => {
         labels,
         datasets: [
         {
-            label: 'Values1',
-            data: values1,
+            label: 'mean',
+            data: mean_values,
             backgroundColor: 'rgba(54, 162, 235, 0.6)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
         },
         {
-            label: 'Values2',
-            data: values2,
+            label: 'median',
+            data: median_values,
             backgroundColor: 'rgba(235, 54, 54, 1)',
             borderColor: 'rgba(235, 75, 54, 0.96)',
             borderWidth: 1
         }]
     });
-  }, [labels, values1, values2]);
+  }, [labels, mean_values, median_values]);
 
   return (
     <div className='barchart'>

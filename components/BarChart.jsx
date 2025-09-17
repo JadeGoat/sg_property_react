@@ -21,7 +21,7 @@ const BarChartCompare = ({ labels, values }) => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { display: false },
+      legend: { position: 'top' },
       tooltip: { enabled: true }
     },
     scales: {

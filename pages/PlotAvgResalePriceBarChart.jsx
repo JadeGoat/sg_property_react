@@ -37,29 +37,29 @@ const PlotAvgResalePriceBarChart = ({ year }) => {
       <h2>Resale Price (Mean vs Median)</h2>
       {meanPrice ? 
         <BarChartCompare labels={labels} 
-                         values1={meanPrice} 
-                         values2={medianPrice}/> : 
+                         mean_values={meanPrice} 
+                         median_values={medianPrice}/> : 
         <p>Loading chart...</p>}
       
       <h2>Resale Price Per Sqm (Mean vs Median)</h2>
       {meanPerSqm ? 
         <BarChartCompare labels={labels} 
-                         values1={meanPerSqm} 
-                         values2={medianPerSqm}/> : 
+                         mean_values={meanPerSqm} 
+                         median_values={medianPerSqm}/> : 
         <p>Loading chart...</p>}
       
       <h2>Resale Price Per Remaining Lease (Mean vs Median)</h2>
       {meanPerLease ? 
         <BarChartCompare labels={labels} 
-                         values1={meanPerLease} 
-                         values2={medianPerLease}/> : 
+                         mean_values={meanPerLease} 
+                         median_values={medianPerLease}/> : 
         <p>Loading chart...</p>}
 
       <h2>Resale Price Per Sqm Per Remaining Lease (Mean vs Median)</h2>
       {meanPerLease ? 
         <BarChartCompare labels={labels} 
-                         values1={meanPerSqmPerLease} 
-                         values2={medianPerSqmPerLease}/> : 
+                         mean_values={meanPerSqmPerLease} 
+                         median_values={medianPerSqmPerLease}/> : 
         <p>Loading chart...</p>}
     </div>
   );
