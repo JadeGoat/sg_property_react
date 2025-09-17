@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getAvgDataByYear } from '../scripts/RestApiDataSource.js'
 import BarChartCompare from '../components/BarChartCompare';
 
 const PlotAvgResalePriceChart = ({ year }) => {
+    const [data, setData] = useState(null);
     const [labels, setLabels] = useState(null);
     const [meanPrice, setMeanPrice] = useState(null);
     const [medianPrice, setMedianPrice] = useState(null);
@@ -14,21 +15,22 @@ const PlotAvgResalePriceChart = ({ year }) => {
     const [medianPerSqmPerLease, setMedianPerSqmPerLease] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/data?year=${year}`)
-        .then(response => {
-            const data = response.data;
-            setLabels(data.map(item => item.town));
-            setMeanPrice(data.map(item => item.resale_price_mean));
-            setMedianPrice(data.map(item => item.resale_price_median));
-            setMeanPerSqm(data.map(item => item.resale_per_sqm_mean));
-            setMedianPerSqm(data.map(item => item.resale_per_sqm_median));
-            setMeanPerLease(data.map(item => item.resale_per_lease_mean));
-            setMedianPerLease(data.map(item => item.resale_per_lease_median));
-            setMeanPerSqmPerLease(data.map(item => item.resale_per_sqm_per_lease_mean));
-            setMedianPerSqmPerLease(data.map(item => item.resale_per_sqm_per_lease_median));
-        })
-        .catch(error => console.error('Error loading chart data:', error));
+      getAvgDataByYear(year, setData);
     }, [year]);
+
+    useEffect(() => {
+      if (data) {
+        setLabels(data.map(item => item.town));
+        setMeanPrice(data.map(item => item.resale_price_mean));
+        setMedianPrice(data.map(item => item.resale_price_median));
+        setMeanPerSqm(data.map(item => item.resale_per_sqm_mean));
+        setMedianPerSqm(data.map(item => item.resale_per_sqm_median));
+        setMeanPerLease(data.map(item => item.resale_per_lease_mean));
+        setMedianPerLease(data.map(item => item.resale_per_lease_median));
+        setMeanPerSqmPerLease(data.map(item => item.resale_per_sqm_per_lease_mean));
+        setMedianPerSqmPerLease(data.map(item => item.resale_per_sqm_per_lease_median));
+      }
+    }, [data]);
 
   return (
     <div>
