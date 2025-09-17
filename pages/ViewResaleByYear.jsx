@@ -20,7 +20,7 @@ const ViewResaleByYear = () => {
     const handleChange = (e) => {
         setSelectedYear(e.target.value);
     };
-    console.log(options);
+    
     return (
         <div>
             <label htmlFor="year-select">Select Year:</label>
