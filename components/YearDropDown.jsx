@@ -15,7 +15,7 @@ const YearDropDown = ({ setParentComponentYear }) => {
             setSelectedYear(options[0]);
             setParentComponentYear(options[0]);
         }
-    }, [options]);
+    }, [options, setParentComponentYear]);
 
     const handleChange = (e) => {
         setSelectedYear(e.target.value);
