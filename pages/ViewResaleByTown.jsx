@@ -8,7 +8,7 @@ const ViewResaleByTown = () => {
     return (
       <div>
           <DropDownTown setParentComponentTown={setSelectedTown} />
-          <PlotAvgResalePriceLineChart year={selectedTown} />
+          <PlotAvgResalePriceLineChart town={selectedTown} />
       </div>
     )
 }

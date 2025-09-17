@@ -56,7 +56,8 @@ const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
           const tempAvgData = data.find(item => item.town === town.toUpperCase())
           if (tempAvgData) {
             // Add resale price to the copy of sgTown
-            tempHeatmap[town] = [lat, lon, tempAvgData.resale_price_mean/highestResalePrice.resale_price_mean]
+            const heatmapValue = tempAvgData.resale_price_mean / highestResalePrice.resale_price_mean
+            tempHeatmap[town] = [lat, lon, heatmapValue]
           }
           else {
             console.log("Missing town data: " + town)
@@ -72,7 +73,7 @@ const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
         // Update the copy of sgTowns to heatmap
         setHeatmapPoints(Object.values(tempHeatmap))
       }
-    }, [data]);
+    }, [data, normalizeFlag]);
 
   function normalizeValue(heatmapLookup) {
     // Step 1: Extract all z values
