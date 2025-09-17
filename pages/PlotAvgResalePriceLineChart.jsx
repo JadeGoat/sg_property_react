@@ -6,11 +6,31 @@ import LineChartCompare from '../components/LineChartCompare';
 const PlotAvgResalePriceLineChart = ({ town }) => {
     const [data, setData] = useState(null);
     const [labels, setLabels] = useState(null);
+
     const [twoRoomPrice, setTwoRoomPrice] = useState(null);
     const [threeRoomPrice, setThreeRoomPrice] = useState(null);
     const [fourRoomPrice, setFourRoomPrice] = useState(null);
     const [fiveRoomPrice, setFiveRoomPrice] = useState(null);
     const [executivePrice, setExecutivePrice] = useState(null);
+
+    const [twoRoomPerSqmPrice, setTwoRoomPerSqmPrice] = useState(null);
+    const [threeRoomPerSqmPrice, setThreeRoomPerSqmPrice] = useState(null);
+    const [fourRoomPerSqmPrice, setFourRoomPerSqmPrice] = useState(null);
+    const [fiveRoomPerSqmPrice, setFiveRoomPerSqmPrice] = useState(null);
+    const [executivePerSqmPrice, setExecutivePerSqmPrice] = useState(null);
+
+    const [twoRoomPerLeasePrice, setTwoRoomPerLeasePrice] = useState(null);
+    const [threeRoomPerLeasePrice, setThreeRoomPerLeasePrice] = useState(null);
+    const [fourRoomPerLeasePrice, setFourRoomPerLeasePrice] = useState(null);
+    const [fiveRoomPerLeasePrice, setFiveRoomPerLeasePrice] = useState(null);
+    const [executivePerLeasePrice, setExecutivePerLeasePrice] = useState(null);
+
+    const [twoRoomPerSqmPerLeasePrice, setTwoRoomPerSqmPerLeasePrice] = useState(null);
+    const [threeRoomPerSqmPerLeasePrice, setThreeRoomPerSqmPerLeasePrice] = useState(null);
+    const [fourRoomPerSqmPerLeasePrice, setFourRoomPerSqmPerLeasePrice] = useState(null);
+    const [fiveRoomPerSqmPerLeasePrice, setFiveRoomPerSqmPerLeasePrice] = useState(null);
+    const [executivePerSqmPerLeasePrice, setExecutivePerSqmPerLeasePrice] = useState(null);
+
     const sgFlats = ["2 room", "3 room", "4 room", "5 room", "Executive"]
 
     useEffect(() => {
@@ -31,6 +51,9 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
             if (tempAvgData) {
                 
                 var priceData = tempAvgData.map(item => item.resale_price_mean);
+                var pricePerSqmData = tempAvgData.map(item => item.resale_per_sqm_mean);
+                var pricePerLeaseData = tempAvgData.map(item => item.resale_per_lease_mean);
+                var pricePerSqmPerLeaseData = tempAvgData.map(item => item.resale_per_sqm_per_lease_mean);
                 const currentYearData = tempAvgData.map(item => item.transact_year);
                 
                 // Pre-filled with zero if length is not same
@@ -39,23 +62,50 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                         ...Array(Math.max(0, maxLength - priceData.length)).fill(0),
                         ...priceData
                     ];
+                    pricePerSqmData = [
+                        ...Array(Math.max(0, maxLength - pricePerSqmData.length)).fill(0),
+                        ...pricePerSqmData
+                    ];
+                    pricePerLeaseData = [
+                        ...Array(Math.max(0, maxLength - pricePerLeaseData.length)).fill(0),
+                        ...pricePerLeaseData
+                    ];
+                    pricePerSqmPerLeaseData = [
+                        ...Array(Math.max(0, maxLength - pricePerSqmPerLeaseData.length)).fill(0),
+                        ...pricePerSqmPerLeaseData
+                    ];
                 }
                 
                 // Set appropriate state based on type
-                if (flatType === "2 room") {
+                if (flatType === sgFlats[0]) {
                     setTwoRoomPrice(priceData);
+                    setTwoRoomPerSqmPrice(pricePerSqmData);
+                    setTwoRoomPerLeasePrice(pricePerLeaseData);
+                    setTwoRoomPerSqmPerLeasePrice(pricePerSqmPerLeaseData);
                 }
-                else if (flatType === "3 room") {
+                else if (flatType === sgFlats[1]) {
                     setThreeRoomPrice(priceData);
+                    setThreeRoomPerSqmPrice(pricePerSqmData);
+                    setThreeRoomPerLeasePrice(pricePerLeaseData);
+                    setThreeRoomPerSqmPerLeasePrice(pricePerSqmPerLeaseData);
                 }
-                else if (flatType === "4 room") {
+                else if (flatType === sgFlats[2]) {
                     setFourRoomPrice(priceData);
+                    setFourRoomPerSqmPrice(pricePerSqmData);
+                    setFourRoomPerLeasePrice(pricePerLeaseData);
+                    setFourRoomPerSqmPerLeasePrice(pricePerSqmPerLeaseData);
                 }
-                else if (flatType === "5 room") {
+                else if (flatType === sgFlats[3]) {
                     setFiveRoomPrice(priceData);
+                    setFiveRoomPerSqmPrice(pricePerSqmData);
+                    setFiveRoomPerLeasePrice(pricePerLeaseData);
+                    setFiveRoomPerSqmPerLeasePrice(pricePerSqmPerLeaseData);
                 }
-                else if (flatType === "Executive") {
+                else if (flatType === sgFlats[4]) {
                     setExecutivePrice(priceData);
+                    setExecutivePerSqmPrice(pricePerSqmData);
+                    setExecutivePerLeasePrice(pricePerLeaseData);
+                    setExecutivePerSqmPerLeasePrice(pricePerSqmPerLeaseData);
                 }
 
                 // Use the larger year data
@@ -73,29 +123,59 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
 
     return (
       <div>
+        <h2>Mean Resale Price</h2>
         <LineChartCompare labels={labels} 
                           values={[twoRoomPrice, 
                                    threeRoomPrice, 
                                    fourRoomPrice, 
                                    fiveRoomPrice, 
                                    executivePrice]} 
-                          title={["2 room", "3 room", "4 room", "5 room", "Executive"]} />
+                          title={sgFlats} />
 
-        {twoRoomPrice && twoRoomPrice.length > 0 ? 
-            <LineChart labels={labels} values={twoRoomPrice} title="2 room" /> : <></>
+        <h2>Mean Resale Price (Per Sqm Per Lease)</h2>
+        <LineChartCompare labels={labels} 
+                          values={[twoRoomPerSqmPerLeasePrice, 
+                                   threeRoomPerSqmPerLeasePrice, 
+                                   fourRoomPerSqmPerLeasePrice, 
+                                   fiveRoomPerSqmPerLeasePrice, 
+                                   executivePerSqmPerLeasePrice]} 
+                          title={sgFlats} />
+                          
+        <h2>Mean Resale Price (Per Sqm)</h2>
+        <LineChartCompare labels={labels} 
+                          values={[twoRoomPerSqmPrice, 
+                                   threeRoomPerSqmPrice, 
+                                   fourRoomPerSqmPrice, 
+                                   fiveRoomPerSqmPrice, 
+                                   executivePerSqmPrice]} 
+                          title={sgFlats} />
+        
+        <h2>Mean Resale Price (Per Lease)</h2>
+        <LineChartCompare labels={labels} 
+                          values={[twoRoomPerLeasePrice, 
+                                   threeRoomPerLeasePrice, 
+                                   fourRoomPerLeasePrice, 
+                                   fiveRoomPerLeasePrice, 
+                                   executivePerLeasePrice]} 
+                          title={sgFlats} />
+        
+        
+
+        {/* {twoRoomPrice && twoRoomPrice.length > 0 ? 
+            <LineChart labels={labels} values={twoRoomPrice} title={sgFlats[0]} /> : <></>
         }
         {threeRoomPrice && threeRoomPrice.length > 0 ? 
-            <LineChart labels={labels} values={threeRoomPrice} title="3 room" /> : <></>
+            <LineChart labels={labels} values={threeRoomPrice} title={sgFlats[1]} /> : <></>
         }
         {fourRoomPrice && fourRoomPrice.length > 0 ?
-            <LineChart labels={labels} values={fourRoomPrice} title="4 room" /> : <></>
+            <LineChart labels={labels} values={fourRoomPrice} title={sgFlats[2]} /> : <></>
         }
         {fiveRoomPrice && fiveRoomPrice.length > 0 ?
-            <LineChart labels={labels} values={fiveRoomPrice} title="5 room" /> : <></>
+            <LineChart labels={labels} values={fiveRoomPrice} title={sgFlats[3]} /> : <></>
         }
         {executivePrice && executivePrice.length > 0 ?
-            <LineChart labels={labels} values={executivePrice} title="Executive" /> : <></>
-        }
+            <LineChart labels={labels} values={executivePrice} title={sgFlats[4]} /> : <></>
+        } */}
       </div>
     )
 }
