@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getAvgDataByYear = async (year, setData) => {
-    axios.get(`http://localhost:3001/api/getAvgData?year=${year}`)
+    axios.get(`http://localhost:3001/api/getAvgDataByYear?year=${year}`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }

@@ -26,16 +26,18 @@ db.connect(err => {
   console.log('Connected to MySQL');
 });
 
-app.get('/api/getAvgData', (req, res) => {
+app.get('/api/getAvgDataByYear', (req, res) => {
   const year = req.query.year;
-  db.query('SELECT * FROM hdb_resale_avg WHERE transact_year = ?', [year], (err, results) => {
+  const sqlQuery = 'SELECT * FROM hdb_resale_avg WHERE transact_year = ?';
+  db.query(sqlQuery, [year], (err, results) => {
     if (err) throw err;
     res.json(results);
   });
 });
 
 app.get('/api/getYear', (req, res) => {
-  db.query('SELECT DISTINCT(transact_year) FROM hdb_resale_avg ORDER BY transact_year DESC',(err, results) => {
+  const sqlQuery = 'SELECT DISTINCT(transact_year) FROM hdb_resale_avg ORDER BY transact_year DESC';
+  db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
   });
