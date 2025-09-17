@@ -23,16 +23,6 @@ const BarChartCompare = ({ labels, values }) => {
     plugins: {
       legend: { position: 'top' },
       tooltip: { enabled: true }
-    },
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    },
-    interaction: {
-      mode: 'nearest',
-      axis: 'x',
-      intersect: false
     }
   };
 
