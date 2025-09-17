@@ -10,6 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import '../css/LineChart.css'
 
 ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
@@ -22,10 +23,7 @@ const LineChart = ({ labels, values, title }) => {
       maintainAspectRatio: false,
       plugins: {
         legend: { position: 'top' },
-        title: {
-          display: !!title,
-          text: title,
-        },
+        tooltip: { enabled: true }
       },
     };
 
@@ -44,7 +42,7 @@ const LineChart = ({ labels, values, title }) => {
     }, [labels, values, title]);
 
   return ( 
-    <div>
+    <div className='linechart'>
         {chartData ? <Line data={chartData} options={options}/> : <p>Loading chart...</p>}
     </div>
   );

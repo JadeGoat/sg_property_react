@@ -48,7 +48,7 @@ const BarChartCompare = ({ labels, mean_values, median_values }) => {
   }, [labels, mean_values, median_values]);
 
   return (
-    <div className='barchart'>
+    <div className='barchartcompare'>
       {chartData ? <Bar data={chartData} options={options}/> : <p>Loading chart...</p>}
     </div>
   );

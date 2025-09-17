@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAvgDataByTown } from '../scripts/RestApiDataSource.js'
 import LineChart from '../components/LineChart';
+import LineChartCompare from '../components/LineChartCompare';
 
 const PlotAvgResalePriceLineChart = ({ town }) => {
     const [data, setData] = useState(null);
@@ -72,6 +73,14 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
 
     return (
       <div>
+        <LineChartCompare labels={labels} 
+                          values={[twoRoomPrice, 
+                                   threeRoomPrice, 
+                                   fourRoomPrice, 
+                                   fiveRoomPrice, 
+                                   executivePrice]} 
+                          title={["2 room", "3 room", "4 room", "5 room", "Executive"]} />
+
         {twoRoomPrice && twoRoomPrice.length > 0 ? 
             <LineChart labels={labels} values={twoRoomPrice} title="2 room" /> : <></>
         }
