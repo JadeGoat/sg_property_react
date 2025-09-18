@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import DropDownTown from '../components/DropDownTown'
 import PlotAvgResalePriceLineChart from './PlotAvgResalePriceLineChart'
-import PlotAvgResaleLeaseBarChart from './PlotAvgResaleLeaseBarChart'
 
 const ViewResaleByTown = () => {
 
@@ -10,7 +9,6 @@ const ViewResaleByTown = () => {
       <div>
           <DropDownTown setParentComponentTown={setSelectedTown} />
           <PlotAvgResalePriceLineChart town={selectedTown} />
-          <PlotAvgResaleLeaseBarChart town={selectedTown} />
       </div>
     )
 }

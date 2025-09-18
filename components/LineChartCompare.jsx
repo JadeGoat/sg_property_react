@@ -22,7 +22,8 @@ const LineChartCompare = ({ labels, values, line_titles }) => {
       'rgba(75, 192, 151, 1)',
       'rgba(75, 186, 192, 1)',
       'rgba(75, 128, 192, 1)',
-      'rgba(91, 75, 192, 1)'
+      'rgba(91, 75, 192, 1)',
+      'rgba(192, 75, 75, 1)'
     ]
 
     const options = {

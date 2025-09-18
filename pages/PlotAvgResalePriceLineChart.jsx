@@ -30,6 +30,13 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
     const [fiveRoomPerSqmPerLeasePrice, setFiveRoomPerSqmPerLeasePrice] = useState(null);
     const [executivePerSqmPerLeasePrice, setExecutivePerSqmPerLeasePrice] = useState(null);
 
+    const [twoRoomLeaseRemaining, setTwoRoomLeaseRemaining] = useState(null);
+    const [threeRoomLeaseRemaining, setThreeRoomLeaseRemaining] = useState(null);
+    const [fourRoomLeaseRemaining, setFourRoomLeaseRemaining] = useState(null);
+    const [fiveRoomLeaseRemaining, setFiveRoomLeaseRemaining] = useState(null);
+    const [executiveLeaseRemaining, setExecutiveLeaseRemaining] = useState(null);
+    const [leaseRemainingHalfPointMark, setLeaseRemainingHalfPointMark] = useState(null);
+
     const sgFlats = ["2 room", "3 room", "4 room", "5 room", "Executive"]
 
     useEffect(() => {
@@ -53,8 +60,12 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                 var pricePerSqmData = tempAvgData.map(item => item.resale_per_sqm_mean);
                 var pricePerLeaseData = tempAvgData.map(item => item.resale_per_lease_mean);
                 var pricePerSqmPerLeaseData = tempAvgData.map(item => item.resale_per_sqm_per_lease_mean);
+                var leaseRemainingData = tempAvgData.map(item => item.lease_remaining_mean);
                 const currentYearData = tempAvgData.map(item => item.transact_year);
-                
+                const straightLine = Array(maxLength).fill(50);
+                console.log(straightLine)
+                setLeaseRemainingHalfPointMark(straightLine);
+
                 // Pre-filled with zero if length is not same
                 if (priceData.length > 0 && priceData.length < maxLength) {
                     priceData = [
@@ -73,6 +84,10 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                         ...Array(Math.max(0, maxLength - pricePerSqmPerLeaseData.length)).fill(0),
                         ...pricePerSqmPerLeaseData
                     ];
+                    leaseRemainingData = [
+                        ...Array(Math.max(0, maxLength - leaseRemainingData.length)).fill(0),
+                        ...leaseRemainingData
+                    ];
                 }
                 
                 // Set appropriate state based on type
@@ -81,30 +96,35 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                     setTwoRoomPerSqmPrice(pricePerSqmData);
                     setTwoRoomPerLeasePrice(pricePerLeaseData);
                     setTwoRoomPerSqmPerLeasePrice(pricePerSqmPerLeaseData);
+                    setTwoRoomLeaseRemaining(leaseRemainingData);
                 }
                 else if (flatType === sgFlats[1]) {
                     setThreeRoomPrice(priceData);
                     setThreeRoomPerSqmPrice(pricePerSqmData);
                     setThreeRoomPerLeasePrice(pricePerLeaseData);
                     setThreeRoomPerSqmPerLeasePrice(pricePerSqmPerLeaseData);
+                    setThreeRoomLeaseRemaining(leaseRemainingData);
                 }
                 else if (flatType === sgFlats[2]) {
                     setFourRoomPrice(priceData);
                     setFourRoomPerSqmPrice(pricePerSqmData);
                     setFourRoomPerLeasePrice(pricePerLeaseData);
                     setFourRoomPerSqmPerLeasePrice(pricePerSqmPerLeaseData);
+                    setFourRoomLeaseRemaining(leaseRemainingData);
                 }
                 else if (flatType === sgFlats[3]) {
                     setFiveRoomPrice(priceData);
                     setFiveRoomPerSqmPrice(pricePerSqmData);
                     setFiveRoomPerLeasePrice(pricePerLeaseData);
                     setFiveRoomPerSqmPerLeasePrice(pricePerSqmPerLeaseData);
+                    setFiveRoomLeaseRemaining(leaseRemainingData);
                 }
                 else if (flatType === sgFlats[4]) {
                     setExecutivePrice(priceData);
                     setExecutivePerSqmPrice(pricePerSqmData);
                     setExecutivePerLeasePrice(pricePerLeaseData);
                     setExecutivePerSqmPerLeasePrice(pricePerSqmPerLeaseData);
+                    setExecutiveLeaseRemaining(leaseRemainingData);
                 }
 
                 // Use the larger year data
@@ -122,6 +142,16 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
 
     return (
       <div>
+        <h2>Lease Remaining</h2>
+        <LineChartCompare labels={labels} 
+                          values={[twoRoomLeaseRemaining,
+                                   threeRoomLeaseRemaining,
+                                   fourRoomLeaseRemaining,
+                                   fiveRoomLeaseRemaining,
+                                   executiveLeaseRemaining,
+                                   leaseRemainingHalfPointMark]} 
+                          line_titles={[...sgFlats, "mid-point"]} />
+
         <h2>Mean Resale Price</h2>
         <LineChartCompare labels={labels} 
                           values={[twoRoomPrice, 
@@ -157,6 +187,8 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                                    fiveRoomPerLeasePrice, 
                                    executivePerLeasePrice]} 
                           line_titles={sgFlats} />
+
+        
       </div>
     )
 }
