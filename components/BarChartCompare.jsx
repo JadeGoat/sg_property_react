@@ -13,10 +13,18 @@ import '../css/BarChartCompare.css'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChartCompare = ({ labels, mean_values, median_values }) => {
+const BarChartCompare = ({ labels, values, bar_titles }) => {
 
   const [chartData, setChartData] = useState(null);
-  
+  const barColorArray = [
+    'rgba(54, 162, 235, 0.6)', 
+    'rgba(235, 54, 54, 1)'
+  ]
+  const barBorderColorArray = [
+    'rgba(54, 162, 235, 1)', 
+    'rgba(235, 75, 54, 0.96)'
+  ]
+
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -31,21 +39,21 @@ const BarChartCompare = ({ labels, mean_values, median_values }) => {
         labels,
         datasets: [
         {
-            label: 'mean',
-            data: mean_values,
-            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            label: bar_titles[0],
+            data: values[0],
+            backgroundColor: barColorArray[0],
+            borderColor: barBorderColorArray[0],
             borderWidth: 1
         },
         {
-            label: 'median',
-            data: median_values,
-            backgroundColor: 'rgba(235, 54, 54, 1)',
-            borderColor: 'rgba(235, 75, 54, 0.96)',
+            label: bar_titles[1],
+            data: values[1],
+            backgroundColor: barColorArray[1],
+            borderColor: barBorderColorArray[1],
             borderWidth: 1
         }]
     });
-  }, [labels, mean_values, median_values]);
+  }, [labels, values, bar_titles]);
 
   return (
     <div className='barchartcompare'>
