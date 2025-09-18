@@ -17,6 +17,13 @@ ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Title, T
 const LineChartCompare = ({ labels, values, title }) => {
 
     const [chartData, setChartData] = useState(null);
+    const colorArray = [
+      'rgba(79, 192, 75, 1)', 
+      'rgba(75, 192, 151, 1)',
+      'rgba(75, 186, 192, 1)',
+      'rgba(75, 128, 192, 1)',
+      'rgba(91, 75, 192, 1)'
+    ]
 
     const options = {
       responsive: true,
@@ -35,35 +42,35 @@ const LineChartCompare = ({ labels, values, title }) => {
                 label: title[0],
                 data: values[0],
                 fill: false,
-                borderColor: 'rgba(79, 192, 75, 1)',
+                borderColor: colorArray[0],
                 tension: 0.4,
             },
             {
                 label: title[1],
                 data: values[1],
                 fill: false,
-                borderColor: 'rgba(75, 192, 151, 1)',
+                borderColor: colorArray[1],
                 tension: 0.4,
             },
             {
                 label: title[2],
                 data: values[2],
                 fill: false,
-                borderColor: 'rgba(75, 186, 192, 1)',
+                borderColor: colorArray[2],
                 tension: 0.4,
             },
             {
                 label: title[3],
                 data: values[3],
                 fill: false,
-                borderColor: 'rgba(75, 128, 192, 1)',
+                borderColor: colorArray[3],
                 tension: 0.4,
             },
             {
                 label: title[4],
                 data: values[4],
                 fill: false,
-                borderColor: 'rgba(91, 75, 192, 1)',
+                borderColor: colorArray[4],
                 tension: 0.4,
             }]
         });
