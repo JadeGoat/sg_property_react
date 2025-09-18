@@ -63,7 +63,7 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                 var leaseRemainingData = tempAvgData.map(item => item.lease_remaining_mean);
                 const currentYearData = tempAvgData.map(item => item.transact_year);
                 const straightLine = Array(maxLength).fill(50);
-                console.log(straightLine)
+
                 setLeaseRemainingHalfPointMark(straightLine);
 
                 // Pre-filled with zero if length is not same
