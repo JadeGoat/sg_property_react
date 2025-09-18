@@ -35,44 +35,22 @@ const LineChartCompare = ({ labels, values, line_titles }) => {
     };
 
     useEffect(() => {
+
+      var datasetInfoArray = [];
+      for (var index=0; index<values.length; index++)
+      {
+        const datasetInfo = {
+          label: line_titles[index],
+          data: values[index],
+          fill: false,
+          borderColor: colorArray[index],
+          tension: 0.4,
+        }
+        datasetInfoArray.push(datasetInfo);
+      }
         setChartData({
             labels,
-            datasets: [
-            {
-                label: line_titles[0],
-                data: values[0],
-                fill: false,
-                borderColor: colorArray[0],
-                tension: 0.4,
-            },
-            {
-                label: line_titles[1],
-                data: values[1],
-                fill: false,
-                borderColor: colorArray[1],
-                tension: 0.4,
-            },
-            {
-                label: line_titles[2],
-                data: values[2],
-                fill: false,
-                borderColor: colorArray[2],
-                tension: 0.4,
-            },
-            {
-                label: line_titles[3],
-                data: values[3],
-                fill: false,
-                borderColor: colorArray[3],
-                tension: 0.4,
-            },
-            {
-                label: line_titles[4],
-                data: values[4],
-                fill: false,
-                borderColor: colorArray[4],
-                tension: 0.4,
-            }]
+            datasets: datasetInfoArray
         });
     }, [labels, values, line_titles]);
 

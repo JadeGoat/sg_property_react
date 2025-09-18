@@ -18,11 +18,17 @@ const BarChartCompare = ({ labels, values, bar_titles }) => {
   const [chartData, setChartData] = useState(null);
   const barColorArray = [
     'rgba(54, 162, 235, 0.6)', 
-    'rgba(235, 54, 54, 1)'
+    'rgba(235, 54, 54, 1)',
+    'rgba(54, 162, 235, 0.6)', 
+    'rgba(235, 54, 54, 1)',
+    'rgba(54, 162, 235, 0.6)'
   ]
   const barBorderColorArray = [
     'rgba(54, 162, 235, 1)', 
-    'rgba(235, 75, 54, 0.96)'
+    'rgba(235, 75, 54, 0.96)',
+    'rgba(54, 162, 235, 0.6)', 
+    'rgba(235, 54, 54, 1)',
+    'rgba(54, 162, 235, 0.6)'
   ]
 
   const options = {
@@ -35,24 +41,25 @@ const BarChartCompare = ({ labels, values, bar_titles }) => {
   };
 
   useEffect(() => {
+    
+    var datasetInfoArray = [];
+    for (var index=0; index<values.length; index++)
+    {
+      const datasetInfo = {
+            label: bar_titles[index],
+            data: values[index],
+            backgroundColor: barColorArray[index],
+            borderColor: barBorderColorArray[index],
+            borderWidth: 1
+      }
+      datasetInfoArray.push(datasetInfo);
+    }
+
     setChartData({
         labels,
-        datasets: [
-        {
-            label: bar_titles[0],
-            data: values[0],
-            backgroundColor: barColorArray[0],
-            borderColor: barBorderColorArray[0],
-            borderWidth: 1
-        },
-        {
-            label: bar_titles[1],
-            data: values[1],
-            backgroundColor: barColorArray[1],
-            borderColor: barBorderColorArray[1],
-            borderWidth: 1
-        }]
+        datasets: datasetInfoArray
     });
+    
   }, [labels, values, bar_titles]);
 
   return (
