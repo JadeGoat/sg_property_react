@@ -14,7 +14,7 @@ import '../css/LineChartCompare.css'
 
 ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
-const LineChartCompare = ({ labels, values, title }) => {
+const LineChartCompare = ({ labels, values, line_titles }) => {
 
     const [chartData, setChartData] = useState(null);
     const colorArray = [
@@ -39,42 +39,42 @@ const LineChartCompare = ({ labels, values, title }) => {
             labels,
             datasets: [
             {
-                label: title[0],
+                label: line_titles[0],
                 data: values[0],
                 fill: false,
                 borderColor: colorArray[0],
                 tension: 0.4,
             },
             {
-                label: title[1],
+                label: line_titles[1],
                 data: values[1],
                 fill: false,
                 borderColor: colorArray[1],
                 tension: 0.4,
             },
             {
-                label: title[2],
+                label: line_titles[2],
                 data: values[2],
                 fill: false,
                 borderColor: colorArray[2],
                 tension: 0.4,
             },
             {
-                label: title[3],
+                label: line_titles[3],
                 data: values[3],
                 fill: false,
                 borderColor: colorArray[3],
                 tension: 0.4,
             },
             {
-                label: title[4],
+                label: line_titles[4],
                 data: values[4],
                 fill: false,
                 borderColor: colorArray[4],
                 tension: 0.4,
             }]
         });
-    }, [labels, values, title]);
+    }, [labels, values, line_titles]);
 
   return ( 
     <div className='linechartcompare'>
