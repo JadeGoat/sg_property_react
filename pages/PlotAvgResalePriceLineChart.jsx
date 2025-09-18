@@ -129,7 +129,7 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                                    fourRoomPrice, 
                                    fiveRoomPrice, 
                                    executivePrice]} 
-                          title={sgFlats} />
+                          line_titles={sgFlats} />
 
         <h2>Mean Resale Price (Per Sqm Per Lease)</h2>
         <LineChartCompare labels={labels} 
@@ -138,7 +138,7 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                                    fourRoomPerSqmPerLeasePrice, 
                                    fiveRoomPerSqmPerLeasePrice, 
                                    executivePerSqmPerLeasePrice]} 
-                          title={sgFlats} />
+                          line_titles={sgFlats} />
                           
         <h2>Mean Resale Price (Per Sqm)</h2>
         <LineChartCompare labels={labels} 
@@ -147,7 +147,7 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                                    fourRoomPerSqmPrice, 
                                    fiveRoomPerSqmPrice, 
                                    executivePerSqmPrice]} 
-                          title={sgFlats} />
+                          line_titles={sgFlats} />
         
         <h2>Mean Resale Price (Per Lease)</h2>
         <LineChartCompare labels={labels} 
@@ -156,7 +156,7 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
                                    fourRoomPerLeasePrice, 
                                    fiveRoomPerLeasePrice, 
                                    executivePerLeasePrice]} 
-                          title={sgFlats} />
+                          line_titles={sgFlats} />
       </div>
     )
 }
