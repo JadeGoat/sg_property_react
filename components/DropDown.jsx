@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const DropDownTown = ({ options, desc, setParentComponent }) => {
+const DropDown = ({ options, desc, setParentComponent }) => {
 
     const [selectedValue, setSelectedValue] = useState('');
 
@@ -32,4 +32,4 @@ const DropDownTown = ({ options, desc, setParentComponent }) => {
     )
 }
 
-export default DropDownTown
+export default DropDown
