@@ -16,7 +16,7 @@ export const getYearInRental = async (setData) => {
     axios.get(`http://localhost:3001/api/getYearInRental`)
          .then(response => {
             const data = response.data;
-            setData(data.map(item => item.transact_year));
+            setData(data.map(item => item.approval_year));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
