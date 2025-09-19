@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAvgDataByYear } from '../scripts/RestApiDataSource.js'
+import { getResaleDataByYear } from '../scripts/RestApiDataSource.js'
 import Heatmap from '../components/Heatmap.jsx';
 
 const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
@@ -36,7 +36,7 @@ const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
   };
 
   useEffect(() => {
-    getAvgDataByYear(year, setData);
+    getResaleDataByYear(year, setData);
   }, [year]);
 
   useEffect(() => {

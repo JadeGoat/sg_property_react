@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAvgDataByTown } from '../scripts/RestApiDataSource.js'
+import { getResaleDataByTown } from '../scripts/RestApiDataSource.js'
 import LineChartCompare from '../components/LineChartCompare';
 
 const PlotAvgResalePriceLineChart = ({ town }) => {
@@ -40,7 +40,7 @@ const PlotAvgResalePriceLineChart = ({ town }) => {
     const sgFlats = ["2 room", "3 room", "4 room", "5 room", "Executive"]
 
     useEffect(() => {
-      getAvgDataByTown(town, setData);
+      getResaleDataByTown(town, setData);
     }, [town]);
 
     useEffect(() => {

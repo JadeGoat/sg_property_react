@@ -1,13 +1,19 @@
 import axios from 'axios';
 
-export const getAvgDataByYear = async (year, setData) => {
-    axios.get(`http://localhost:3001/api/getAvgDataByYear?year=${year}`)
+export const getRentalDataByYear = async (year, setData) => {
+    axios.get(`http://localhost:3001/api/getResaleDataByYear?year=${year}`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }
 
-export const getYear = async (setData) => {
-    axios.get(`http://localhost:3001/api/getYear`)
+export const getResaleDataByYear = async (year, setData) => {
+    axios.get(`http://localhost:3001/api/getResaleDataByYear?year=${year}`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
+export const getYearInResale = async (setData) => {
+    axios.get(`http://localhost:3001/api/getYearInResale`)
          .then(response => {
             const data = response.data;
             setData(data.map(item => item.transact_year));
@@ -15,14 +21,20 @@ export const getYear = async (setData) => {
          .catch(error => console.error('Error retrieving year data:', error))
 }
 
-export const getAvgDataByTown = async (town, setData) => {
-    axios.get(`http://localhost:3001/api/getAvgDataByTown?town=${town}`)
+export const getRentalDataByTown = async (town, setData) => {
+    axios.get(`http://localhost:3001/api/getResaleDataByTown?town=${town}`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }
 
-export const getTown = async (setData) => {
-    axios.get(`http://localhost:3001/api/getTown`)
+export const getResaleDataByTown = async (town, setData) => {
+    axios.get(`http://localhost:3001/api/getResaleDataByTown?town=${town}`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
+export const getTownInResale = async (setData) => {
+    axios.get(`http://localhost:3001/api/getTownInResale`)
          .then(response => {
             const data = response.data;
             setData(data.map(item => item.town));

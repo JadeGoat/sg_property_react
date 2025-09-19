@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getTown } from '../scripts/RestApiDataSource.js'
+import { getTownInResale } from '../scripts/RestApiDataSource.js'
 
 const DropDownTown = ({ setParentComponentTown }) => {
 
@@ -7,7 +7,7 @@ const DropDownTown = ({ setParentComponentTown }) => {
     const [selectedTown, setSelectedTown] = useState('');
 
     useEffect(() => {
-        getTown(setOptions);
+        getTownInResale(setOptions);
     }, []);
 
     useEffect(() => {

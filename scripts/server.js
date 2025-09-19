@@ -26,7 +26,16 @@ db.connect(err => {
   console.log('Connected to MySQL');
 });
 
-app.get('/api/getAvgDataByYear', (req, res) => {
+app.get('/api/getRentalDataByYear', (req, res) => {
+  const year = req.query.year;
+  const sqlQuery = 'SELECT * FROM hdb_rental_avg_year WHERE transact_year = ?';
+  db.query(sqlQuery, [year], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getResaleDataByYear', (req, res) => {
   const year = req.query.year;
   const sqlQuery = 'SELECT * FROM hdb_resale_avg_year WHERE transact_year = ?';
   db.query(sqlQuery, [year], (err, results) => {
@@ -35,7 +44,15 @@ app.get('/api/getAvgDataByYear', (req, res) => {
   });
 });
 
-app.get('/api/getYear', (req, res) => {
+app.get('/api/getYearInRental', (req, res) => {
+  const sqlQuery = 'SELECT DISTINCT(approval_year) FROM hdb_rental_avg_year ORDER BY transact_year DESC';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getYearInResale', (req, res) => {
   const sqlQuery = 'SELECT DISTINCT(transact_year) FROM hdb_resale_avg_year ORDER BY transact_year DESC';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
@@ -43,7 +60,16 @@ app.get('/api/getYear', (req, res) => {
   });
 });
 
-app.get('/api/getAvgDataByTown', (req, res) => {
+app.get('/api/getRentalDataByTown', (req, res) => {
+  const town = req.query.town;
+  const sqlQuery = 'SELECT * FROM hdb_rental_avg_town WHERE town = ?';
+  db.query(sqlQuery, [town], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getResaleDataByTown', (req, res) => {
   const town = req.query.town;
   const sqlQuery = 'SELECT * FROM hdb_resale_avg_town WHERE town = ?';
   db.query(sqlQuery, [town], (err, results) => {
@@ -52,7 +78,15 @@ app.get('/api/getAvgDataByTown', (req, res) => {
   });
 });
 
-app.get('/api/getTown', (req, res) => {
+app.get('/api/getTownInRental', (req, res) => {
+  const sqlQuery = 'SELECT DISTINCT(town) FROM hdb_rental_avg_town ORDER BY town ASC';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getTownInResale', (req, res) => {
   const sqlQuery = 'SELECT DISTINCT(town) FROM hdb_resale_avg_town ORDER BY town ASC';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;

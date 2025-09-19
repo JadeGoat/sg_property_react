@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getYear } from '../scripts/RestApiDataSource.js'
+import { getYearInResale } from '../scripts/RestApiDataSource.js'
 
 const DropDownYear = ({ setParentComponentYear }) => {
 
@@ -7,7 +7,7 @@ const DropDownYear = ({ setParentComponentYear }) => {
     const [selectedYear, setSelectedYear] = useState('');
 
     useEffect(() => {
-        getYear(setOptions);
+        getYearInResale(setOptions);
     }, []);
 
     useEffect(() => {

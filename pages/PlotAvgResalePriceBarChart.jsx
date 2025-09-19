@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAvgDataByYear } from '../scripts/RestApiDataSource.js'
+import { getResaleDataByYear } from '../scripts/RestApiDataSource.js'
 import BarChartCompare from '../components/BarChartCompare';
 
 const PlotAvgResalePriceBarChart = ({ year }) => {
@@ -15,7 +15,7 @@ const PlotAvgResalePriceBarChart = ({ year }) => {
     const [medianPerSqmPerLease, setMedianPerSqmPerLease] = useState(null);
 
     useEffect(() => {
-      getAvgDataByYear(year, setData);
+      getResaleDataByYear(year, setData);
     }, [year]);
 
     useEffect(() => {
