@@ -61,6 +61,7 @@ const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
           }
           else {
             console.log("Missing town data: " + town)
+            delete tempHeatmap[town]
           }
         }
 

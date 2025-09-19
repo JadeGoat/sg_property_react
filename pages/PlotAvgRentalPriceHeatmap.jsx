@@ -14,7 +14,7 @@ const PlotAvgRentalPriceHeatmap = ({ year, normalizeFlag }) => {
     "Bukit Merah": [1.2776, 103.8198],
     "Bukit Panjang": [1.3784, 103.7642],
     "Bukit Timah": [1.3294, 103.8021],
-    "Central Area": [1.2903, 103.8519],
+    "Central": [1.2903, 103.8519],
     "Choa Chu Kang": [1.3850, 103.7450],
     "Clementi": [1.3151, 103.7656],
     "Geylang": [1.3160, 103.8860],
@@ -30,7 +30,7 @@ const PlotAvgRentalPriceHeatmap = ({ year, normalizeFlag }) => {
     "Sengkang": [1.3911, 103.8950],
     "Serangoon": [1.3644, 103.8701],
     "Tampines": [1.3496, 103.9568],
-    "Tengah": [1.3857, 103.7052],
+    "Tengah": [1.3587, 103.7295],
     "Toa Payoh": [1.3345, 103.8490],
     "Woodlands": [1.4380, 103.7865],
     "Yishun": [1.4294, 103.8355]
@@ -62,6 +62,7 @@ const PlotAvgRentalPriceHeatmap = ({ year, normalizeFlag }) => {
           }
           else {
             console.log("Missing town data: " + town)
+            delete tempHeatmap[town]
           }
         }
 
@@ -70,7 +71,7 @@ const PlotAvgRentalPriceHeatmap = ({ year, normalizeFlag }) => {
           tempHeatmap = normalizeValue(tempHeatmap)
           console.log(Object.values(tempHeatmap))
         }
-      
+
         // Update the copy of sgTowns to heatmap
         setHeatmapPoints(Object.values(tempHeatmap))
       }
