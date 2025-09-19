@@ -1,4 +1,5 @@
 // For pages components
+import ViewRentalByYear from './ViewRentalByYear';
 import ViewRentalByTown from './ViewRentalByTown';
 import ViewResaleByYear from './ViewResaleByYear';
 import ViewResaleByTown from './ViewResaleByTown';
@@ -25,7 +26,7 @@ const Viewer = () => {
               </TabList>
               {/* Sub tab */}
               <TabPanel><ViewResaleByYear/></TabPanel>
-              <TabPanel></TabPanel>
+              <TabPanel><ViewRentalByYear/></TabPanel>
             </Tabs>
           </TabPanel>
 
