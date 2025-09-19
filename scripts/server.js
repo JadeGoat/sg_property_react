@@ -28,7 +28,7 @@ db.connect(err => {
 
 app.get('/api/getRentalDataByYear', (req, res) => {
   const year = req.query.year;
-  const sqlQuery = 'SELECT * FROM hdb_rental_avg_year WHERE transact_year = ?';
+  const sqlQuery = 'SELECT * FROM hdb_rental_avg_year WHERE approval_year = ?';
   db.query(sqlQuery, [year], (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -45,7 +45,7 @@ app.get('/api/getResaleDataByYear', (req, res) => {
 });
 
 app.get('/api/getYearInRental', (req, res) => {
-  const sqlQuery = 'SELECT DISTINCT(approval_year) FROM hdb_rental_avg_year ORDER BY transact_year DESC';
+  const sqlQuery = 'SELECT DISTINCT(approval_year) FROM hdb_rental_avg_year ORDER BY approval_year DESC';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
