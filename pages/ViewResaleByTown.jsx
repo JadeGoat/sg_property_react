@@ -1,14 +1,23 @@
-import { useState } from 'react';
-import DropDownTown from '../components/DropDownTown'
+import { useState, useEffect } from 'react';
+import { getTownInResale } from '../scripts/RestApiDataSource.js'
+import DropDown from '../components/DropDown.jsx'
 import PlotAvgResalePriceLineChart from './PlotAvgResalePriceLineChart'
 
 const ViewResaleByTown = () => {
 
+    const [options, setOptions] = useState([])
     const [selectedTown, setSelectedTown] = useState("");
+
+    useEffect(() => {
+        getTownInResale(setOptions);
+    }, []);
+
     return (
       <div>
-          <DropDownTown setParentComponentTown={setSelectedTown} />
-          <PlotAvgResalePriceLineChart town={selectedTown} />
+        <DropDown options={options} 
+                  desc={"Select Town:"} 
+                  setParentComponent={setSelectedTown} />
+        <PlotAvgResalePriceLineChart town={selectedTown} />
       </div>
     )
 }
