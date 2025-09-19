@@ -12,7 +12,7 @@ const ViewRentalByYear = () => {
     useEffect(() => {
       getYearInRental(setOptions);
     }, []);
-    console.log(options)
+
     return (
       <div>
         <DropDown options={options} 
