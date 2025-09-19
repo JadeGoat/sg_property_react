@@ -17,7 +17,12 @@ const ViewResaleByTown = () => {
         <DropDown options={options} 
                   desc={"Select Town:"} 
                   setParentComponent={setSelectedTown} />
-        <PlotAvgResalePriceLineChart town={selectedTown} />
+                  
+        {selectedTown != "" ?
+          <div>
+            <PlotAvgResalePriceLineChart town={selectedTown} />
+          </div>: <></>
+        }
       </div>
     )
 }
