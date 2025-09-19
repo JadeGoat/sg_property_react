@@ -30,7 +30,7 @@ const PlotAvgRentalPriceLineChart = ({ town }) => {
             // Filter out the flat type
             const tempAvgData = data.filter(item => item.flat_type === flatType.toUpperCase());
             if (tempAvgData) {
-                console.log(tempAvgData)
+
                 var rentData = tempAvgData.map(item => item.monthly_rent_mean);
                 const currentYearData = tempAvgData.map(item => item.approval_year);
 
