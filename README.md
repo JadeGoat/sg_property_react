@@ -38,3 +38,15 @@ node ./scripts/server.js
 npm run dev
 ```
 
+# Feature Log
+1. Add Resale price data feature viewable by
+   
+   a. Year
+
+   b. Town
+
+2. Add Rental price data feature viewable by
+
+   a. Year (WIP)
+
+   b. Town
