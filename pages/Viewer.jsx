@@ -1,4 +1,5 @@
 // For pages components
+import ViewRentalByTown from './ViewRentalByTown';
 import ViewResaleByYear from './ViewResaleByYear';
 import ViewResaleByTown from './ViewResaleByTown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -11,16 +12,34 @@ const Viewer = () => {
         <Tabs defaultIndex={0}>
           
           <TabList>
-            <Tab>View Resale By Year</Tab>
-            <Tab>View Resale By Town</Tab>
+            <Tab>View By Year</Tab>
+            <Tab>View By Town</Tab>
           </TabList>
 
           <TabPanel>
-            <ViewResaleByYear/>
+            {/* Main tab 1 */}
+            <Tabs>
+              <TabList>
+                <Tab>Resale</Tab>
+                <Tab>Rental</Tab>
+              </TabList>
+              {/* Sub tab */}
+              <TabPanel><ViewResaleByYear/></TabPanel>
+              <TabPanel></TabPanel>
+            </Tabs>
           </TabPanel>
 
           <TabPanel>
-            <ViewResaleByTown/>
+            {/* Main tab 2 */}
+            <Tabs>
+              <TabList>
+                  <Tab>Resale</Tab>
+                  <Tab>Rental</Tab>
+              </TabList>
+              {/* Sub tab */}
+              <TabPanel><ViewResaleByTown/></TabPanel>
+              <TabPanel><ViewRentalByTown/></TabPanel>
+            </Tabs>
           </TabPanel>
 
         </Tabs>
