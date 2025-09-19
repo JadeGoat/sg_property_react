@@ -30,6 +30,7 @@ const PlotAvgRentalPriceHeatmap = ({ year, normalizeFlag }) => {
     "Sengkang": [1.3911, 103.8950],
     "Serangoon": [1.3644, 103.8701],
     "Tampines": [1.3496, 103.9568],
+    "Tengah": [1.3857, 103.7052],
     "Toa Payoh": [1.3345, 103.8490],
     "Woodlands": [1.4380, 103.7865],
     "Yishun": [1.4294, 103.8355]
