@@ -96,7 +96,7 @@ const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
 
   return (
       <div>
-          <h2>SG Heatmap (Median)</h2>
+          <h2>Heatmap (Median)</h2>
           {heatmapPoints ?
             <Heatmap centerCoordinate={[1.3531, 103.8198]} 
                       zoomValue={11}

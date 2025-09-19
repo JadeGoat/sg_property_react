@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getYearInRental } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
-//import PlotAvgRentalPriceBarChart from './PlotAvgRentalPriceBarChart.jsx'
+import PlotAvgRentalPriceBarChart from './PlotAvgRentalPriceBarChart.jsx'
 import PlotAvgRentalPriceHeatmap from './PlotAvgRentalPriceHeatmap.jsx';
 
 const ViewRentalByYear = () => {
@@ -18,11 +18,11 @@ const ViewRentalByYear = () => {
         <DropDown options={options} 
                   desc={"Select Year:"} 
                   setParentComponent={setSelectedYear} />
-                  
+
         {selectedYear != "" ?
           <div>
             <PlotAvgRentalPriceHeatmap year={selectedYear} normalizeFlag={false}/>
-            {/* <PlotAvgRentalPriceBarChart year={selectedYear} /> */}
+            <PlotAvgRentalPriceBarChart year={selectedYear} />
           </div>: <></>
         }
       </div>
