@@ -47,6 +47,8 @@ npm run dev
 
 2. Add Rental price data feature viewable by
 
-   a. Year (WIP)
+   a. Year
 
    b. Town
+
+3. Carpark (WIP)
