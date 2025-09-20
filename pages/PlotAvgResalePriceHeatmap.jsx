@@ -67,7 +67,7 @@ const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
 
         if (normalizeFlag) {
           console.log(Object.values(tempHeatmap))
-          tempHeatmap = normalizeValue(tempHeatmap)
+          tempHeatmap = normalizeToRange(tempHeatmap)
           console.log(Object.values(tempHeatmap))
         }
       
@@ -76,19 +76,15 @@ const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
       }
     }, [data, normalizeFlag]);
 
-  function normalizeValue(heatmapLookup) {
-    // Step 1: Extract all z values
+  function normalizeToRange(heatmapLookup, minRange = 0.5, maxRange = 1) {
     const zValues = Object.values(heatmapLookup).map(([, , z]) => z);
-
-    // Step 2: Find min and max of z
-    const minZ = Math.min(...zValues);
-    const maxZ = Math.max(...zValues);
-    const offset = 0.5;
+    const min = Math.min(...zValues);
+    const max = Math.max(...zValues);
 
     // Step 3: Normalize only z
     for (const town in heatmapLookup) {
       const [x, y, z] = heatmapLookup[town];
-      const normZ = (z - minZ) / (maxZ - minZ || 1) + offset; // avoid divide by zero
+      const normZ = minRange + ((z - min) / (max - min)) * (maxRange - minRange);
       heatmapLookup[town] = [x, y, normZ];
     }
     
@@ -97,7 +93,10 @@ const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
 
   return (
       <div>
-          <h2>Heatmap (Median)</h2>
+          { normalizeFlag ? 
+              <h2>Heatmap (Median Normalized)</h2>:
+              <h2>Heatmap (Median)</h2>
+          }
           {heatmapPoints ?
             <Heatmap centerCoordinate={[1.3531, 103.8198]} 
                       zoomValue={11}

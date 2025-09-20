@@ -22,6 +22,7 @@ const ViewRentalByYear = () => {
         {selectedYear != "" ?
           <div>
             <PlotAvgRentalPriceHeatmap year={selectedYear} normalizeFlag={false}/>
+            <PlotAvgRentalPriceHeatmap year={selectedYear} normalizeFlag={true}/>
             <PlotAvgRentalPriceBarChart year={selectedYear} />
           </div>: <></>
         }
