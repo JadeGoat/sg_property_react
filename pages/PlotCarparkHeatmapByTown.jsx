@@ -49,7 +49,6 @@ const PlotCarparkHeatmapByTown = ({ town }) => {
 
   }, [town]);
 
-  console.log(town)
   useEffect(() => {
       if (data && data.length > 0) {
         setLocationPoints(data)
