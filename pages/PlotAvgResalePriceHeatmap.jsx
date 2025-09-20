@@ -66,9 +66,9 @@ const PlotAvgResalePriceHeatmap = ({ year, normalizeFlag }) => {
         }
 
         if (normalizeFlag) {
-          console.log(Object.values(tempHeatmap))
+          //console.log(Object.values(tempHeatmap))
           tempHeatmap = normalizeToRange(tempHeatmap)
-          console.log(Object.values(tempHeatmap))
+          //console.log(Object.values(tempHeatmap))
         }
       
         // Update the copy of sgTowns to heatmap
