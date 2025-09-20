@@ -3,6 +3,7 @@ import ViewRentalByYear from './ViewRentalByYear';
 import ViewRentalByTown from './ViewRentalByTown';
 import ViewResaleByYear from './ViewResaleByYear';
 import ViewResaleByTown from './ViewResaleByTown';
+import ViewCarparkByTown from './ViewCarparkByTown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
@@ -34,10 +35,12 @@ const Viewer = () => {
             {/* Main tab 2 */}
             <Tabs>
               <TabList>
+                  <Tab>Carpark</Tab>
                   <Tab>Resale</Tab>
                   <Tab>Rental</Tab>
               </TabList>
               {/* Sub tab */}
+               <TabPanel><ViewCarparkByTown/></TabPanel>
               <TabPanel><ViewResaleByTown/></TabPanel>
               <TabPanel><ViewRentalByTown/></TabPanel>
             </Tabs>

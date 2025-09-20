@@ -78,6 +78,15 @@ app.get('/api/getResaleDataByTown', (req, res) => {
   });
 });
 
+app.get('/api/getCarparkDataByTown', (req, res) => {
+  const town = req.query.town;
+  const sqlQuery = 'SELECT lat, lon, address as label FROM carpark_info_clean WHERE town = ?';
+  db.query(sqlQuery, [town], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 app.get('/api/getTownInRental', (req, res) => {
   const sqlQuery = 'SELECT DISTINCT(town) FROM hdb_rental_avg_town ORDER BY town ASC';
   db.query(sqlQuery, (err, results) => {
@@ -88,6 +97,14 @@ app.get('/api/getTownInRental', (req, res) => {
 
 app.get('/api/getTownInResale', (req, res) => {
   const sqlQuery = 'SELECT DISTINCT(town) FROM hdb_resale_avg_town ORDER BY town ASC';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getTownInCarpark', (req, res) => {
+  const sqlQuery = 'SELECT DISTINCT(town) FROM carpark_info_clean ORDER BY town ASC';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);

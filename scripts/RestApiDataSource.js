@@ -42,6 +42,12 @@ export const getResaleDataByTown = async (town, setData) => {
          .catch(error => console.error('Error retrieving data:', error))
 }
 
+export const getCarparkDataByTown = async (town, setData) => {
+    axios.get(`http://localhost:3001/api/getCarparkDataByTown?town=${town}`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
 export const getTownInRental = async (setData) => {
     axios.get(`http://localhost:3001/api/getTownInRental`)
          .then(response => {
@@ -53,6 +59,15 @@ export const getTownInRental = async (setData) => {
 
 export const getTownInResale = async (setData) => {
     axios.get(`http://localhost:3001/api/getTownInResale`)
+         .then(response => {
+            const data = response.data;
+            setData(data.map(item => item.town));
+         })
+         .catch(error => console.error('Error retrieving year data:', error))
+}
+
+export const getTownInCarpark = async (setData) => {
+    axios.get(`http://localhost:3001/api/getTownInCarpark`)
          .then(response => {
             const data = response.data;
             setData(data.map(item => item.town));
