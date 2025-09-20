@@ -26,7 +26,6 @@ const MapWithPins = ( {centerCoordinate, zoomValue, locations} ) => {
     shadowSize: [41, 41]
   });
 
-  console.log(locations)
   return (
     <MapContainer className='mapWithPinsContainer' center={centerCoordinate} zoom={zoomValue}>
       <TileLayer
