@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getCarparkDataByTown } from '../scripts/RestApiDataSource.js'
 import MapWithPins from '../components/MapWithPins.jsx';
 
-const PlotCarparkHeatmapByTown = ({ town }) => {
+const PlotCarparkMapByTown = ({ town }) => {
 
   const [data, setData] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
@@ -73,4 +73,4 @@ const PlotCarparkHeatmapByTown = ({ town }) => {
   )
 }
 
-export default PlotCarparkHeatmapByTown
+export default PlotCarparkMapByTown

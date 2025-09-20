@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getTownInCarpark } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
-import PlotCarparkHeatmapByTown from './PlotCarparkHeatmapByTown.jsx'
+import PlotCarparkMapByTown from './PlotCarparkMapByTown.jsx'
 
 const ViewCarparkByTown = () => {
   const [options, setOptions] = useState([])
@@ -19,7 +19,7 @@ const ViewCarparkByTown = () => {
                   
         {selectedTown != "" ?
           <div>
-            <PlotCarparkHeatmapByTown town={selectedTown} />
+            <PlotCarparkMapByTown town={selectedTown} />
           </div>: <></>
         }
       </div>
