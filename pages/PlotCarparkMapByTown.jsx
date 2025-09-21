@@ -64,9 +64,10 @@ const PlotCarparkMapByTown = ({ town }) => {
   return (
       <div>
           {locationPoints ?
-            <MapWithPins centerCoordinate={[selectedLat, selectedLon]} 
-                         zoomValue={15}
-                         locations={locationPoints}/>:
+            <MapWithPins centerCoordinate={[1.3778, 103.8554]} 
+                         zoomValue={13}
+                         locations={locationPoints}
+                         newCenter={[selectedLat, selectedLon]} />:
             <p>Loading map with pins...</p>
           }
       </div>
