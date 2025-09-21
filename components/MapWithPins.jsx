@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
-
+import PinsLayer from './PinsLayer';
 import 'leaflet.heat';
 import 'leaflet/dist/leaflet.css';
 import '../css/MapWithPins.css'
