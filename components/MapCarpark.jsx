@@ -5,9 +5,9 @@ import PinsLayer from './PinsLayer';
 import PinsLegendLayer from './LegendLayer';
 import 'leaflet.heat';
 import 'leaflet/dist/leaflet.css';
-import '../css/MapWithPins.css'
+import '../css/MapCarpark.css'
 
-const CarparkMap = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
+const MapCarpark = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
 
   function RecenterMap({ center }) {
     const map = useMap();
@@ -33,7 +33,7 @@ const CarparkMap = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
       `
 
     return (
-      <MapContainer className='carparkMapContainers' center={centerCoordinate} zoom={zoomValue}>
+      <MapContainer className='mapCarparkContainer' center={centerCoordinate} zoom={zoomValue}>
         <RecenterMap center={newCenter} />
         <TileLayer
           attribution='&copy; OpenStreetMap contributors'
@@ -45,4 +45,4 @@ const CarparkMap = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
     );
 };
 
-export default CarparkMap;
+export default MapCarpark;

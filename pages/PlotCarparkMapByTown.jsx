@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCarparkDataByTown } from '../scripts/RestApiDataSource.js'
-import CarparkMap from '../components/CarparkMap.jsx';
+import MapCarpark from '../components/MapCarpark.jsx';
 
 const PlotCarparkMapByTown = ({ town }) => {
 
@@ -64,7 +64,7 @@ const PlotCarparkMapByTown = ({ town }) => {
   return (
       <div>
           {locationPoints ?
-            <CarparkMap centerCoordinate={[1.3778, 103.8554]} 
+            <MapCarpark centerCoordinate={[1.3778, 103.8554]} 
                         zoomValue={13}
                         locations={locationPoints}
                         newCenter={[selectedLat, selectedLon]} />:
