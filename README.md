@@ -39,16 +39,24 @@ npm run dev
 ```
 
 # Feature Log
-1. Add Resale price data feature viewable by
+1. Added Resale price data feature viewable by
    
    a. Year
 
    b. Town
 
-2. Add Rental price data feature viewable by
+   ![Alt text](./images/sample_heatmap.png)
+   ![Alt text](./images/sample_barchart.png)
+   ![Alt text](./images/sample_linechart.png)
+
+2. Added Rental price data feature viewable by
 
    a. Year
 
    b. Town
 
-3. Carpark (WIP)
+3. Added Carpark location viewable by
+   
+   a. Town
+
+   ![Alt text](./images/sample_map_with_pins.png)
