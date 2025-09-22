@@ -146,31 +146,31 @@ export function extractPostalCodeFromMetaData(geoJsonData) {
     const metaData = geoJsonData.features.map(item => item.properties);
     const metaPostalCodeData = metaData.map(item => {
 
-    // Parse the html content in the meta block
-    const doc =  parser.parseFromString(item.Description, 'text/html');
-    const rows = doc.querySelectorAll('table tr');
+        // Parse the html content in the meta block
+        const doc =  parser.parseFromString(item.Description, 'text/html');
+        const rows = doc.querySelectorAll('table tr');
 
-    // Look through all table rows and extract cell value where row header is postal code
-    let postal_code = null;
-    let address = null;
-    rows.forEach(row => {
-        const rowDesc = row.querySelectorAll('th');
-        const rowValue = row.querySelectorAll('td');
-        if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'ADDRESSPOSTALCODE') {
-            const tempValue =  rowValue[0].textContent.trim()
-            if (tempValue.length === 5) {
-                 postal_code = "0" + rowValue[0].textContent.trim();
+        // Look through all table rows and extract cell value where row header is postal code
+        let postal_code = null;
+        let address = null;
+        rows.forEach(row => {
+            const rowDesc = row.querySelectorAll('th');
+            const rowValue = row.querySelectorAll('td');
+            if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'ADDRESSPOSTALCODE') {
+                const tempValue =  rowValue[0].textContent.trim()
+                if (tempValue.length === 5) {
+                    postal_code = "0" + rowValue[0].textContent.trim();
+                }
+                else {
+                    postal_code = rowValue[0].textContent.trim();
+                }
             }
-            else {
-                postal_code = rowValue[0].textContent.trim();
+            if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'ADDRESSSTREETNAME') {
+                address = rowValue[0].textContent.trim();
             }
-        }
-        if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'ADDRESSSTREETNAME') {
-            address = rowValue[0].textContent.trim();
-        }
-    });
+        });
 
-    return { postal_code, address }
+        return { postal_code, address }
     });
 
     return metaPostalCodeData;
