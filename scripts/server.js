@@ -80,7 +80,8 @@ app.get('/api/getResaleDataByTown', (req, res) => {
 
 app.get('/api/getCarparkDataByTown', (req, res) => {
   const town = req.query.town;
-  const sqlQuery = 'SELECT lat, lon, address as label, postal_code FROM carpark_info_clean2 WHERE town = ?';
+  const sqlQuery = 'SELECT lat, lon, address as label, short_term_parking, free_parking, postal_code as status ' +
+                   'FROM carpark_info_clean2 WHERE town = ?';
   db.query(sqlQuery, [town], (err, results) => {
     if (err) throw err;
     res.json(results);

@@ -23,13 +23,45 @@ const PinsLayer = ( {locations} ) => {
         shadowSize: [41, 41]
       });
 
+      const redIconWithDollar = L.icon({
+        iconUrl: '../images/marker-icon-red-dollar.png',
+        shadowUrl: '../images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+
+      // Green icon
+      const greenIcon = L.icon({
+        iconUrl: '../images/marker-icon-green.png',
+        shadowUrl: '../images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+
+      const greenIconWithDollar = L.icon({
+        iconUrl: '../images/marker-icon-green-dollar.png',
+        shadowUrl: '../images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+
   return (
     <div>
         {
             locations.map((loc, idx) => (
             <Marker key={idx} 
                     position={[loc.lat, loc.lon]}
-                    icon={loc.postal_code === "Unknown" ? redIcon : defaultIcon} >
+                    // icon={loc.status === "Unknown" ? redIcon : defaultIcon}
+                    icon={loc.short_term_parking === "NO" && loc.free_parking === "NO" ? redIconWithDollar :
+                          loc.short_term_parking === "NO" && loc.free_parking !== "NO"?  redIcon : 
+                          loc.short_term_parking !== "NO" && loc.free_parking === "NO"?  greenIconWithDollar :
+                          loc.short_term_parking !== "NO" && loc.free_parking !== "NO"?  greenIcon : defaultIcon} >
                 <Popup>{loc.label}</Popup>
             </Marker>
         ))}
