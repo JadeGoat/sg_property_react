@@ -19,6 +19,7 @@ const PlotChildAndElderlyCareMapByTown = ({ town }) => {
         setSelectedLon(latlon[1]);
     }, [town]);
 
+    // TODO: To rework on this
     useEffect(() => {
         fetch('../data/child_care_data.geojson')
             .then(res => res.json())

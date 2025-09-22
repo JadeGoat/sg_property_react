@@ -1,4 +1,3 @@
-
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { RecenterMap } from '../scripts/MapUtils.js'
 import PinsLayer from './PinsLayer';
