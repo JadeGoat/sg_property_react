@@ -1,5 +1,5 @@
 # Setup
-To be use together with sg_property_datapipeline project
+Important Note: To be use together with sg_property_datapipeline project
 
 #### Installing node packages
 a. Using repo package.json
