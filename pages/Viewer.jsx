@@ -46,24 +46,28 @@ const Viewer = () => {
               <TabPanel><ViewRentalByTown/></TabPanel>
 
               {/* Sub tab - Transport */}
-              <Tabs>
-                <TabList>
-                  <Tab>Carpark</Tab>
-                  <Tab>Bus Stop</Tab>
-                </TabList>
-                <TabPanel><ViewCarparkByTown/></TabPanel>
-                <TabPanel></TabPanel>
-              </Tabs>
+              <TabPanel>
+                <Tabs>
+                  <TabList>
+                    <Tab>Carpark</Tab>
+                    <Tab>Bus Stop</Tab>
+                  </TabList>
+                  <TabPanel><ViewCarparkByTown/></TabPanel>
+                  <TabPanel></TabPanel>
+                </Tabs>
+              </TabPanel>
              
               {/* Sub tab - Child/Elderly Care */}
-              <Tabs>
-                <TabList>
-                  <Tab>Child Care</Tab>
-                  <Tab>Elderly Care</Tab>
-                </TabList>
-                <TabPanel><ViewChildCareByTown/></TabPanel>
-                <TabPanel></TabPanel>
-              </Tabs>
+              <TabPanel>
+                <Tabs>
+                  <TabList>
+                    <Tab>Child Care</Tab>
+                    <Tab>Elderly Care</Tab>
+                  </TabList>
+                  <TabPanel><ViewChildCareByTown/></TabPanel>
+                  <TabPanel></TabPanel>
+                </Tabs>
+              </TabPanel>
             </Tabs>
           </TabPanel>
 
