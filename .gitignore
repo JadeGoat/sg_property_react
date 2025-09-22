@@ -23,4 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# data folder
+data
+
+# env file
 .env
