@@ -11,7 +11,7 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue, childCareData, el
         <p><b>Pin Legend</b></p>
         <section>
             <div>
-              <div style="background-color:lightgreen; width:10px; height:10px; 
+              <div style="background-color:orange; width:10px; height:10px; 
                    border-radius:50%; border:1px solid white;">
               </div>
               <i>Child Care</i>
@@ -25,10 +25,10 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue, childCareData, el
         <section>
       `
 
-    const greenPointToLayer = (feature, latlng) => {
+    const orangePointToLayer = (feature, latlng) => {
       const icon = L.divIcon({
         className: 'custom-icon',
-        html: `<div style="background-color:lightgreen; width:10px; height:10px; 
+        html: `<div style="background-color:orange; width:10px; height:10px; 
                     border-radius:50%; border:1px solid white;"></div>`,
         iconSize: [20, 20],
         iconAnchor: [10, 10]
@@ -54,8 +54,8 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue, childCareData, el
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
         />
-        <GeoJSON data={childCareData} pointToLayer={greenPointToLayer} />
-        <GeoJSON data={elderlyCareData} pointToLayer={bluePointToLayer} />
+        <GeoJSON key={JSON.stringify(childCareData)} data={childCareData} pointToLayer={orangePointToLayer} />
+        <GeoJSON key={JSON.stringify(elderlyCareData)} data={elderlyCareData} pointToLayer={bluePointToLayer} />
         <PinsLegendLayer legendHtml={legendHtml} />
       </MapContainer>
     )
