@@ -49,7 +49,7 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue, childCareData, el
 
     return (
       <MapContainer className='mapChildAndElderlyCareContainer' center={centerCoordinate} zoom={zoomValue}>
-        {/* <RecenterMap center={newCenter} /> */}
+        <RecenterMap center={newCenter} />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
