@@ -3,7 +3,7 @@ import L from 'leaflet';
 
 const PinsLayer = ( {locations} ) => {
 
-    // Default blue icon (same as Leaflet's default)
+      // Default blue icon (same as Leaflet's default)
       const defaultIcon = L.icon({
         iconUrl: '../images/marker-icon.png',
         shadowUrl: '../images/marker-shadow.png',
@@ -23,6 +23,7 @@ const PinsLayer = ( {locations} ) => {
         shadowSize: [41, 41]
       });
 
+      // Red icon (variant)
       const redIconWithDollar = L.icon({
         iconUrl: '../images/marker-icon-red-dollar.png',
         shadowUrl: '../images/marker-shadow.png',
@@ -42,6 +43,7 @@ const PinsLayer = ( {locations} ) => {
         shadowSize: [41, 41]
       });
 
+      // Green icon (variant)
       const greenIconWithDollar = L.icon({
         iconUrl: '../images/marker-icon-green-dollar.png',
         shadowUrl: '../images/marker-shadow.png',
@@ -57,7 +59,7 @@ const PinsLayer = ( {locations} ) => {
             locations.map((loc, idx) => (
             <Marker key={idx} 
                     position={[loc.lat, loc.lon]}
-                    // icon={loc.status === "Unknown" ? redIcon : defaultIcon}
+                    // icon={loc.status === "Unknown" ? redIcon : defaultIcon} // Debug purpose
                     icon={loc.short_term_parking === "NO" && loc.free_parking === "NO" ? redIconWithDollar :
                           loc.short_term_parking === "NO" && loc.free_parking !== "NO"?  redIcon : 
                           loc.short_term_parking !== "NO" && loc.free_parking === "NO"?  greenIconWithDollar :
