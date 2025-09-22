@@ -1,14 +1,58 @@
+import { useEffect, useState } from 'react';
 import MapChildAndElderlyCare from '../components/MapChildAndElderlyCare.jsx';
+import { extractPostalCodeFromMetaData, filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
+import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
-const PlotChildAndElderlyCareMapByTown = ({ childCareData, elderlyCareData }) => {
+const PlotChildAndElderlyCareMapByTown = ({ town }) => {
+
+    const [selectedLat, setSelectedLat] = useState(null);
+    const [selectedLon, setSelectedLon] = useState(null);
+
+    const [childCareData, setChildCareData] = useState(null);
+    const [elderlyCareData, setElderlyCareData] = useState(null);
+    const [selectedChildCareData, setSelectedChildCareData] = useState(null);
+    const [selectedElderlyCareData, setSelectedElderlyCareData] = useState(null);
+
+    useEffect(() => {
+        const latlon = getTownLatLon(town)
+        setSelectedLat(latlon[0]);
+        setSelectedLon(latlon[1]);
+    }, [town]);
+
+    useEffect(() => {
+        fetch('../data/child_care_data.geojson')
+            .then(res => res.json())
+            .then(data  => setChildCareData(data));
+
+        fetch('../data/elderly_care_data.geojson')
+            .then(res => res.json())
+            .then(data  => setElderlyCareData(data));
+    }, []);
+
+    useEffect(() => {
+
+      if (childCareData) {
+        const metaPostalCodeData = extractPostalCodeFromMetaData(childCareData)
+        const filteredChildCareData = filterGeoJsonData(childCareData, metaPostalCodeData, town)
+        setSelectedChildCareData(filteredChildCareData);
+      };
+
+      if (elderlyCareData) {
+        const metaPostalCodeData = extractPostalCodeFromMetaData(elderlyCareData)
+        const filteredElderlyCareData = filterGeoJsonData(elderlyCareData, metaPostalCodeData, town)
+        setSelectedElderlyCareData(filteredElderlyCareData);
+      };
+
+    }, [childCareData, elderlyCareData, town]);
 
     return (
         <div>
-            {childCareData && elderlyCareData ?
+            {selectedChildCareData && selectedElderlyCareData ?
                 <MapChildAndElderlyCare centerCoordinate={[1.3778, 103.8554]} 
-                                        zoomValue={11} 
-                                        childCareData={childCareData}
-                                        elderlyCareData={elderlyCareData} />:
+                                        zoomValue={13} 
+                                        childCareData={selectedChildCareData}
+                                        elderlyCareData={selectedElderlyCareData} 
+                                        newCenter={[selectedLat, selectedLon]} />:
                 <p>Loading map with pins...</p>
             }
         </div>

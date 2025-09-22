@@ -1,55 +1,64 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { RecenterMap } from '../scripts/MapUtils.js'
+import PinsLegendLayer from './LegendLayer';
 import L from 'leaflet';
 import '../css/MapChildAndElderlyCare.css'
 
-const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue, childCareData, elderlyCareData }) => {
+const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue, childCareData, elderlyCareData, newCenter }) => {
 
-  const greenPointToLayer = (feature, latlng) => {
+    // Customize legend here
+    const legendHtml = `
+        <p><b>Pin Legend</b></p>
+        <section>
+            <div>
+              <div style="background-color:lightgreen; width:10px; height:10px; 
+                   border-radius:50%; border:1px solid white;">
+              </div>
+              <i>Child Care</i>
+            </div>
+            <div>
+              <div style="background-color:blue; width:10px; height:10px; 
+                   border-radius:50%; border:1px solid white;">
+              </div>
+              <i>Elderly Care</i>
+            </div>
+        <section>
+      `
 
-    // Use color from geojson
-    //const color = feature.properties.color
+    const greenPointToLayer = (feature, latlng) => {
+      const icon = L.divIcon({
+        className: 'custom-icon',
+        html: `<div style="background-color:lightgreen; width:10px; height:10px; 
+                    border-radius:50%; border:1px solid white;"></div>`,
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+      });
+      return L.marker(latlng, { icon });
+    };
 
-    // Overwrite default color in geojson
-    const color = "lightgreen";
+    const bluePointToLayer = (feature, latlng) => {
+      const icon = L.divIcon({
+        className: 'custom-icon',
+        html: `<div style="background-color:blue; width:10px; height:10px; 
+                    border-radius:50%; border:1px solid white;"></div>`,
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+      });
+      return L.marker(latlng, { icon });
+    };
 
-    const icon = L.divIcon({
-      className: 'custom-icon',
-      html: `<div style="background-color:${color}; width:10px; height:10px; border-radius:50%; border:1px solid white;"></div>`,
-      iconSize: [20, 20],
-      iconAnchor: [10, 10]
-    });
-
-    return L.marker(latlng, { icon });
-  };
-
-  const bluePointToLayer = (feature, latlng) => {
-    
-    // Use color from geojson
-    //const color = feature.properties.color
-
-    // Overwrite default color in geojson
-    const color = "blue";
-
-    const icon = L.divIcon({
-      className: 'custom-icon',
-      html: `<div style="background-color:${color}; width:10px; height:10px; border-radius:50%; border:1px solid white;"></div>`,
-      iconSize: [20, 20],
-      iconAnchor: [10, 10]
-    });
-
-    return L.marker(latlng, { icon });
-  };
-
-  return (
-    <MapContainer className='mapChildAndElderlyCareContainer' center={centerCoordinate} zoom={zoomValue}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="&copy; OpenStreetMap contributors"
-      />
-      <GeoJSON data={childCareData} pointToLayer={greenPointToLayer} />
-      <GeoJSON data={elderlyCareData} pointToLayer={bluePointToLayer} />
-    </MapContainer>
-  )
+    return (
+      <MapContainer className='mapChildAndElderlyCareContainer' center={centerCoordinate} zoom={zoomValue}>
+        <RecenterMap center={newCenter} />
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="&copy; OpenStreetMap contributors"
+        />
+        <GeoJSON data={childCareData} pointToLayer={greenPointToLayer} />
+        <GeoJSON data={elderlyCareData} pointToLayer={bluePointToLayer} />
+        <PinsLegendLayer legendHtml={legendHtml} />
+      </MapContainer>
+    )
 }
 
 export default MapChildAndElderlyCare

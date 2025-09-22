@@ -1,37 +1,28 @@
 import { useState, useEffect } from 'react';
-// import { getTownInCarpark } from '../scripts/RestApiDataSource.js'
-// import DropDown from '../components/DropDown.jsx'
+import { getTownInRental } from '../scripts/RestApiDataSource.js'
+import DropDown from '../components/DropDown.jsx'
 import PlotChildAndElderlyCareMapByTown  from './PlotChildAndElderlyCareMapByTown.jsx'
 
 const ViewChildAndElerlyCareByTown = () => {
 
-    // const [selectedTown, setSelectedTown] = useState("");
-    const [childCareData, setChildCareData] = useState(null);
-    const [elderlyCareData, setElderlyCareData] = useState(null);
+    const [options, setOptions] = useState([])
+    const [selectedTown, setSelectedTown] = useState("");
 
     useEffect(() => {
-        fetch('../data/child_care_data.geojson')
-            .then(res => res.json())
-            .then(data  => setChildCareData(data));
-
-        fetch('../data/elderly_care_data.geojson')
-            .then(res => res.json())
-            .then(data  => setElderlyCareData(data));
+        getTownInRental(setOptions);
     }, []);
 
     return (
       <div>
-        {/* <DropDown options={options} 
+        <DropDown options={options} 
                   desc={"Select Town:"} 
-                  setParentComponent={setSelectedTown} /> */}
+                  setParentComponent={setSelectedTown} />
                   
-        {/* {selectedTown != "" ?*/}
+        {selectedTown != "" ?
           <div>
-            <PlotChildAndElderlyCareMapByTown childCareData={childCareData}
-                                              elderlyCareData={elderlyCareData} />
+            <PlotChildAndElderlyCareMapByTown town={selectedTown} />
           </div>: <></>
-        {/* }  */}
-        
+        }
       </div>
     )
 }

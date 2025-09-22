@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+
 import { MapContainer, TileLayer } from 'react-leaflet';
-import { useMap } from 'react-leaflet';
+import { RecenterMap } from '../scripts/MapUtils.js'
 import PinsLayer from './PinsLayer';
 import PinsLegendLayer from './LegendLayer';
 import 'leaflet.heat';
@@ -8,18 +8,6 @@ import 'leaflet/dist/leaflet.css';
 import '../css/MapCarpark.css'
 
 const MapCarpark = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
-
-  function RecenterMap({ center }) {
-    const map = useMap();
-    
-    useEffect(() => {
-        if (center) {
-          map.flyTo(center, map.getZoom());
-        }
-      }, [center, map]);
-
-      return null;
-    }
 
     // Customize legend here
     const legendHtml = `

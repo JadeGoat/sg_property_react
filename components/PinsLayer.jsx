@@ -1,57 +1,14 @@
 import { Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
+import { getIcons } from '../scripts/MapUtils.js'
 
 const PinsLayer = ( {locations} ) => {
 
-      // Default blue icon (same as Leaflet's default)
-      const defaultIcon = L.icon({
-        iconUrl: '../images/marker-icon.png',
-        shadowUrl: '../images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      });
-    
-      // Red icon
-      const redIcon = L.icon({
-        iconUrl: '../images/marker-icon-red.png',
-        shadowUrl: '../images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      });
-
-      // Red icon (variant)
-      const redIconWithDollar = L.icon({
-        iconUrl: '../images/marker-icon-red-dollar.png',
-        shadowUrl: '../images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      });
-
-      // Green icon
-      const greenIcon = L.icon({
-        iconUrl: '../images/marker-icon-green.png',
-        shadowUrl: '../images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      });
-
-      // Green icon (variant)
-      const greenIconWithDollar = L.icon({
-        iconUrl: '../images/marker-icon-green-dollar.png',
-        shadowUrl: '../images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      });
+  const { redIcon, 
+          redIconWithDollar, 
+          greenIcon, 
+          greenIconWithDollar, 
+          defaultIcon 
+        } = getIcons();
 
   return (
     <div>
