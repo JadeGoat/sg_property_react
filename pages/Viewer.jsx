@@ -4,7 +4,7 @@ import ViewRentalByTown from './ViewRentalByTown';
 import ViewResaleByYear from './ViewResaleByYear';
 import ViewResaleByTown from './ViewResaleByTown';
 import ViewCarparkByTown from './ViewCarparkByTown';
-import ViewChildCareByTown from './ViewChildCareByTown';
+import ViewChildAndElerlyCareByTown from './ViewChildAndElerlyCareByTown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
@@ -26,8 +26,11 @@ const Viewer = () => {
                 <Tab>Resale</Tab>
                 <Tab>Rental</Tab>
               </TabList>
-              {/* Sub tab  */}
+
+              {/* Sub tab - Resale */}
               <TabPanel><ViewResaleByYear/></TabPanel>
+
+              {/* Sub tab - Rental */}
               <TabPanel><ViewRentalByYear/></TabPanel>
             </Tabs>
           </TabPanel>
@@ -41,8 +44,11 @@ const Viewer = () => {
                   <Tab>Transport</Tab>
                   <Tab>Child/Elderly Care</Tab>
               </TabList>
-              {/* Sub tab */}
+
+              {/* Sub tab - Resale */}
               <TabPanel><ViewResaleByTown/></TabPanel>
+
+              {/* Sub tab - Rental */}
               <TabPanel><ViewRentalByTown/></TabPanel>
 
               {/* Sub tab - Transport */}
@@ -56,18 +62,10 @@ const Viewer = () => {
                   <TabPanel></TabPanel>
                 </Tabs>
               </TabPanel>
-             
+
               {/* Sub tab - Child/Elderly Care */}
-              <TabPanel>
-                <Tabs>
-                  <TabList>
-                    <Tab>Child Care</Tab>
-                    <Tab>Elderly Care</Tab>
-                  </TabList>
-                  <TabPanel><ViewChildCareByTown/></TabPanel>
-                  <TabPanel></TabPanel>
-                </Tabs>
-              </TabPanel>
+              <TabPanel><ViewChildAndElerlyCareByTown/></TabPanel>
+              
             </Tabs>
           </TabPanel>
 
