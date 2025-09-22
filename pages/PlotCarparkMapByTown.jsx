@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCarparkDataByTown } from '../scripts/RestApiDataSource.js'
-import MapWithPins from '../components/MapWithPins.jsx';
+import CarparkMap from '../components/CarparkMap.jsx';
 
 const PlotCarparkMapByTown = ({ town }) => {
 
@@ -64,10 +64,10 @@ const PlotCarparkMapByTown = ({ town }) => {
   return (
       <div>
           {locationPoints ?
-            <MapWithPins centerCoordinate={[1.3778, 103.8554]} 
-                         zoomValue={13}
-                         locations={locationPoints}
-                         newCenter={[selectedLat, selectedLon]} />:
+            <CarparkMap centerCoordinate={[1.3778, 103.8554]} 
+                        zoomValue={13}
+                        locations={locationPoints}
+                        newCenter={[selectedLat, selectedLon]} />:
             <p>Loading map with pins...</p>
           }
       </div>
