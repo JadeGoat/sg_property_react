@@ -4,6 +4,7 @@ import ViewRentalByTown from './ViewRentalByTown';
 import ViewResaleByYear from './ViewResaleByYear';
 import ViewResaleByTown from './ViewResaleByTown';
 import ViewCarparkByTown from './ViewCarparkByTown';
+import ViewChildCareByTown from './ViewChildCareByTown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
@@ -19,30 +20,50 @@ const Viewer = () => {
           </TabList>
 
           <TabPanel>
-            {/* Main tab 1 */}
+            {/* Main tab - By Year */}
             <Tabs>
               <TabList>
                 <Tab>Resale</Tab>
                 <Tab>Rental</Tab>
               </TabList>
-              {/* Sub tab */}
+              {/* Sub tab  */}
               <TabPanel><ViewResaleByYear/></TabPanel>
               <TabPanel><ViewRentalByYear/></TabPanel>
             </Tabs>
           </TabPanel>
 
           <TabPanel>
-            {/* Main tab 2 */}
+            {/* Main tab - By Town */}
             <Tabs>
               <TabList>
                   <Tab>Resale</Tab>
                   <Tab>Rental</Tab>
-                  <Tab>Carpark</Tab>
+                  <Tab>Transport</Tab>
+                  <Tab>Child/Elderly Care</Tab>
               </TabList>
               {/* Sub tab */}
               <TabPanel><ViewResaleByTown/></TabPanel>
               <TabPanel><ViewRentalByTown/></TabPanel>
-              <TabPanel><ViewCarparkByTown/></TabPanel>
+
+              {/* Sub tab - Transport */}
+              <Tabs>
+                <TabList>
+                  <Tab>Carpark</Tab>
+                  <Tab>Bus Stop</Tab>
+                </TabList>
+                <TabPanel><ViewCarparkByTown/></TabPanel>
+                <TabPanel></TabPanel>
+              </Tabs>
+             
+              {/* Sub tab - Child/Elderly Care */}
+              <Tabs>
+                <TabList>
+                  <Tab>Child Care</Tab>
+                  <Tab>Elderly Care</Tab>
+                </TabList>
+                <TabPanel><ViewChildCareByTown/></TabPanel>
+                <TabPanel></TabPanel>
+              </Tabs>
             </Tabs>
           </TabPanel>
 
