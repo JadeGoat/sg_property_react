@@ -35,14 +35,14 @@ const Viewer = () => {
             {/* Main tab 2 */}
             <Tabs>
               <TabList>
-                  <Tab>Carpark</Tab>
                   <Tab>Resale</Tab>
                   <Tab>Rental</Tab>
+                  <Tab>Carpark</Tab>
               </TabList>
               {/* Sub tab */}
-               <TabPanel><ViewCarparkByTown/></TabPanel>
               <TabPanel><ViewResaleByTown/></TabPanel>
               <TabPanel><ViewRentalByTown/></TabPanel>
+              <TabPanel><ViewCarparkByTown/></TabPanel>
             </Tabs>
           </TabPanel>
 
