@@ -21,6 +21,7 @@ const MapWithPins = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
       return null;
     }
 
+    // Customize legend here
     const legendHtml = `
         <p><b>Pin Legend</b></p>
         <section>
