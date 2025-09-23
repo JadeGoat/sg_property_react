@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getTownInCarpark } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
 import PlotChildAndElderlyCareMapByTown  from './PlotChildAndElderlyCareMapByTown.jsx'
+import PlotChildAndElderlyCareMapByRadius  from './PlotChildAndElderlyCareMapByRadius.jsx'
 
 const ViewChildAndElerlyCareByTown = () => {
 
@@ -20,6 +21,7 @@ const ViewChildAndElerlyCareByTown = () => {
                   
         {selectedTown != "" ?
           <div>
+            <PlotChildAndElderlyCareMapByRadius town={selectedTown} />
             <PlotChildAndElderlyCareMapByTown town={selectedTown} />
           </div>: <></>
         }

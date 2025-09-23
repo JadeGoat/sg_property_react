@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getTownInCarpark } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
 import PlotHawkersAndEateriesMapByTown  from './PlotHawkersAndEateriesMapByTown.jsx'
+import PlotHawkersAndEateriesMapByRadius  from './PlotHawkersAndEateriesMapByRadius.jsx'
 
 const ViewHawkersAndEateriesByTown = () => {
 
@@ -20,6 +21,7 @@ const ViewHawkersAndEateriesByTown = () => {
                   
         {selectedTown != "" ?
           <div>
+            <PlotHawkersAndEateriesMapByRadius town={selectedTown} />
             <PlotHawkersAndEateriesMapByTown town={selectedTown} />
           </div>: <></>
         }

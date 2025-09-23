@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getChildCareData, getElderlyCareData } from '../scripts/RestApiDataSource.js'
 import MapChildAndElderlyCare from '../components/MapChildAndElderlyCare.jsx';
-import { extractPostalCodeFromMetaData, filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
+import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
-const PlotChildAndElderlyCareMapByTown = ({ town }) => {
+const PlotChildAndElderlyCareMapByRadius = ({ town }) => {
 
     const [selectedLat, setSelectedLat] = useState(null);
     const [selectedLon, setSelectedLon] = useState(null);
@@ -13,6 +13,7 @@ const PlotChildAndElderlyCareMapByTown = ({ town }) => {
     const [elderlyCareData, setElderlyCareData] = useState(null);
     const [selectedChildCareData, setSelectedChildCareData] = useState(null);
     const [selectedElderlyCareData, setSelectedElderlyCareData] = useState(null);
+    const [radius, ] = useState(2.5); // radius in km
 
     useEffect(() => {
         const latlon = getTownLatLon(town)
@@ -26,24 +27,30 @@ const PlotChildAndElderlyCareMapByTown = ({ town }) => {
     }, []);
 
     useEffect(() => {
-
+      
       if (childCareData) {
-        const metaPostalCodeData = extractPostalCodeFromMetaData(childCareData)
-        const filteredChildCareData = filterGeoJsonData(childCareData, metaPostalCodeData, town)
+        const filteredChildCareData = childCareData.features.filter(item => {
+          const loc = item.geometry.coordinates;
+          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc[1], loc[0])
+          return dist <= radius;
+        });
         setSelectedChildCareData(filteredChildCareData);
       };
 
       if (elderlyCareData) {
-        const metaPostalCodeData = extractPostalCodeFromMetaData(elderlyCareData)
-        const filteredElderlyCareData = filterGeoJsonData(elderlyCareData, metaPostalCodeData, town)
+        const filteredElderlyCareData = elderlyCareData.features.filter(item => {
+          const loc = item.geometry.coordinates;
+          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc[1], loc[0]);
+          return dist <= radius;
+        });
         setSelectedElderlyCareData(filteredElderlyCareData);
       };
 
-    }, [childCareData, elderlyCareData, town]);
+    }, [radius, selectedLat, selectedLon, childCareData, elderlyCareData]);
 
     return (
         <div>
-            <h2>By category</h2>
+            <h2>By radius from centre</h2>
             {selectedChildCareData && selectedElderlyCareData ?
                 <MapChildAndElderlyCare centerCoordinate={[1.3778, 103.8554]} 
                                         zoomValue={13} 
@@ -56,4 +63,4 @@ const PlotChildAndElderlyCareMapByTown = ({ town }) => {
     )
 }
 
-export default PlotChildAndElderlyCareMapByTown
+export default PlotChildAndElderlyCareMapByRadius
