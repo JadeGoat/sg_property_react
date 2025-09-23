@@ -44,7 +44,7 @@ const Viewer = () => {
                   <Tab>Rental</Tab>
                   <Tab>Transport</Tab>
                   <Tab>Child/Elderly Care</Tab>
-                  {/* <Tab>Hawkers/Eateries</Tab> */}
+                  <Tab>Hawkers/Eateries</Tab>
               </TabList>
 
               {/* Sub tab 1 - Resale */}
@@ -69,7 +69,7 @@ const Viewer = () => {
               <TabPanel><ViewChildAndElerlyCareByTown/></TabPanel>
               
               {/* Sub tab 5 - Hawkers and Eateries */}
-              {/* <TabPanel><ViewHawkersAndEateriesByTown/></TabPanel> */}
+              <TabPanel><ViewHawkersAndEateriesByTown/></TabPanel>
 
             </Tabs>
           </TabPanel>

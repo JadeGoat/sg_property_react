@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getHawkerCentreData, getHealthierEateriesData } from '../scripts/RestApiDataSource.js'
 import MapHawkersAndEateries from '../components/MapHawkersAndEateries.jsx';
-import { extractPostalCodeFromMetaData, filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
+import { extractPostalCodeFromPropertiesData, 
+         extractPostalCodeFromMetaData, 
+         filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
 const PlotHawkersAndEateriesMapByTown = ({ town }) => {
@@ -29,7 +31,7 @@ const PlotHawkersAndEateriesMapByTown = ({ town }) => {
 
       if (hawkerCentreData) {
         console.log(hawkerCentreData)
-        const metaPostalCodeData = extractPostalCodeFromMetaData(hawkerCentreData)
+        const metaPostalCodeData = extractPostalCodeFromPropertiesData(hawkerCentreData)
         const filteredHawkerCentreData = filterGeoJsonData(hawkerCentreData, metaPostalCodeData, town)
         setSelectedHawkerCentreData(filteredHawkerCentreData);
       };

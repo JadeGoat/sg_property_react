@@ -78,10 +78,7 @@ export const getTownInCarpark = async (setData) => {
 export const transformToGeoFeatures = (data) => {
     return data.map(f => ({
             type: "Feature",
-            properties: {
-                Name: f.name,
-                Description: f.description
-            },
+            properties: f.properties,
             geometry: {
                 type: "Point",
                 coordinates: JSON.parse(f.coordinates)

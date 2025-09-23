@@ -140,6 +140,18 @@ const postalToTown = {
     "829": "Punggol"
 }
 
+export function extractPostalCodeFromPropertiesData(geoJsonData) {
+    const metaData = geoJsonData.features.map(item => item.properties);
+    const metaPostalCodeData = metaData.map(item => {
+        const result = {
+            "postal_code": item.ADDRESSPOSTALCODE,
+            "address": item.ADDRESSSTREETNAME
+        }
+        return result;
+    });
+    return metaPostalCodeData;
+}
+
 export function extractPostalCodeFromMetaData(geoJsonData) {
       
     const parser = new DOMParser();

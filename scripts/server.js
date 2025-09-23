@@ -113,7 +113,7 @@ app.get('/api/getTownInCarpark', (req, res) => {
 });
 
 app.get('/api/getChildCareData', (req, res) => {
-  const sqlQuery = 'SELECT * FROM child_care';
+  const sqlQuery = 'SELECT coordinates, properties FROM child_care';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -121,7 +121,7 @@ app.get('/api/getChildCareData', (req, res) => {
 });
 
 app.get('/api/getElderlyCareData', (req, res) => {
-  const sqlQuery = 'SELECT * FROM elderly_care';
+  const sqlQuery = 'SELECT coordinates, properties FROM elderly_care';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -129,7 +129,7 @@ app.get('/api/getElderlyCareData', (req, res) => {
 });
 
 app.get('/api/getHawkerCentreData', (req, res) => {
-  const sqlQuery = 'SELECT * FROM hawker_centre';
+  const sqlQuery = 'SELECT coordinates, properties FROM hawker_centre';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -137,7 +137,7 @@ app.get('/api/getHawkerCentreData', (req, res) => {
 });
 
 app.get('/api/getHealthierEateriesData', (req, res) => {
-  const sqlQuery = 'SELECT * FROM healthier_eateries';
+  const sqlQuery = 'SELECT coordinates, properties FROM healthier_eateries';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
