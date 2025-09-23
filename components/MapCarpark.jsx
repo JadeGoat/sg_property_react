@@ -12,10 +12,22 @@ const MapCarpark = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
     const legendHtml = `
         <p><b>Pin Legend</b></p>
         <section>
-            <div><img src="../images/marker-icon-red.png"/><i>Seasonal Only (FOC)</i></div>
-            <div><img src="../images/marker-icon-red-dollar.png"/><i>Seasonal Only</i></div>
-            <div><img src="../images/marker-icon-green.png"/><i>Short Term Parking (FOC)</i></div>
-            <div><img src="../images/marker-icon-green-dollar.png"/><i>Short Term Parking</i></div>
+            <div>
+              <img src="../images/marker-icon-red.png"/>
+              <i>Seasonal Only (FOC)</i>
+            </div>
+            <div>
+              <img src="../images/marker-icon-red-dollar.png"/>
+              <i>Seasonal Only</i>
+            </div>
+            <div>
+              <img src="../images/marker-icon-green.png"/>
+              <i>Short Term Parking (FOC)</i>
+            </div>
+            <div>
+              <img src="../images/marker-icon-green-dollar.png"/>
+              <i>Short Term Parking</i>
+            </div>
         <section>
       `
 

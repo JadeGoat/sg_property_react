@@ -2,57 +2,25 @@ import { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 
-// Default blue icon (same as Leaflet's default)
-const defaultIcon = L.icon({
-    iconUrl: '../images/marker-icon.png',
-    shadowUrl: '../images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-});
+function createIcon(iconDesc, multiplier = 1) {
+    return L.icon({
+        iconUrl: '../images/marker-icon' + iconDesc + '.png',
+        shadowUrl: '../images/marker-shadow.png',
+        iconSize: [25* multiplier, 41 * multiplier],
+        iconAnchor: [12* multiplier, 41 * multiplier],
+        popupAnchor: [1* multiplier, -34 * multiplier],
+        shadowSize: [41* multiplier, 41 * multiplier]
+    }); 
+}
 
-// Red icon
-const redIcon = L.icon({
-    iconUrl: '../images/marker-icon-red.png',
-    shadowUrl: '../images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-});
+export function getIcons(multiplier = 1) {
 
-// Red icon (variant)
-const redIconWithDollar = L.icon({
-    iconUrl: '../images/marker-icon-red-dollar.png',
-    shadowUrl: '../images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-});
+    const redIcon = createIcon("-red", multiplier);
+    const redIconWithDollar = createIcon("-red-dollar", multiplier);
+    const greenIcon = createIcon("-green", multiplier);
+    const greenIconWithDollar = createIcon("-green-dollar", multiplier);
+    const defaultIcon = createIcon("", multiplier);
 
-// Green icon
-const greenIcon = L.icon({
-    iconUrl: '../images/marker-icon-green.png',
-    shadowUrl: '../images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-});
-
-// Green icon (variant)
-const greenIconWithDollar = L.icon({
-    iconUrl: '../images/marker-icon-green-dollar.png',
-    shadowUrl: '../images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-});
-
-export function getIcons() {
     return { redIcon, redIconWithDollar, greenIcon, greenIconWithDollar, defaultIcon };
 }
 

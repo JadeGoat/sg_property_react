@@ -12,15 +12,11 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
         <p><b>Pin Legend</b></p>
         <section>
             <div>
-              <div style="background-color:orange; width:10px; height:10px; 
-                   border-radius:50%; border:1px solid white;">
-              </div>
+              <img src="../images/marker-icon-orange.png"/>
               <i>Hawker Centre</i>
             </div>
             <div>
-              <div style="background-color:blue; width:10px; height:10px; 
-                   border-radius:50%; border:1px solid white;">
-              </div>
+              <img src="../images/marker-icon.png"/>
               <i>Healthier Eateries</i>
             </div>
         <section>
@@ -29,8 +25,7 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
     const orangePointToLayer = (feature, latlng) => {
       const icon = L.divIcon({
         className: 'custom-icon',
-        html: `<div style="background-color:orange; width:10px; height:10px; 
-                    border-radius:50%; border:1px solid white;"></div>`,
+        html: `<img src="../images/marker-icon-orange.png" width=25 height=25 />`,
         iconSize: [20, 20],
         iconAnchor: [10, 10]
       });
@@ -40,8 +35,7 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
     const bluePointToLayer = (feature, latlng) => {
       const icon = L.divIcon({
         className: 'custom-icon',
-        html: `<div style="background-color:blue; width:10px; height:10px; 
-                    border-radius:50%; border:1px solid white;"></div>`,
+        html: `<img src="../images/marker-icon.png" width=25 height=25 />`,
         iconSize: [20, 20],
         iconAnchor: [10, 10]
       });

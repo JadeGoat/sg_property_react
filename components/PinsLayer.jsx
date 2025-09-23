@@ -8,7 +8,7 @@ const PinsLayer = ( {locations} ) => {
           greenIcon, 
           greenIconWithDollar, 
           defaultIcon 
-        } = getIcons();
+        } = getIcons(0.7);
 
   return (
     <div>
