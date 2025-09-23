@@ -191,6 +191,7 @@ export function extractPostalCodeFromMetaData(geoJsonData) {
 export function filterGeoJsonData(geoJsonData, postalCodeData, selectedTown) {
 
     // Map postal to town
+    // TODO: Method not reliable, to revisit mechanism
     const enrichedData = postalCodeData.map(item => {
         const fullPostal = item.postal_code
         const prefix3 = fullPostal.slice(0, 3);
