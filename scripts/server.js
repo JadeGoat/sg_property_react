@@ -112,6 +112,38 @@ app.get('/api/getTownInCarpark', (req, res) => {
   });
 });
 
+app.get('/api/getChildCareData', (req, res) => {
+  const sqlQuery = 'SELECT * FROM child_care';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getElderlyCareData', (req, res) => {
+  const sqlQuery = 'SELECT * FROM elderly_care';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getHawkerCentreData', (req, res) => {
+  const sqlQuery = 'SELECT * FROM hawker_centre';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getHealthierEateriesData', (req, res) => {
+  const sqlQuery = 'SELECT * FROM healthier_eateries';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

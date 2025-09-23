@@ -74,3 +74,63 @@ export const getTownInCarpark = async (setData) => {
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
+
+export const transformToGeoFeatures = (data) => {
+    return data.map(f => ({
+            type: "Feature",
+            properties: {
+                Name: f.name,
+                Description: f.description
+            },
+            geometry: {
+                type: "Point",
+                coordinates: JSON.parse(f.coordinates)
+            }
+    }));
+};
+
+export const transformToGeoJson = (data) => {
+    return {
+        "type": "FeatureCollection",
+        "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+        "features": data
+    };
+}
+
+export const getChildCareData = async (setData) => {
+    axios.get(`http://localhost:3001/api/getChildCareData`)
+         .then(response => {
+            const data = response.data;
+            const featureData = transformToGeoFeatures(data)
+            setData(transformToGeoJson(featureData));
+         })
+         .catch(error => console.error('Error retrieving year data:', error))
+}
+
+export const getElderlyCareData = async (setData) => {
+    axios.get(`http://localhost:3001/api/getElderlyCareData`)
+         .then(response => {
+            const data = response.data;
+            const featureData = transformToGeoFeatures(data)
+            setData(transformToGeoJson(featureData));
+         })
+         .catch(error => console.error('Error retrieving year data:', error))
+}
+
+export const getHawkerCentreData = async (setData) => {
+    axios.get(`http://localhost:3001/api/getHawkerCentreData`)
+         .then(response => {
+            const data = response.data;
+            setData(transformToGeoFeatures(data));
+         })
+         .catch(error => console.error('Error retrieving year data:', error))
+}
+
+export const getHealtherEateries = async (setData) => {
+    axios.get(`http://localhost:3001/api/getHealtherEateries`)
+         .then(response => {
+            const data = response.data;
+            setData(transformToGeoFeatures(data));
+         })
+         .catch(error => console.error('Error retrieving year data:', error))
+}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getChildCareData, getElderlyCareData } from '../scripts/RestApiDataSource.js'
 import MapChildAndElderlyCare from '../components/MapChildAndElderlyCare.jsx';
 import { extractPostalCodeFromMetaData, filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
@@ -19,20 +20,15 @@ const PlotChildAndElderlyCareMapByTown = ({ town }) => {
         setSelectedLon(latlon[1]);
     }, [town]);
 
-    // TODO: To rework on this
     useEffect(() => {
-        fetch('../data/child_care_data.geojson')
-            .then(res => res.json())
-            .then(data  => setChildCareData(data));
-
-        fetch('../data/elderly_care_data.geojson')
-            .then(res => res.json())
-            .then(data  => setElderlyCareData(data));
+        getChildCareData(setChildCareData)
+        getElderlyCareData(setElderlyCareData);
     }, []);
 
     useEffect(() => {
 
       if (childCareData) {
+        console.log(childCareData)
         const metaPostalCodeData = extractPostalCodeFromMetaData(childCareData)
         const filteredChildCareData = filterGeoJsonData(childCareData, metaPostalCodeData, town)
         setSelectedChildCareData(filteredChildCareData);
