@@ -80,8 +80,9 @@ export const getTownInCarpark = async (setData) => {
     axios.get(`${baseUrl}/getTownInCarpark`)
          .then(response => {
             const data = response.data;
-            const cleaned_data = data.filter(item => item.town !== "Unknown");
-            setData(cleaned_data.map(item => item.town));
+            setData(data.map(item => item.town));
+            //const cleaned_data = data.filter(item => item.town !== "Unknown");
+            //setData(cleaned_data.map(item => item.town));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
