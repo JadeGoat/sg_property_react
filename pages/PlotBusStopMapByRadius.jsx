@@ -10,7 +10,7 @@ const PlotBusStopMapByRadius = ({ town }) => {
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
   const [locationPoints, setLocationPoints] = useState(null);
-  const [radius, ] = useState(3); // radius in km
+  const [radius, ] = useState(2.5); // radius in km
 
   useEffect(() => {
 
