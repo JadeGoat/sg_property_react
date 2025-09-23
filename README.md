@@ -57,14 +57,14 @@ npm run dev
 
    b. Town
 
-3. Added Transport (Carpark) viewable by Town
+3. Added Transport (Carpark) viewable  by Town's category or radius from Town's centre
 
    ![Alt text](./images/sample_map_carpark.png)
 
-4. Added Child/Elderly Care viewable by Town
+4. Added Child/Elderly Care viewable  by Town's category or radius from Town's centre
 
    ![Alt text](./images/sample_map_child_elderly_care.png)
 
-4. Added Hawker Centre and Healthier Eateries viewable by Town
+4. Added Hawker Centre and Healthier Eateries viewable by Town's category or radius from Town's centre
 
    ![Alt text](./images/sample_map_hawker_eateries.png)
