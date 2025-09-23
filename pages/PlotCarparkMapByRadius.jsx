@@ -30,7 +30,6 @@ const PlotCarparkMapByRadius = ({ town }) => {
           const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
           return dist <= radius;
         });
-        console.log(filteredData)
         setLocationPoints(filteredData)
       }
   }, [radius, selectedLat, selectedLon, data]);
