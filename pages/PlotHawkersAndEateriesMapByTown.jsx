@@ -30,7 +30,6 @@ const PlotHawkersAndEateriesMapByTown = ({ town }) => {
     useEffect(() => {
 
       if (hawkerCentreData) {
-        console.log(hawkerCentreData)
         const metaPostalCodeData = extractPostalCodeFromPropertiesData(hawkerCentreData)
         const filteredHawkerCentreData = filterGeoJsonData(hawkerCentreData, metaPostalCodeData, town)
         setSelectedHawkerCentreData(filteredHawkerCentreData);
