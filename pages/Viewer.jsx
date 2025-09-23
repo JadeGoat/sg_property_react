@@ -4,6 +4,7 @@ import ViewRentalByTown from './ViewRentalByTown';
 import ViewResaleByYear from './ViewResaleByYear';
 import ViewResaleByTown from './ViewResaleByTown';
 import ViewCarparkByTown from './ViewCarparkByTown';
+import ViewBusStopByTown from './ViewCarparkByTown';
 import ViewChildAndElerlyCareByTown from './ViewChildAndElerlyCareByTown';
 import ViewHawkersAndEateriesByTown from './ViewHawkersAndEateriesByTown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -61,7 +62,7 @@ const Viewer = () => {
                     <Tab>Bus Stop</Tab>
                   </TabList>
                   <TabPanel><ViewCarparkByTown/></TabPanel>
-                  <TabPanel></TabPanel>
+                  <TabPanel><ViewBusStopByTown/></TabPanel>
                 </Tabs>
               </TabPanel>
 
