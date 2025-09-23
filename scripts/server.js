@@ -88,6 +88,15 @@ app.get('/api/getCarparkDataByTown', (req, res) => {
   });
 });
 
+app.get('/api/getBusStopDataByTown', (req, res) => {
+  const town = req.query.town;
+  const sqlQuery = 'SELECT * FROM bus_stop_info WHERE town = ?';
+  db.query(sqlQuery, [town], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 app.get('/api/getTownInRental', (req, res) => {
   const sqlQuery = 'SELECT DISTINCT(town) FROM hdb_rental_avg_town ORDER BY town ASC';
   db.query(sqlQuery, (err, results) => {
