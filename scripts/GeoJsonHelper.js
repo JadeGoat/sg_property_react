@@ -215,3 +215,23 @@ export function filterGeoJsonData(geoJsonData, postalCodeData, selectedTown) {
     
     return filteredData;
 }
+
+export const constructGeoFeatureFromData = (data) => {
+    return data.map(f => ({
+            type: "Feature",
+            properties: f.properties,
+            geometry: {
+                type: "Point",
+                coordinates: JSON.parse(f.coordinates)
+            }
+    }));
+};
+
+export const constructGeoJsonFromData = (data) => {
+    const featureData = constructGeoFeatureFromData(data);
+    return {
+        "type": "FeatureCollection",
+        "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+        "features": featureData
+    };
+}

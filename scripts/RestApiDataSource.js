@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { constructGeoJsonFromData } from './GeoJsonHelper.js'
 
 const host = import.meta.env.VITE_DB_HOST;
 const port = import.meta.env.VITE_PORT;
@@ -85,31 +86,11 @@ export const getTownInCarpark = async (setData) => {
          .catch(error => console.error('Error retrieving year data:', error))
 }
 
-const transformToGeoFeatures = (data) => {
-    return data.map(f => ({
-            type: "Feature",
-            properties: f.properties,
-            geometry: {
-                type: "Point",
-                coordinates: JSON.parse(f.coordinates)
-            }
-    }));
-};
-
-const transformToGeoJson = (data) => {
-    return {
-        "type": "FeatureCollection",
-        "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-        "features": data
-    };
-}
-
 export const getChildCareData = async (setData) => {
     axios.get(`${baseUrl}/getChildCareData`)
          .then(response => {
             const data = response.data;
-            const featureData = transformToGeoFeatures(data)
-            setData(transformToGeoJson(featureData));
+            setData(constructGeoJsonFromData(data));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
@@ -118,8 +99,7 @@ export const getElderlyCareData = async (setData) => {
     axios.get(`${baseUrl}/getElderlyCareData`)
          .then(response => {
             const data = response.data;
-            const featureData = transformToGeoFeatures(data)
-            setData(transformToGeoJson(featureData));
+             setData(constructGeoJsonFromData(data));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
@@ -128,8 +108,7 @@ export const getHawkerCentreData = async (setData) => {
     axios.get(`${baseUrl}/getHawkerCentreData`)
          .then(response => {
             const data = response.data;
-            const featureData = transformToGeoFeatures(data)
-            setData(transformToGeoJson(featureData));
+             setData(constructGeoJsonFromData(data));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
@@ -138,8 +117,7 @@ export const getHealthierEateriesData = async (setData) => {
     axios.get(`${baseUrl}/getHealthierEateriesData`)
          .then(response => {
             const data = response.data;
-            const featureData = transformToGeoFeatures(data)
-            setData(transformToGeoJson(featureData));
+            setData(constructGeoJsonFromData(data));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
