@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getBusStopDataByTown } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
-import MapCarpark from '../components/MapCarpark.jsx';
+import MapBusStop from '../components/MapBusStop.jsx';
 
 const PlotBusStopMapByTown = ({ town }) => {
 
@@ -16,14 +16,15 @@ const PlotBusStopMapByTown = ({ town }) => {
     getBusStopDataByTown(town, setData);
     
     // Set lat, lon
-    const latlon = getTownLatLon(town)
-    setSelectedLat(latlon[0]);
-    setSelectedLon(latlon[1]);
+    //const latlon = getTownLatLon(town)
+    //setSelectedLat(latlon[0]);
+    //setSelectedLon(latlon[1]);
 
   }, [town]);
 
   useEffect(() => {
       if (data && data.length > 0) {
+        console.log(data)
         setLocationPoints(data)
       }
   }, [data]);
@@ -31,7 +32,7 @@ const PlotBusStopMapByTown = ({ town }) => {
   return (
       <div>
           {locationPoints ?
-            <MapCarpark centerCoordinate={[1.3778, 103.8554]} 
+            <MapBusStop centerCoordinate={[1.3778, 103.8554]} 
                         zoomValue={13}
                         locations={locationPoints}
                         newCenter={[selectedLat, selectedLon]} />:

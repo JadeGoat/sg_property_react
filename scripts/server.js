@@ -90,7 +90,10 @@ app.get('/api/getCarparkDataByTown', (req, res) => {
 
 app.get('/api/getBusStopDataByTown', (req, res) => {
   const town = req.query.town;
-  const sqlQuery = 'SELECT * FROM bus_stop_info WHERE town = ?';
+  const sqlQuery = 'SELECT RoadName, Description, ' +
+                   'CAST(Latitude AS CHAR) as lat, ' +
+                   'CAST(Longitude AS CHAR) as lon FROM bus_stop_info LIMIT 100';
+  //const sqlQuery = 'SELECT * FROM bus_stop_info WHERE town = ?';
   db.query(sqlQuery, [town], (err, results) => {
     if (err) throw err;
     res.json(results);

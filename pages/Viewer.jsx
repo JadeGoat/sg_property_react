@@ -4,7 +4,7 @@ import ViewRentalByTown from './ViewRentalByTown';
 import ViewResaleByYear from './ViewResaleByYear';
 import ViewResaleByTown from './ViewResaleByTown';
 import ViewCarparkByTown from './ViewCarparkByTown';
-import ViewBusStopByTown from './ViewCarparkByTown';
+import ViewBusStopByTown from './ViewBusStopByTown';
 import ViewChildAndElerlyCareByTown from './ViewChildAndElerlyCareByTown';
 import ViewHawkersAndEateriesByTown from './ViewHawkersAndEateriesByTown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
