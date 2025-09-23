@@ -1,11 +1,11 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import { RecenterMap } from '../scripts/MapUtils.js'
-import PinsLegendLayer from './LegendLayer';
+import PinsLegendLayer from './LegendLayer.jsx';
 import L from 'leaflet';
-import '../css/MapChildAndElderlyCare.css'
+import '../css/MapHawkersAndEateries.css'
 
-const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue, 
-                                  childCareData, elderlyCareData, newCenter }) => {
+const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
+                                 hawkerCentreData, healthierEateriesData, newCenter }) => {
 
     // Customize legend here
     const legendHtml = `
@@ -15,13 +15,13 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
               <div style="background-color:orange; width:10px; height:10px; 
                    border-radius:50%; border:1px solid white;">
               </div>
-              <i>Child Care</i>
+              <i>Hawker Centre</i>
             </div>
             <div>
               <div style="background-color:blue; width:10px; height:10px; 
                    border-radius:50%; border:1px solid white;">
               </div>
-              <i>Elderly Care</i>
+              <i>Healthier Eateries</i>
             </div>
         <section>
       `
@@ -49,21 +49,21 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
     };
 
     return (
-      <MapContainer className='mapChildAndElderlyCareContainer' center={centerCoordinate} zoom={zoomValue}>
+      <MapContainer className='mapHawkersAndEateriesContainer' center={centerCoordinate} zoom={zoomValue}>
         <RecenterMap center={newCenter} />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
         />
-        <GeoJSON key={JSON.stringify(childCareData)} 
-                 data={childCareData} 
+        <GeoJSON key={JSON.stringify(hawkerCentreData)} 
+                 data={hawkerCentreData} 
                  pointToLayer={orangePointToLayer} />
-        <GeoJSON key={JSON.stringify(elderlyCareData)} 
-                 data={elderlyCareData} 
+        <GeoJSON key={JSON.stringify(healthierEateriesData)} 
+                 data={healthierEateriesData} 
                  pointToLayer={bluePointToLayer} />
         <PinsLegendLayer legendHtml={legendHtml} />
       </MapContainer>
     )
 }
 
-export default MapChildAndElderlyCare
+export default MapHawkersAndEateries

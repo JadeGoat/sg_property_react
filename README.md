@@ -55,8 +55,13 @@ npm run dev
 
    b. Town
 
-3. Added Carpark location viewable by
+3. Added Transport (Carpark) viewable by
    
    a. Town
 
    ![Alt text](./images/sample_map_with_pins.png)
+
+4. Added Child/Elderly Care viewable by
+   
+   a. Town
+

@@ -121,16 +121,18 @@ export const getHawkerCentreData = async (setData) => {
     axios.get(`http://localhost:3001/api/getHawkerCentreData`)
          .then(response => {
             const data = response.data;
-            setData(transformToGeoFeatures(data));
+            const featureData = transformToGeoFeatures(data)
+            setData(transformToGeoJson(featureData));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
 
-export const getHealtherEateries = async (setData) => {
-    axios.get(`http://localhost:3001/api/getHealtherEateries`)
+export const getHealthierEateriesData = async (setData) => {
+    axios.get(`http://localhost:3001/api/getHealthierEateriesData`)
          .then(response => {
             const data = response.data;
-            setData(transformToGeoFeatures(data));
+            const featureData = transformToGeoFeatures(data)
+            setData(transformToGeoJson(featureData));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
