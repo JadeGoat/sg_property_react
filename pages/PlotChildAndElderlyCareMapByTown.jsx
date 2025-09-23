@@ -28,7 +28,6 @@ const PlotChildAndElderlyCareMapByTown = ({ town }) => {
     useEffect(() => {
 
       if (childCareData) {
-        console.log(childCareData)
         const metaPostalCodeData = extractPostalCodeFromMetaData(childCareData)
         const filteredChildCareData = filterGeoJsonData(childCareData, metaPostalCodeData, town)
         setSelectedChildCareData(filteredChildCareData);
