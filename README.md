@@ -41,30 +41,24 @@ npm run dev
 ```
 
 # Feature Log
-1. Added Resale price data feature viewable by
-   
-   a. Year
-
-   b. Town
+1. Added Resale price data feature viewable by Year & Town 
 
    ![Alt text](./images/sample_heatmap.png)
    ![Alt text](./images/sample_barchart.png)
    ![Alt text](./images/sample_linechart.png)
 
-2. Added Rental price data feature viewable by
+2. Added Rental price data feature viewable by Year & Town 
 
-   a. Year
-
-   b. Town
-
-3. Added Transport (Carpark) viewable  by Town's category or radius from Town's centre
+3. Added Transport (Carpark) viewable by Town's category or radius from Town's centre
 
    ![Alt text](./images/sample_map_carpark.png)
 
-4. Added Child/Elderly Care viewable  by Town's category or radius from Town's centre
+4. Added Transport (Bus Stop) viewable by radius from Town's centre only
+
+5. Added Child/Elderly Care viewable by Town's category or radius from Town's centre
 
    ![Alt text](./images/sample_map_child_elderly_care.png)
 
-4. Added Hawker Centre and Healthier Eateries viewable by Town's category or radius from Town's centre
+6. Added Hawker Centre and Healthier Eateries viewable by Town's category or radius from Town's centre
 
    ![Alt text](./images/sample_map_hawker_eateries.png)
