@@ -17,13 +17,15 @@ npm install react-tabs
 ```
 
 #### Preparing .env file
-Creating .env in root folder with the following field
+Creating .env in root folder with the following fields
+
+IMPORTANT: There must be "VITE_" prefix in the names
 ```
-DB_HOST = <to_fill_in_database_url>
-DB_USER = <to_fill_in_database_username>
-DB_PASSWORD = <to_fill_in_database_password>
-DB_NAME = <to_fill_in_database_name>
-PORT = <to_fill_in_database_port>
+VITE_DB_HOST = <to_fill_in_database_url>
+VITE_DB_USER = <to_fill_in_database_username>
+VITE_DB_PASSWORD = <to_fill_in_database_password>
+VITE_DB_NAME = <to_fill_in_database_name>
+VITE_PORT = <to_fill_in_database_port>
 ```
 
 # Usage

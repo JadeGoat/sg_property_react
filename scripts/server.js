@@ -15,10 +15,10 @@ const app = express();
 app.use(cors());
 
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  host: process.env.VITE_DB_HOST,
+  user: process.env.VITE_DB_USER,
+  password: process.env.VITE_DB_PASSWORD,
+  database: process.env.VITE_DB_NAME
 });
 
 db.connect(err => {
@@ -144,7 +144,7 @@ app.get('/api/getHealthierEateriesData', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.VITE_PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -1,19 +1,23 @@
 import axios from 'axios';
 
+const host = import.meta.env.VITE_DB_HOST;
+const port = import.meta.env.VITE_PORT;
+const baseUrl = `http://${host}:${port}/api`;
+
 export const getRentalDataByYear = async (year, setData) => {
-    axios.get(`http://localhost:3001/api/getRentalDataByYear?year=${year}`)
+    axios.get(`${baseUrl}/getRentalDataByYear?year=${year}`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }
 
 export const getResaleDataByYear = async (year, setData) => {
-    axios.get(`http://localhost:3001/api/getResaleDataByYear?year=${year}`)
+    axios.get(`${baseUrl}/getResaleDataByYear?year=${year}`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }
 
 export const getYearInRental = async (setData) => {
-    axios.get(`http://localhost:3001/api/getYearInRental`)
+    axios.get(`${baseUrl}/getYearInRental`)
          .then(response => {
             const data = response.data;
             setData(data.map(item => item.approval_year));
@@ -22,7 +26,7 @@ export const getYearInRental = async (setData) => {
 }
 
 export const getYearInResale = async (setData) => {
-    axios.get(`http://localhost:3001/api/getYearInResale`)
+    axios.get(`${baseUrl}/getYearInResale`)
          .then(response => {
             const data = response.data;
             setData(data.map(item => item.transact_year));
@@ -31,25 +35,25 @@ export const getYearInResale = async (setData) => {
 }
 
 export const getRentalDataByTown = async (town, setData) => {
-    axios.get(`http://localhost:3001/api/getRentalDataByTown?town=${town}`)
+    axios.get(`${baseUrl}/getRentalDataByTown?town=${town}`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }
 
 export const getResaleDataByTown = async (town, setData) => {
-    axios.get(`http://localhost:3001/api/getResaleDataByTown?town=${town}`)
+    axios.get(`${baseUrl}/getResaleDataByTown?town=${town}`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }
 
 export const getCarparkDataByTown = async (town, setData) => {
-    axios.get(`http://localhost:3001/api/getCarparkDataByTown?town=${town}`)
+    axios.get(`${baseUrl}/getCarparkDataByTown?town=${town}`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }
 
 export const getTownInRental = async (setData) => {
-    axios.get(`http://localhost:3001/api/getTownInRental`)
+    axios.get(`${baseUrl}/getTownInRental`)
          .then(response => {
             const data = response.data;
             setData(data.map(item => item.town));
@@ -58,7 +62,7 @@ export const getTownInRental = async (setData) => {
 }
 
 export const getTownInResale = async (setData) => {
-    axios.get(`http://localhost:3001/api/getTownInResale`)
+    axios.get(`${baseUrl}/getTownInResale`)
          .then(response => {
             const data = response.data;
             setData(data.map(item => item.town));
@@ -67,7 +71,7 @@ export const getTownInResale = async (setData) => {
 }
 
 export const getTownInCarpark = async (setData) => {
-    axios.get(`http://localhost:3001/api/getTownInCarpark`)
+    axios.get(`${baseUrl}/getTownInCarpark`)
          .then(response => {
             const data = response.data;
             setData(data.map(item => item.town));
@@ -75,7 +79,7 @@ export const getTownInCarpark = async (setData) => {
          .catch(error => console.error('Error retrieving year data:', error))
 }
 
-export const transformToGeoFeatures = (data) => {
+const transformToGeoFeatures = (data) => {
     return data.map(f => ({
             type: "Feature",
             properties: f.properties,
@@ -86,7 +90,7 @@ export const transformToGeoFeatures = (data) => {
     }));
 };
 
-export const transformToGeoJson = (data) => {
+const transformToGeoJson = (data) => {
     return {
         "type": "FeatureCollection",
         "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
@@ -95,7 +99,7 @@ export const transformToGeoJson = (data) => {
 }
 
 export const getChildCareData = async (setData) => {
-    axios.get(`http://localhost:3001/api/getChildCareData`)
+    axios.get(`${baseUrl}/getChildCareData`)
          .then(response => {
             const data = response.data;
             const featureData = transformToGeoFeatures(data)
@@ -105,7 +109,7 @@ export const getChildCareData = async (setData) => {
 }
 
 export const getElderlyCareData = async (setData) => {
-    axios.get(`http://localhost:3001/api/getElderlyCareData`)
+    axios.get(`${baseUrl}/getElderlyCareData`)
          .then(response => {
             const data = response.data;
             const featureData = transformToGeoFeatures(data)
@@ -115,7 +119,7 @@ export const getElderlyCareData = async (setData) => {
 }
 
 export const getHawkerCentreData = async (setData) => {
-    axios.get(`http://localhost:3001/api/getHawkerCentreData`)
+    axios.get(`${baseUrl}/getHawkerCentreData`)
          .then(response => {
             const data = response.data;
             const featureData = transformToGeoFeatures(data)
@@ -125,7 +129,7 @@ export const getHawkerCentreData = async (setData) => {
 }
 
 export const getHealthierEateriesData = async (setData) => {
-    axios.get(`http://localhost:3001/api/getHealthierEateriesData`)
+    axios.get(`${baseUrl}/getHealthierEateriesData`)
          .then(response => {
             const data = response.data;
             const featureData = transformToGeoFeatures(data)
