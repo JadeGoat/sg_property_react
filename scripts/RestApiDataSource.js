@@ -47,8 +47,20 @@ export const getResaleDataByTown = async (town, setData) => {
          .catch(error => console.error('Error retrieving data:', error))
 }
 
+export const getCarparkData = async (setData) => {
+    axios.get(`${baseUrl}/getCarparkData`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
 export const getCarparkDataByTown = async (town, setData) => {
     axios.get(`${baseUrl}/getCarparkDataByTown?town=${town}`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
+export const getBusStopData = async (setData) => {
+    axios.get(`${baseUrl}/getBusStopData`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }

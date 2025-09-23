@@ -9,7 +9,7 @@ const MapBusStop = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
 
     return (
       <MapContainer className='mapBusStopContainer' center={centerCoordinate} zoom={zoomValue}>
-        {/* <RecenterMap center={newCenter} /> */}
+        <RecenterMap center={newCenter} />
         <TileLayer
           attribution='&copy; OpenStreetMap contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

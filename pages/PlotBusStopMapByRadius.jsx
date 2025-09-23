@@ -1,36 +1,42 @@
 import { useEffect, useState } from 'react';
-import { getBusStopDataByTown } from '../scripts/RestApiDataSource.js'
+import { getBusStopData } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
+import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import MapBusStop from '../components/MapBusStop.jsx';
 
-const PlotBusStopMapByTown = ({ town }) => {
+const PlotBusStopMapByRadius = ({ town }) => {
 
   const [data, setData] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
   const [locationPoints, setLocationPoints] = useState(null);
-  
+  const [radius, ] = useState(3); // radius in km
+
   useEffect(() => {
 
     // Set carpark data
-    getBusStopDataByTown(town, setData);
+    getBusStopData(setData);
     
     // Set lat, lon
-    //const latlon = getTownLatLon(town)
-    //setSelectedLat(latlon[0]);
-    //setSelectedLon(latlon[1]);
+    const latlon = getTownLatLon(town)
+    setSelectedLat(latlon[0]);
+    setSelectedLon(latlon[1]);
 
   }, [town]);
 
   useEffect(() => {
       if (data && data.length > 0) {
-        console.log(data)
-        setLocationPoints(data)
+        const filteredData = data.filter(loc => {
+          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
+          return dist <= radius;
+        });
+        setLocationPoints(filteredData)
       }
-  }, [data]);
+  }, [radius, selectedLat, selectedLon, data]);
 
   return (
       <div>
+          <h2>By radius from centre</h2>
           {locationPoints ?
             <MapBusStop centerCoordinate={[1.3778, 103.8554]} 
                         zoomValue={13}
@@ -42,4 +48,4 @@ const PlotBusStopMapByTown = ({ town }) => {
   )
 }
 
-export default PlotBusStopMapByTown
+export default PlotBusStopMapByRadius

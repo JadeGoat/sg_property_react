@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
-import { getCarparkDataByTown } from '../scripts/RestApiDataSource.js'
+import { getCarparkData } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
+import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import MapCarpark from '../components/MapCarpark.jsx';
 
-const PlotCarparkMapByTown = ({ town }) => {
+const PlotCarparkMapByRadius = ({ town }) => {
 
   const [data, setData] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
   const [locationPoints, setLocationPoints] = useState(null);
+  const [radius, ] = useState(2.5); // radius in km
   
   useEffect(() => {
 
     // Set carpark data
-    getCarparkDataByTown(town, setData);
+    getCarparkData(setData);
     
     // Set lat, lon
     const latlon = getTownLatLon(town)
@@ -24,13 +26,18 @@ const PlotCarparkMapByTown = ({ town }) => {
 
   useEffect(() => {
       if (data && data.length > 0) {
-        setLocationPoints(data)
+        const filteredData = data.filter(loc => {
+          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
+          return dist <= radius;
+        });
+        console.log(filteredData)
+        setLocationPoints(filteredData)
       }
-  }, [data]);
+  }, [radius, selectedLat, selectedLon, data]);
 
   return (
       <div>
-          <h2>By category</h2>
+          <h2>By radius from centre</h2>
           {locationPoints ?
             <MapCarpark centerCoordinate={[1.3778, 103.8554]} 
                         zoomValue={13}
@@ -42,4 +49,4 @@ const PlotCarparkMapByTown = ({ town }) => {
   )
 }
 
-export default PlotCarparkMapByTown
+export default PlotCarparkMapByRadius

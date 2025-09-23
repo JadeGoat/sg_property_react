@@ -78,6 +78,16 @@ app.get('/api/getResaleDataByTown', (req, res) => {
   });
 });
 
+app.get('/api/getCarparkData', (req, res) => {
+  const sqlQuery = 'SELECT lat, lon, address as label, ' + 
+                   'short_term_parking, free_parking, postal_code as status ' +
+                   'FROM carpark_info_clean2';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 app.get('/api/getCarparkDataByTown', (req, res) => {
   const town = req.query.town;
   const sqlQuery = 'SELECT lat, lon, address as label, ' + 
@@ -89,12 +99,21 @@ app.get('/api/getCarparkDataByTown', (req, res) => {
   });
 });
 
+app.get('/api/getBusStopData', (req, res) => {
+  const sqlQuery = 'SELECT RoadName, Description, ' +
+                   'CAST(Latitude AS CHAR) as lat, ' +
+                   'CAST(Longitude AS CHAR) as lon FROM bus_stop_info';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 app.get('/api/getBusStopDataByTown', (req, res) => {
   const town = req.query.town;
   const sqlQuery = 'SELECT RoadName, Description, ' +
                    'CAST(Latitude AS CHAR) as lat, ' +
-                   'CAST(Longitude AS CHAR) as lon FROM bus_stop_info LIMIT 100';
-  //const sqlQuery = 'SELECT * FROM bus_stop_info WHERE town = ?';
+                   'CAST(Longitude AS CHAR) as lon FROM bus_stop_info WHERE town = ?';
   db.query(sqlQuery, [town], (err, results) => {
     if (err) throw err;
     res.json(results);

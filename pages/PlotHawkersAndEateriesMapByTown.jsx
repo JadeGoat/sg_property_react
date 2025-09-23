@@ -45,6 +45,7 @@ const PlotHawkersAndEateriesMapByTown = ({ town }) => {
 
     return (
         <div>
+            <h2>By category</h2>
             {selectedHawkerCentreData && selectedHealthierEateriesData ?
                 <MapHawkersAndEateries centerCoordinate={[1.3778, 103.8554]} 
                                        zoomValue={13} 
