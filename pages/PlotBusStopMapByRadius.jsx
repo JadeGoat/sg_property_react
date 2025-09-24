@@ -37,11 +37,12 @@ const PlotBusStopMapByRadius = ({ town }) => {
   return (
       <div>
           <h2>By radius from centre</h2>
-          {locationPoints ?
+          {locationPoints && radius ?
             <MapBusStop centerCoordinate={[1.3778, 103.8554]} 
                         zoomValue={13}
                         locations={locationPoints}
-                        newCenter={[selectedLat, selectedLon]} />:
+                        newCenter={[selectedLat, selectedLon]}
+                        radius={radius} />:
             <p>Loading map with pins...</p>
           }
       </div>

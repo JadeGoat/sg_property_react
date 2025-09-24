@@ -51,12 +51,13 @@ const PlotHawkersAndEateriesMapByRadius = ({ town }) => {
     return (
         <div>
             <h2>By radius from centre</h2>
-            {selectedHawkerCentreData && selectedHealthierEateriesData ?
+            {selectedHawkerCentreData && selectedHealthierEateriesData && radius ?
                 <MapHawkersAndEateries centerCoordinate={[1.3778, 103.8554]} 
                                        zoomValue={13} 
                                        hawkerCentreData={selectedHawkerCentreData}
                                        healthierEateriesData={selectedHealthierEateriesData} 
-                                       newCenter={[selectedLat, selectedLon]} />:
+                                       newCenter={[selectedLat, selectedLon]}
+                                       radius={radius}  />:
                 <p>Loading map with pins...</p>
             }
         </div>

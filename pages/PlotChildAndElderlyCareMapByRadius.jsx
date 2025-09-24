@@ -47,16 +47,17 @@ const PlotChildAndElderlyCareMapByRadius = ({ town }) => {
       };
 
     }, [radius, selectedLat, selectedLon, childCareData, elderlyCareData]);
-
+    
     return (
         <div>
             <h2>By radius from centre</h2>
-            {selectedChildCareData && selectedElderlyCareData ?
+            {selectedChildCareData && selectedElderlyCareData && radius ?
                 <MapChildAndElderlyCare centerCoordinate={[1.3778, 103.8554]} 
                                         zoomValue={13} 
                                         childCareData={selectedChildCareData}
                                         elderlyCareData={selectedElderlyCareData} 
-                                        newCenter={[selectedLat, selectedLon]} />:
+                                        newCenter={[selectedLat, selectedLon]} 
+                                        radius={radius} />:
                 <p>Loading map with pins...</p>
             }
         </div>
