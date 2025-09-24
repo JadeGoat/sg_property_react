@@ -35,7 +35,7 @@ const rangeToTowns = {
   "117-119": ["Queenstown"],
   "120-129": ["Clementi"],
   "131-131": ["Queenstown"],
-  "131-137": ["Clementi"],
+  "132-137": ["Clementi"],
   "138-139": ["Queenstown"],
   "140-149": ["Queenstown"],
   "150-159": ["Bukit Merah"],
