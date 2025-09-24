@@ -92,7 +92,7 @@ app.get('/api/getCarparkDataByTown', (req, res) => {
   const town = req.query.town;
   const sqlQuery = 'SELECT lat, lon, address as label, ' + 
                    'short_term_parking, free_parking, postal_code as status ' +
-                   'FROM carpark_info_clean2 WHERE town = ?';
+                   'FROM carpark_info_clean2 WHERE town LIKE "%?%"';
   db.query(sqlQuery, [town], (err, results) => {
     if (err) throw err;
     res.json(results);
