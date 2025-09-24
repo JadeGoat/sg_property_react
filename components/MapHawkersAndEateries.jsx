@@ -46,6 +46,9 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
       if (feature.address) {
         layer.bindPopup(`${feature.address} SINGAPORE ${feature.postal_code}`);
       }
+      else if (feature.properties && feature.properties.NAME) {
+        layer.bindPopup(feature.properties.NAME);
+      }
     };
 
     return (

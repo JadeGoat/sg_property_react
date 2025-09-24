@@ -46,9 +46,6 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
       if (feature.address) {
         layer.bindPopup(feature.address);
       }
-      else if (feature.properties && feature.properties.NAME) {
-        layer.bindPopup(feature.properties.NAME);
-      }
     };
 
     return (
