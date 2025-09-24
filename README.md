@@ -49,7 +49,7 @@ npm run dev
 
 2. Added Rental price data feature viewable by Year & Town 
 
-3. Added Transport (Carpark) viewable by Town's category or radius from Town's centre
+3. Added Transport (Carpark) viewable by radius from Town's centre only
 
    ![Alt text](./images/sample_map_carpark.png)
 
