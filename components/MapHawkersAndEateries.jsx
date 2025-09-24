@@ -55,14 +55,12 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
         <GeoJSON key={JSON.stringify(healthierEateriesData)} 
                  data={healthierEateriesData} 
                  pointToLayer={bluePointToLayer} />
-        { 
-          radius ? 
-          <Circle
-            center={newCenter}
-            radius={radius * 1000} // takes in metres, converts km to metres
-            pathOptions={{ color: 'pink', fillColor: 'pink', fillOpacity: 0.3 }}
-          /> : 
-          <></>
+        { radius ? 
+            <Circle
+              center={newCenter}
+              radius={radius * 1000} // takes in metres, converts km to metres
+              pathOptions={{ color: 'pink', fillColor: 'pink', fillOpacity: 0.3 }}
+            /> : <></>
         }
         <PinsLegendLayer legendHtml={legendHtml} />
       </MapContainer>
