@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Circle } from 'react-leaflet';
 import { RecenterMap } from '../scripts/MapUtils.js'
 import PinsLegendLayer from './LegendLayer.jsx';
 import L from 'leaflet';
