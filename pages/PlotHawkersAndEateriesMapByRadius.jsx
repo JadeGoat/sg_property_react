@@ -36,16 +36,10 @@ const PlotHawkersAndEateriesMapByRadius = ({ town }) => {
           return dist <= radius;
         });
 
-        // Extract postal and address from html
+        // No need to extract postal and address from html
+        // as the geojson is a different format
         const filteredHawkerCentreData = constructGeoJsonFromFeature(hawkerFeatures)
-        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredHawkerCentreData)
-        
-        // Merge feature together
-        const mergedFeatures = filteredHawkerCentreData.features.map((item, index) => ({
-            ...item,
-            ...metaPostalCodeData[index]
-        }));
-        setSelectedHawkerCentreData(constructGeoJsonFromFeature(mergedFeatures));
+        setSelectedHawkerCentreData(filteredHawkerCentreData);
       };
 
       if (healthierEateriesData) {
@@ -58,7 +52,7 @@ const PlotHawkersAndEateriesMapByRadius = ({ town }) => {
         // Extract postal and address from html
         const filteredHealthierEateriesData = constructGeoJsonFromFeature(eateriesFeatures)
         const metaPostalCodeData = extractPostalCodeFromMetaData(filteredHealthierEateriesData)
-        
+
         // Merge feature together
         const mergedFeatures = filteredHealthierEateriesData.features.map((item, index) => ({
             ...item,
