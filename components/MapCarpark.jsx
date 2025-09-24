@@ -6,7 +6,7 @@ import 'leaflet.heat';
 import 'leaflet/dist/leaflet.css';
 import '../css/MapCarpark.css'
 
-const MapCarpark = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
+const MapCarpark = ({ centerCoordinate, zoomValue, locations, newCenter, radius }) => {
 
     // Customize legend here
     const legendHtml = `
@@ -39,6 +39,15 @@ const MapCarpark = ( {centerCoordinate, zoomValue, locations, newCenter} ) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <PinsLayer locations={locations} />
+        { 
+          radius ? 
+          <Circle
+            center={newCenter}
+            radius={radius * 1000} // takes in metres, converts km to metres
+            pathOptions={{ color: 'pink', fillColor: 'pink', fillOpacity: 0.3 }}
+          /> : 
+          <></>
+        }
         <PinsLegendLayer legendHtml={legendHtml} />
       </MapContainer>
     );

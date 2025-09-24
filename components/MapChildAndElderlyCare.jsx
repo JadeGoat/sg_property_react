@@ -1,11 +1,11 @@
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Circle } from 'react-leaflet';
 import { RecenterMap } from '../scripts/MapUtils.js'
 import PinsLegendLayer from './LegendLayer';
 import L from 'leaflet';
 import '../css/MapChildAndElderlyCare.css'
 
 const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue, 
-                                  childCareData, elderlyCareData, newCenter }) => {
+                                  childCareData, elderlyCareData, newCenter, radius }) => {
 
     // Customize legend here
     const legendHtml = `
@@ -41,7 +41,7 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
       });
       return L.marker(latlng, { icon });
     };
-
+    console.log(radius)
     return (
       <MapContainer className='mapChildAndElderlyCareContainer' center={centerCoordinate} zoom={zoomValue}>
         <RecenterMap center={newCenter} />
@@ -55,6 +55,15 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
         <GeoJSON key={JSON.stringify(elderlyCareData)} 
                  data={elderlyCareData} 
                  pointToLayer={bluePointToLayer} />
+        { 
+          radius ? 
+          <Circle
+            center={newCenter}
+            radius={radius * 1000} // takes in metres, converts km to metres
+            pathOptions={{ color: 'pink', fillColor: 'pink', fillOpacity: 0.3 }}
+          /> : 
+          <></>
+        }
         <PinsLegendLayer legendHtml={legendHtml} />
       </MapContainer>
     )

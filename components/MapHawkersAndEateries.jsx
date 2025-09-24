@@ -5,7 +5,7 @@ import L from 'leaflet';
 import '../css/MapHawkersAndEateries.css'
 
 const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
-                                 hawkerCentreData, healthierEateriesData, newCenter }) => {
+                                 hawkerCentreData, healthierEateriesData, newCenter, radius }) => {
 
     // Customize legend here
     const legendHtml = `
@@ -55,6 +55,15 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
         <GeoJSON key={JSON.stringify(healthierEateriesData)} 
                  data={healthierEateriesData} 
                  pointToLayer={bluePointToLayer} />
+        { 
+          radius ? 
+          <Circle
+            center={newCenter}
+            radius={radius * 1000} // takes in metres, converts km to metres
+            pathOptions={{ color: 'pink', fillColor: 'pink', fillOpacity: 0.3 }}
+          /> : 
+          <></>
+        }
         <PinsLegendLayer legendHtml={legendHtml} />
       </MapContainer>
     )
