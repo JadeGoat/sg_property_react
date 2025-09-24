@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getTownInCarpark } from '../scripts/RestApiDataSource.js'
+import { getTownInRental } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
 import PlotBusStopMapByRadius from './PlotBusStopMapByRadius.jsx'
 
@@ -8,7 +8,7 @@ const ViewBusStopByTown = () => {
     const [selectedTown, setSelectedTown] = useState("");
 
     useEffect(() => {
-        getTownInCarpark(setOptions);
+        getTownInRental(setOptions);
     }, []);
 
     return (

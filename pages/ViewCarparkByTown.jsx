@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getTownInCarpark } from '../scripts/RestApiDataSource.js'
+import { getTownInRental } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
 import PlotCarparkMapByTown from './PlotCarparkMapByTown.jsx'
 import PlotCarparkMapByRadius from './PlotCarparkMapByRadius.jsx'
@@ -9,7 +9,7 @@ const ViewCarparkByTown = () => {
     const [selectedTown, setSelectedTown] = useState("");
 
     useEffect(() => {
-        getTownInCarpark(setOptions);
+        getTownInRental(setOptions);
     }, []);
 
     return (

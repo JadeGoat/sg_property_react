@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getTownInCarpark } from '../scripts/RestApiDataSource.js'
+import { getTownInRental } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
 import PlotChildAndElderlyCareMapByTown  from './PlotChildAndElderlyCareMapByTown.jsx'
 import PlotChildAndElderlyCareMapByRadius  from './PlotChildAndElderlyCareMapByRadius.jsx'
@@ -10,7 +10,7 @@ const ViewChildAndElerlyCareByTown = () => {
     const [selectedTown, setSelectedTown] = useState("");
 
     useEffect(() => {
-        getTownInCarpark(setOptions);
+        getTownInRental(setOptions);
     }, []);
 
     return (
