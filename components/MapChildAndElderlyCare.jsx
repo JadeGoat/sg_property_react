@@ -41,7 +41,7 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
       });
       return L.marker(latlng, { icon });
     };
-    console.log(radius)
+
     return (
       <MapContainer className='mapChildAndElderlyCareContainer' center={centerCoordinate} zoom={zoomValue}>
         <RecenterMap center={newCenter} />
