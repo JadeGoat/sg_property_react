@@ -42,6 +42,16 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
       return L.marker(latlng, { icon });
     };
 
+    const onEachFeature = (feature, layer) => {
+      if (feature.address) {
+        layer.bindPopup(feature.address);
+      }
+      else if (feature.properties && feature.properties.NAME) {
+        console.log(feature.properties)
+        layer.bindPopup(feature.properties.NAME);
+      }
+    };
+
     return (
       <MapContainer className='mapChildAndElderlyCareContainer' center={centerCoordinate} zoom={zoomValue}>
         <RecenterMap center={newCenter} />
@@ -51,10 +61,10 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
         />
         <GeoJSON key={JSON.stringify(childCareData)} 
                  data={childCareData} 
-                 pointToLayer={orangePointToLayer} />
+                 pointToLayer={orangePointToLayer} onEachFeature={onEachFeature} />
         <GeoJSON key={JSON.stringify(elderlyCareData)} 
                  data={elderlyCareData} 
-                 pointToLayer={bluePointToLayer} />
+                 pointToLayer={bluePointToLayer} onEachFeature={onEachFeature} />
         { radius ? 
             <Circle
               center={newCenter}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getChildCareData, getElderlyCareData } from '../scripts/RestApiDataSource.js'
 import MapChildAndElderlyCare from '../components/MapChildAndElderlyCare.jsx';
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
+import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
 const PlotChildAndElderlyCareMapByRadius = ({ town }) => {
@@ -29,21 +30,42 @@ const PlotChildAndElderlyCareMapByRadius = ({ town }) => {
     useEffect(() => {
       
       if (childCareData) {
-        const filteredChildCareData = childCareData.features.filter(item => {
+        const childCareFeatures = childCareData.features.filter(item => {
           const loc = item.geometry.coordinates;
           const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc[1], loc[0])
           return dist <= radius;
         });
-        setSelectedChildCareData(filteredChildCareData);
+        
+        // Extract postal and address from html
+        const filteredChildCareData = constructGeoJsonFromFeature(childCareFeatures)
+        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredChildCareData)
+        
+        // Merge feature together
+        const mergedFeatures = filteredChildCareData.features.map((item, index) => ({
+            ...item,
+            ...metaPostalCodeData[index]
+        }));
+        setSelectedChildCareData(constructGeoJsonFromFeature(mergedFeatures));
       };
 
       if (elderlyCareData) {
-        const filteredElderlyCareData = elderlyCareData.features.filter(item => {
+        const elderlyCareFeatures = elderlyCareData.features.filter(item => {
           const loc = item.geometry.coordinates;
           const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc[1], loc[0]);
           return dist <= radius;
         });
-        setSelectedElderlyCareData(filteredElderlyCareData);
+
+        // Extract postal and address from html
+        const filteredElderlyCareData = constructGeoJsonFromFeature(elderlyCareFeatures)
+        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredElderlyCareData)
+       
+        // Merge feature together
+        const mergedFeatures = filteredElderlyCareData.features.map((item, index) => ({
+            ...item,
+            ...metaPostalCodeData[index]
+        }));
+
+        setSelectedElderlyCareData(constructGeoJsonFromFeature(mergedFeatures));
       };
 
     }, [radius, selectedLat, selectedLon, childCareData, elderlyCareData]);

@@ -42,6 +42,12 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
       return L.marker(latlng, { icon });
     };
 
+    const onEachFeature = (feature, layer) => {
+      if (feature.address) {
+        layer.bindPopup(`${feature.address} SINGAPORE ${feature.postal_code}`);
+      }
+    };
+
     return (
       <MapContainer className='mapHawkersAndEateriesContainer' center={centerCoordinate} zoom={zoomValue}>
         <RecenterMap center={newCenter} />
@@ -51,10 +57,10 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
         />
         <GeoJSON key={JSON.stringify(hawkerCentreData)} 
                  data={hawkerCentreData} 
-                 pointToLayer={orangePointToLayer} />
+                 pointToLayer={orangePointToLayer} onEachFeature={onEachFeature} />
         <GeoJSON key={JSON.stringify(healthierEateriesData)} 
                  data={healthierEateriesData} 
-                 pointToLayer={bluePointToLayer} />
+                 pointToLayer={bluePointToLayer} onEachFeature={onEachFeature}/>
         { radius ? 
             <Circle
               center={newCenter}

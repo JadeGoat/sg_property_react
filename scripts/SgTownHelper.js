@@ -26,14 +26,128 @@ const sgTowns = {
     "Toa Payoh": [1.3345, 103.8490],
     "Woodlands": [1.4380, 103.7865],
     "Yishun": [1.4294, 103.8355]
-  };
+};
 
-  export function getTownLatLon(town) {
-    const key = findOriginalKey(town)
-    return sgTowns[key]
+const rangeToTowns = {
+  "0-89": ["Central"],
+  "90-99": ["Bukit Merah"],
+  "100-116": ["Bukit Merah"],
+  "117-119": ["Queenstown"],
+  "120-129": ["Clementi"],
+  "131-131": ["Queenstown"],
+  "131-137": ["Clementi"],
+  "138-139": ["Queenstown"],
+  "140-149": ["Queenstown"],
+  "150-159": ["Bukit Merah"],
+  "160-169": ["Central"],
+  "170-178": ["Central"],
+  "179-199": ["Central"],
+  "200-249": ["Central"],
+  "250-259": ["Central"],
+  "260-266": ["Bukit Timah"],
+  "267-269": ["Bukit Timah"],
+  "270-276": ["Queenstown"],
+  "277-279": ["Bukit Timah"],
+  "280-289": ["Bukit Timah"],
+  "290-297": ["Bukit Timah"],
+  "298-298": ["Toa Payoh"],
+  "299-299": ["Bukit Timah"],
+  "300-307": ["Toa Payoh"], // Novena
+  "309-310": ["Toa Payoh"],
+  "310-319": ["Toa Payoh"],
+  "320-322": ["Toa Payoh", "Kallang/Whampoa"], // Balestier
+  "323-329": ["Toa Payoh", "Kallang/Whampoa"], // Balestier
+  "330-331": ["Kallang/Whampoa"], // Whampoa
+  "332-339": ["Kallang/Whampoa"], // Whampoa
+  "340-349": ["Kallang/Whampoa"],
+  "350-359": ["Kallang/Whampoa"],
+  "360-369": ["Geylang"],
+  "370-379": ["Geylang"],
+  "380-389": ["Geylang"],
+  "390-399": ["Geylang"],
+  "400-409": ["Bedok"],
+  "410-419": ["Bedok"],
+  "420-429": ["Marine Parade"],
+  "430-439": ["Marine Parade"],
+  "440-449": ["Marine Parade"],
+  "450-459": ["Bedok"],
+  "460-469": ["Bedok"],
+  "470-479": ["Bedok"],
+  "480-489": ["Bedok"],
+  "490-499": ["Bedok", "Tampines"],
+  "500-509": ["Pasir Ris"],
+  "510-519": ["Pasir Ris"],
+  "520-529": ["Tampines"],
+  "530-539": ["Hougang"],
+  "540-544": ["Sengkang"],
+  "545-549": ["Sengkang", "Hougang"],
+  "550-559": ["Serangoon"],
+  "560-569": ["Ang Mo Kio", "Bishan"],
+  "570-579": ["Bishan"],
+  "580-585": ["Toa Payoh"],
+  "586-589": ["Bukit Timah"],
+  "590-590": ["Bukit Timah"],
+  "591-591": ["Bukit Timah"],
+  "592-599": ["Bukit Timah"],
+  "600-609": ["Jurong East"],
+  "610-619": ["Jurong West"],
+  "620-629": ["Jurong West"],
+  "630-631": ["Jurong West", "Bukit Batok"],
+  "632-632": ["Jurong West"],
+  "633-639": ["Jurong West", "Bukit Batok"],
+  "640-644": ["Jurong West"],
+  "645-649": ["Bukit Batok"],
+  "650-659": ["Bukit Batok"],
+  "660-669": ["Bukit Panjang"],
+  "670-679": ["Bukit Panjang"],
+  "680-689": ["Choa Chu Kang"],
+  "690-699": ["Tengah"],
+  "700-729": ["Woodlands"],
+  "730-739": ["Woodlands"],
+  "740-749": ["Yishun"],
+  "750-759": ["Yishun", "Sembawang"],
+  "760-769": ["Yishun"],
+  "770-779": ["Ang Mo Kio"],
+  "780-789": ["Ang Mo Kio"],
+  "790-799": ["Sengkang"],
+  "800-804": ["Punggol"],
+  "805-809": ["Ang Mo Kio"],
+  "810-819": ["Sembawang"],
+  "820-829": ["Punggol"],
+  "830-839": ["Sengkang"],
+  "840-849": ["Hougang"],
+  "850-859": ["Hougang"],
+  "860-869": ["Sengkang", "Hougang"],
+  "870-879": ["Sengkang"],
+  "880-889": ["Sengkang"],
+  "890-899": ["Punggol"],
+  "900-999": ["Bedok"]
+};
+
+export function getTownFromPostal(postalCode) {
+  var strPostalCode = postalCode.toString()
+  if (strPostalCode.length === 5) {
+    strPostalCode = "0" + strPostalCode
+  }
+  const prefix = parseInt(strPostalCode.slice(0, 3), 10);
+
+  for (const range in rangeToTowns) {
+    const [start, end] = range.split("-").map(Number);
+    if (prefix >= start && prefix <= end) {
+      const townUpperCaseList = rangeToTowns[range].map(town => town.toUpperCase());
+      return townUpperCaseList;
+    }
   }
 
-  function findOriginalKey(searchKey) {
-    const upperSearch = searchKey.toUpperCase();
-    return Object.keys(sgTowns).find(key => key.toUpperCase() === upperSearch);
-  }
+  return ["Unknown"];
+}
+
+export function getTownLatLon(town) {
+  const key = findOriginalKey(town)
+  return sgTowns[key]
+}
+
+function findOriginalKey(searchKey) {
+  const upperSearch = searchKey.toUpperCase();
+  return Object.keys(sgTowns).find(key => key.toUpperCase() === upperSearch);
+}

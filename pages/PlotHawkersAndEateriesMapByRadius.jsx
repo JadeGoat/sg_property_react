@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getHawkerCentreData, getHealthierEateriesData } from '../scripts/RestApiDataSource.js'
 import MapHawkersAndEateries from '../components/MapHawkersAndEateries.jsx';
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
+import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
 const PlotHawkersAndEateriesMapByRadius = ({ town }) => {
@@ -29,21 +30,41 @@ const PlotHawkersAndEateriesMapByRadius = ({ town }) => {
     useEffect(() => {
 
       if (hawkerCentreData) {
-        const filteredHawkerCentreData = hawkerCentreData.features.filter(item => {
+        const hawkerFeatures = hawkerCentreData.features.filter(item => {
           const loc = item.geometry.coordinates;
           const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc[1], loc[0])
           return dist <= radius;
         });
-        setSelectedHawkerCentreData(filteredHawkerCentreData);
+
+        // Extract postal and address from html
+        const filteredHawkerCentreData = constructGeoJsonFromFeature(hawkerFeatures)
+        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredHawkerCentreData)
+        
+        // Merge feature together
+        const mergedFeatures = filteredHawkerCentreData.features.map((item, index) => ({
+            ...item,
+            ...metaPostalCodeData[index]
+        }));
+        setSelectedHawkerCentreData(constructGeoJsonFromFeature(mergedFeatures));
       };
 
       if (healthierEateriesData) {
-        const filteredHealthierEateriesData = healthierEateriesData.features.filter(item => {
+        const eateriesFeatures = healthierEateriesData.features.filter(item => {
           const loc = item.geometry.coordinates;
           const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc[1], loc[0])
           return dist <= radius;
         });
-        setSelectedHealthierEateriesData(filteredHealthierEateriesData);
+
+        // Extract postal and address from html
+        const filteredHealthierEateriesData = constructGeoJsonFromFeature(eateriesFeatures)
+        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredHealthierEateriesData)
+        
+        // Merge feature together
+        const mergedFeatures = filteredHealthierEateriesData.features.map((item, index) => ({
+            ...item,
+            ...metaPostalCodeData[index]
+        }));
+        setSelectedHealthierEateriesData(constructGeoJsonFromFeature(mergedFeatures));
       };
 
     }, [radius, selectedLat, selectedLon, hawkerCentreData, healthierEateriesData]);
