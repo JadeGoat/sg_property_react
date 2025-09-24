@@ -6,7 +6,7 @@ const sgTowns = {
     "Bukit Merah": [1.2776, 103.8198],
     "Bukit Panjang": [1.3784, 103.7642],
     "Bukit Timah": [1.3294, 103.8021],
-    "Central Area": [1.2903, 103.8519],
+    "Central": [1.2903, 103.8519],
     "Choa Chu Kang": [1.3850, 103.7450],
     "Clementi": [1.3151, 103.7656],
     "Geylang": [1.3160, 103.8860],
