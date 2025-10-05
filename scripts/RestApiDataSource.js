@@ -122,6 +122,21 @@ export const getElderlyCareData = async (setData) => {
          .catch(error => console.error('Error retrieving year data:', error))
 }
 
+export const getDisabilityServicesData = async (setData) => {
+    axios.get(`${baseUrl}/getDisabilityServicesData`)
+         .then(response => {
+            const data = response.data;
+             setData(constructGeoJsonFromData(data));
+         })
+         .catch(error => console.error('Error retrieving year data:', error))
+}
+
+export const getChasClinicData = async (setData) => {
+    axios.get(`${baseUrl}/getChasClinicData`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
 export const getHawkerCentreData = async (setData) => {
     axios.get(`${baseUrl}/getHawkerCentreData`)
          .then(response => {
@@ -138,4 +153,10 @@ export const getHealthierEateriesData = async (setData) => {
             setData(constructGeoJsonFromData(data));
          })
          .catch(error => console.error('Error retrieving year data:', error))
+}
+
+export const getSupermarketsData = async (setData) => {
+    axios.get(`${baseUrl}/getSupermarketsData`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
 }

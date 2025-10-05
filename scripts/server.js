@@ -170,6 +170,23 @@ app.get('/api/getElderlyCareData', (req, res) => {
   });
 });
 
+app.get('/api/getDisabilityServicesData', (req, res) => {
+  const sqlQuery = 'SELECT coordinates, properties FROM disability_services';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getChasClinicData', (req, res) => {
+  const labelQuery = 'CONCAT(name, "<br>Address: ", addressstreetname, " SINGAPORE ", addresspostalcode) AS label'
+  const sqlQuery = 'SELECT ' + labelQuery + ', lat, lon FROM chas_clinic_clean';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 app.get('/api/getHawkerCentreData', (req, res) => {
   const sqlQuery = 'SELECT coordinates, properties FROM hawker_centre';
   db.query(sqlQuery, (err, results) => {
@@ -180,6 +197,15 @@ app.get('/api/getHawkerCentreData', (req, res) => {
 
 app.get('/api/getHealthierEateriesData', (req, res) => {
   const sqlQuery = 'SELECT coordinates, properties FROM healthier_eateries';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getSupermarketsData', (req, res) => {
+  const labelQuery = 'CONCAT(name, "<br>Address: ", addressstreetname, " SINGAPORE ", addresspostalcode) AS label'
+  const sqlQuery = 'SELECT ' + labelQuery + ', lat, lon FROM supermarkets_clean';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
