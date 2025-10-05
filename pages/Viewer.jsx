@@ -5,7 +5,7 @@ import ViewResaleByYear from './ViewResaleByYear';
 import ViewResaleByTown from './ViewResaleByTown';
 import ViewCarparkByTown from './ViewCarparkByTown';
 import ViewPublicTransportByTown from './ViewPublicTransportByTown';
-import ViewChildAndElerlyCareByTown from './ViewChildAndElerlyCareByTown';
+import ViewPersonalCareByTown from './ViewPersonalCareByTown';
 import ViewHawkersAndEateriesByTown from './ViewHawkersAndEateriesByTown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -44,7 +44,7 @@ const Viewer = () => {
                   <Tab>Resale</Tab>
                   <Tab>Rental</Tab>
                   <Tab>Transport</Tab>
-                  <Tab>Child/Elderly Care</Tab>
+                  <Tab>Personal Care</Tab>
                   <Tab>Hawkers/Eateries</Tab>
               </TabList>
 
@@ -66,8 +66,8 @@ const Viewer = () => {
                 </Tabs>
               </TabPanel>
 
-              {/* Sub tab 4 - Child/Elderly Care */}
-              <TabPanel><ViewChildAndElerlyCareByTown/></TabPanel>
+              {/* Sub tab 4 - Child/Elderly/ Care & Disability Services */}
+              <TabPanel><ViewPersonalCareByTown/></TabPanel>
               
               {/* Sub tab 5 - Hawkers and Eateries */}
               <TabPanel><ViewHawkersAndEateriesByTown/></TabPanel>
