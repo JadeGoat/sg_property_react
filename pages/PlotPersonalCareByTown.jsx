@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getChildCareData, getElderlyCareData } from '../scripts/RestApiDataSource.js'
-import MapChildAndElderlyCare from '../components/MapChildAndElderlyCare.jsx';
+import MapPersonalCare from '../components/MapPersonalCare.jsx';
 import { extractPostalCodeFromMetaData, filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
-const PlotChildAndElderlyCareMapByTown = ({ town }) => {
+const PlotPersonalCareByTown = ({ town }) => {
 
     const [selectedLat, setSelectedLat] = useState(null);
     const [selectedLon, setSelectedLon] = useState(null);
@@ -45,15 +45,15 @@ const PlotChildAndElderlyCareMapByTown = ({ town }) => {
         <div>
             <h2>By category</h2>
             {selectedChildCareData && selectedElderlyCareData ?
-                <MapChildAndElderlyCare centerCoordinate={[1.3778, 103.8554]} 
-                                        zoomValue={13} 
-                                        childCareData={selectedChildCareData}
-                                        elderlyCareData={selectedElderlyCareData} 
-                                        newCenter={[selectedLat, selectedLon]} />:
+                <MapPersonalCare centerCoordinate={[1.3778, 103.8554]} 
+                                 zoomValue={13} 
+                                 childCareData={selectedChildCareData}
+                                 elderlyCareData={selectedElderlyCareData} 
+                                 newCenter={[selectedLat, selectedLon]} />:
                 <p>Loading map with pins...</p>
             }
         </div>
     )
 }
 
-export default PlotChildAndElderlyCareMapByTown
+export default PlotPersonalCareByTown

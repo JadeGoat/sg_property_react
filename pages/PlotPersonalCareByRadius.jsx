@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getChildCareData, getElderlyCareData } from '../scripts/RestApiDataSource.js'
-import MapChildAndElderlyCare from '../components/MapChildAndElderlyCare.jsx';
+import MapPersonalCare from '../components/MapPersonalCare.jsx';
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
-const PlotChildAndElderlyCareMapByRadius = ({ town }) => {
+const PlotPersonalCareByRadius = ({ town }) => {
 
     const [selectedLat, setSelectedLat] = useState(null);
     const [selectedLon, setSelectedLon] = useState(null);
@@ -74,16 +74,16 @@ const PlotChildAndElderlyCareMapByRadius = ({ town }) => {
         <div>
             <h2>By radius from centre</h2>
             {selectedChildCareData && selectedElderlyCareData && radius ?
-                <MapChildAndElderlyCare centerCoordinate={[1.3778, 103.8554]} 
-                                        zoomValue={13} 
-                                        childCareData={selectedChildCareData}
-                                        elderlyCareData={selectedElderlyCareData} 
-                                        newCenter={[selectedLat, selectedLon]} 
-                                        radius={radius} />:
+                <MapPersonalCare centerCoordinate={[1.3778, 103.8554]} 
+                                 zoomValue={13} 
+                                 childCareData={selectedChildCareData}
+                                 elderlyCareData={selectedElderlyCareData} 
+                                 newCenter={[selectedLat, selectedLon]} 
+                                 radius={radius} />:
                 <p>Loading map with pins...</p>
             }
         </div>
     )
 }
 
-export default PlotChildAndElderlyCareMapByRadius
+export default PlotPersonalCareByRadius
