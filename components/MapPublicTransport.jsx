@@ -4,7 +4,7 @@ import PinsLayer from './PinsLayer.jsx';
 import 'leaflet/dist/leaflet.css';
 import '../css/MapBusStop.css'
 
-const MapBusStop = ({ centerCoordinate, zoomValue, busStopLocations, mrtStationLocations, newCenter, radius }) => {
+const MapPublicTransport = ({ centerCoordinate, zoomValue, busStopLocations, mrtStationLocations, newCenter, radius }) => {
 
     return (
       <MapContainer className='mapBusStopContainer' center={centerCoordinate} zoom={zoomValue}>
@@ -26,4 +26,4 @@ const MapBusStop = ({ centerCoordinate, zoomValue, busStopLocations, mrtStationL
     );
 };
 
-export default MapBusStop;
+export default MapPublicTransport;
