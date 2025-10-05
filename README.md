@@ -53,7 +53,9 @@ npm run dev
 
    ![Alt text](./images/sample_map_carpark.png)
 
-4. Added Transport (Bus Stop) viewable by radius from Town's centre only
+4. Added Transport (Bus Stop & MRT/LRT) viewable by radius from Town's centre only
+
+   ![Alt text](./images/sample_map_public_transport.png)
 
 5. Added Child/Elderly Care viewable by Town's category or radius from Town's centre
 
