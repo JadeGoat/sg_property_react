@@ -121,7 +121,7 @@ app.get('/api/getBusStopDataByTown', (req, res) => {
 });
 
 app.get('/api/getMrtStationData', (req, res) => {
-  const sqlQuery = 'SELECT StationName, ExitCode, Latitude, Longitude FROM lta_mrt';
+  const sqlQuery = 'SELECT StationName, ExitCode, Latitude, Longitude FROM lta_mrt_clean';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
