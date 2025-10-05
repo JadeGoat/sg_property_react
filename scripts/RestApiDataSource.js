@@ -71,6 +71,12 @@ export const getBusStopDataByTown = async (town, setData) => {
          .catch(error => console.error('Error retrieving data:', error))
 }
 
+export const getMrtStationData = async (setData) => {
+    axios.get(`${baseUrl}/getMrtStationData`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
 export const getTownInRental = async (setData) => {
     axios.get(`${baseUrl}/getTownInRental`)
          .then(response => {
