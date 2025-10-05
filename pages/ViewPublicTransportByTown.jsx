@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getTownInRental } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
-import PlotBusStopMapByRadius from './PlotBusStopMapByRadius.jsx'
+import PlotPublicTransportMapByRadius from './PlotPublicTransportMapByRadius.jsx'
 
-const ViewBusStopByTown = () => {
+const ViewPublicTransportByTown = () => {
     const [options, setOptions] = useState([])
     const [selectedTown, setSelectedTown] = useState("");
 
@@ -19,11 +19,11 @@ const ViewBusStopByTown = () => {
                   
         {selectedTown != "" ?
           <div>
-            <PlotBusStopMapByRadius town={selectedTown} />
+            <PlotPublicTransportMapByRadius town={selectedTown} />
           </div>: <></>
         }
       </div>
     )
 }
 
-export default ViewBusStopByTown
+export default ViewPublicTransportByTown

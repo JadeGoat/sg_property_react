@@ -4,7 +4,7 @@ import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import MapPublicTransport from '../components/MapPublicTransport.jsx';
 
-const PlotBusStopMapByRadius = ({ town }) => {
+const PlotPublicTransportMapByRadius = ({ town }) => {
 
   const [busStopData, setBusStopData] = useState(null);
   const [mrtStationData, setMrtStationData] = useState(null);
@@ -52,4 +52,4 @@ const PlotBusStopMapByRadius = ({ town }) => {
   )
 }
 
-export default PlotBusStopMapByRadius
+export default PlotPublicTransportMapByRadius
