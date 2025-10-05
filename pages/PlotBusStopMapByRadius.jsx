@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
-import { getBusStopData } from '../scripts/RestApiDataSource.js'
+import { getBusStopData, getMrtStationData } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import MapBusStop from '../components/MapBusStop.jsx';
 
 const PlotBusStopMapByRadius = ({ town }) => {
 
-  const [data, setData] = useState(null);
+  const [busStopData, setBusStopData] = useState(null);
+  const [mrtStationData, setMrtStationData] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
-  const [locationPoints, setLocationPoints] = useState(null);
+  const [busStopLocationPoints, setBusStopLocationPoints] = useState(null);
   const [radius, ] = useState(2.5); // radius in km
 
   useEffect(() => {
 
     // Set carpark data
-    getBusStopData(setData);
-    
+    getBusStopData(setBusStopData);
+    getMrtStationData(setMrtStationData);
+
     // Set lat, lon
     const latlon = getTownLatLon(town)
     setSelectedLat(latlon[0]);
@@ -25,22 +27,23 @@ const PlotBusStopMapByRadius = ({ town }) => {
   }, [town]);
 
   useEffect(() => {
-      if (data && data.length > 0) {
-        const filteredData = data.filter(loc => {
+      if (busStopData && busStopData.length > 0) {
+        const filteredData = busStopData.filter(loc => {
           const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
           return dist <= radius;
         });
-        setLocationPoints(filteredData)
+        setBusStopLocationPoints(filteredData)
       }
-  }, [radius, selectedLat, selectedLon, data]);
+  }, [radius, selectedLat, selectedLon, busStopData]);
 
   return (
       <div>
           <h2>By radius from centre</h2>
-          {locationPoints && radius ?
+          {busStopLocationPoints && radius ?
             <MapBusStop centerCoordinate={[1.3778, 103.8554]} 
                         zoomValue={13}
-                        locations={locationPoints}
+                        busStopLocations={busStopLocationPoints}
+                        mrtStationLocations={mrtStationData}
                         newCenter={[selectedLat, selectedLon]}
                         radius={radius} />:
             <p>Loading map with pins...</p>

@@ -1,11 +1,10 @@
 import { MapContainer, TileLayer, Circle } from 'react-leaflet';
 import { RecenterMap } from '../scripts/MapUtils.js'
 import PinsLayer from './PinsLayer.jsx';
-import 'leaflet.heat';
 import 'leaflet/dist/leaflet.css';
 import '../css/MapBusStop.css'
 
-const MapBusStop = ({ centerCoordinate, zoomValue, locations, newCenter, radius }) => {
+const MapBusStop = ({ centerCoordinate, zoomValue, busStopLocations, mrtStationLocations, newCenter, radius }) => {
 
     return (
       <MapContainer className='mapBusStopContainer' center={centerCoordinate} zoom={zoomValue}>
@@ -14,7 +13,8 @@ const MapBusStop = ({ centerCoordinate, zoomValue, locations, newCenter, radius 
           attribution='&copy; OpenStreetMap contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <PinsLayer locations={locations} />
+        <PinsLayer locations={busStopLocations} />
+        {/* <PinsLayer locations={mrtStationLocations} /> */}
         { radius ? 
             <Circle
               center={newCenter}
