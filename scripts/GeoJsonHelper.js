@@ -5,7 +5,8 @@ export function extractPostalCodeFromPropertiesData(geoJsonData) {
     const metaPostalCodeData = metaData.map(item => {
         const result = {
             "postal_code": item.ADDRESSPOSTALCODE,
-            "address": item.ADDRESSSTREETNAME
+            "address": item.ADDRESSSTREETNAME,
+            "name": item.NAME,
         }
         return result;
     });
