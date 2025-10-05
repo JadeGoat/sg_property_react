@@ -2,7 +2,6 @@ import { MapContainer, TileLayer, Circle } from 'react-leaflet';
 import { RecenterMap } from '../scripts/MapUtils.js'
 import PinsLayer from './PinsLayer';
 import PinsLegendLayer from './LegendLayer';
-import 'leaflet.heat';
 import 'leaflet/dist/leaflet.css';
 import '../css/MapCarpark.css'
 
