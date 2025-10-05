@@ -5,6 +5,7 @@ const PinsLayer = ( {locations, color} ) => {
 
   const { redIcon, 
           greenIcon, 
+          orangeIcon, 
           defaultIcon 
         } = getIcons(0.7);
 
@@ -16,7 +17,8 @@ const PinsLayer = ( {locations, color} ) => {
                     position={[loc.lat, loc.lon]}
                     // Customize pins here
                     icon={color==="red" ? redIcon :
-                          color==="green" ? greenIcon : defaultIcon} 
+                          color==="green" ? greenIcon : 
+                          color==="orange" ? orangeIcon: defaultIcon} 
             >
               <Popup>{loc.label}</Popup>
             </Marker>
