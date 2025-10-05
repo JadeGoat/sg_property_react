@@ -2,10 +2,10 @@ import { MapContainer, TileLayer, GeoJSON, Circle } from 'react-leaflet';
 import { RecenterMap } from '../scripts/MapUtils.js'
 import PinsLegendLayer from './LegendLayer';
 import L from 'leaflet';
-import '../css/MapChildAndElderlyCare.css'
+import '../css/MapPersonalCare.css'
 
-const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue, 
-                                  childCareData, elderlyCareData, newCenter, radius }) => {
+const MapPersonalCare = ({ centerCoordinate, zoomValue, 
+                           childCareData, elderlyCareData, newCenter, radius }) => {
 
     // Customize legend here
     const legendHtml = `
@@ -49,7 +49,7 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
     };
 
     return (
-      <MapContainer className='mapChildAndElderlyCareContainer' center={centerCoordinate} zoom={zoomValue}>
+      <MapContainer className='mapPersonalCareContainer' center={centerCoordinate} zoom={zoomValue}>
         <RecenterMap center={newCenter} />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -73,4 +73,4 @@ const MapChildAndElderlyCare = ({ centerCoordinate, zoomValue,
     )
 }
 
-export default MapChildAndElderlyCare
+export default MapPersonalCare

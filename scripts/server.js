@@ -121,8 +121,8 @@ app.get('/api/getBusStopDataByTown', (req, res) => {
 });
 
 app.get('/api/getMrtStationData', (req, res) => {
-  const sqlQuery = 'SELECT CONCAT(StationName, " (", ExitCode, ")") AS label, ' +
-                   'Latitude as lat, Longitude as lon FROM lta_mrt_clean';
+  const sqlQuery = 'SELECT CONCAT(station_name, " (", exit_code, ")") AS label, ' +
+                   'lat, lon FROM lta_mrt_station_clean';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
