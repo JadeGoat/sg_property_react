@@ -59,7 +59,7 @@ const Viewer = () => {
                 <Tabs>
                   <TabList>
                     <Tab>Carpark</Tab>
-                    <Tab>Bus Stop</Tab>
+                    <Tab>Public Transport</Tab>
                   </TabList>
                   <TabPanel><ViewCarparkByTown/></TabPanel>
                   <TabPanel><ViewPublicTransportByTown/></TabPanel>
