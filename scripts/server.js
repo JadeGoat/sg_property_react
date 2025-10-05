@@ -120,6 +120,14 @@ app.get('/api/getBusStopDataByTown', (req, res) => {
   });
 });
 
+app.get('/api/getMrtStationData', (req, res) => {
+  const sqlQuery = 'SELECT kml_content FROM lta_mrt';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 app.get('/api/getTownInRental', (req, res) => {
   const sqlQuery = 'SELECT DISTINCT(town) FROM hdb_rental_avg_town ORDER BY town ASC';
   db.query(sqlQuery, (err, results) => {
