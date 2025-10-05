@@ -1,12 +1,10 @@
 import { Marker, Popup } from 'react-leaflet';
 import { getIcons } from '../scripts/MapUtils.js'
 
-const PinsLayer = ( {locations} ) => {
+const PinsLayer = ( {locations, color} ) => {
 
   const { redIcon, 
-          redIconWithDollar, 
           greenIcon, 
-          greenIconWithDollar, 
           defaultIcon 
         } = getIcons(0.7);
 
@@ -17,11 +15,8 @@ const PinsLayer = ( {locations} ) => {
             <Marker key={idx} 
                     position={[loc.lat, loc.lon]}
                     // Customize pins here
-                    icon={loc.short_term_parking === "NO" && loc.free_parking === "NO" ? redIconWithDollar :
-                          loc.short_term_parking === "NO" && loc.free_parking !== "NO"?  redIcon : 
-                          loc.short_term_parking !== "NO" && loc.free_parking === "NO"?  greenIconWithDollar :
-                          loc.short_term_parking !== "NO" && loc.free_parking !== "NO"?  greenIcon : defaultIcon} 
-                    // icon={loc.status === "Unknown" ? redIcon : defaultIcon} // Debug purpose
+                    icon={color==="red" ? redIcon :
+                          color==="green" ? greenIcon : defaultIcon} 
             >
               <Popup>{loc.label}</Popup>
             </Marker>

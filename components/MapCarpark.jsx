@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Circle } from 'react-leaflet';
 import { RecenterMap } from '../scripts/MapUtils.js'
-import PinsLayer from './PinsLayer';
+import PinsCarparkLayer from './PinsCarparkLayer';
 import PinsLegendLayer from './LegendLayer';
 import 'leaflet/dist/leaflet.css';
 import '../css/MapCarpark.css'
@@ -37,7 +37,7 @@ const MapCarpark = ({ centerCoordinate, zoomValue, locations, newCenter, radius 
           attribution='&copy; OpenStreetMap contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <PinsLayer locations={locations} />
+        <PinsCarparkLayer locations={locations} />
         { radius ? 
             <Circle
               center={newCenter}

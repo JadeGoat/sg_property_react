@@ -13,8 +13,8 @@ const MapPublicTransport = ({ centerCoordinate, zoomValue, busStopLocations, mrt
           attribution='&copy; OpenStreetMap contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <PinsLayer locations={busStopLocations} />
-        {/* <PinsLayer locations={mrtStationLocations} /> */}
+        <PinsLayer locations={busStopLocations} color="default" />
+        {/* <PinsLayer locations={mrtStationLocations} color="green" /> */}
         { radius ? 
             <Circle
               center={newCenter}
