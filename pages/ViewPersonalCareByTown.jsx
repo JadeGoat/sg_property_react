@@ -4,7 +4,7 @@ import DropDown from '../components/DropDown.jsx'
 import PlotPersonalCareByTown  from './PlotPersonalCareByTown.jsx'
 import PlotPersonalCareByRadius  from './PlotPersonalCareByRadius.jsx'
 
-const ViewChildAndElerlyCareByTown = () => {
+const ViewPersonalCareByTown = () => {
 
     const [options, setOptions] = useState([])
     const [selectedTown, setSelectedTown] = useState("");
@@ -29,4 +29,4 @@ const ViewChildAndElerlyCareByTown = () => {
     )
 }
 
-export default ViewChildAndElerlyCareByTown
+export default ViewPersonalCareByTown
