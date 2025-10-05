@@ -41,20 +41,25 @@ const Viewer = () => {
             {/* Main tab - By Town */}
             <Tabs>
               <TabList>
-                  <Tab>Resale</Tab>
-                  <Tab>Rental</Tab>
+                  <Tab>Property</Tab>
                   <Tab>Transport</Tab>
-                  <Tab>Personal Care</Tab>
-                  <Tab>Hawkers/Eateries</Tab>
+                  <Tab>Lifecare & Healthcare Care</Tab>
+                  <Tab>Food & Retail Services</Tab>
               </TabList>
 
-              {/* Sub tab 1 - Resale */}
-              <TabPanel><ViewResaleByTown/></TabPanel>
+              {/* Sub tab 1 - Property */}
+              <TabPanel>
+                <Tabs>
+                  <TabList>
+                    <Tab>Resale</Tab>
+                    <Tab>Rental</Tab>
+                  </TabList>
+                  <TabPanel><ViewResaleByTown/></TabPanel>
+                  <TabPanel><ViewRentalByTown/></TabPanel>
+                </Tabs>
+              </TabPanel>
 
-              {/* Sub tab 2 - Rental */}
-              <TabPanel><ViewRentalByTown/></TabPanel>
-
-              {/* Sub tab 3 - Transport */}
+              {/* Sub tab 2 - Transport */}
               <TabPanel>
                 <Tabs>
                   <TabList>
@@ -66,11 +71,29 @@ const Viewer = () => {
                 </Tabs>
               </TabPanel>
 
-              {/* Sub tab 4 - Child/Elderly/ Care & Disability Services */}
-              <TabPanel><ViewPersonalCareByTown/></TabPanel>
-              
-              {/* Sub tab 5 - Hawkers and Eateries */}
-              <TabPanel><ViewHawkersAndEateriesByTown/></TabPanel>
+              {/* Sub tab 3 - Lifecare & Healthcare Services */}
+              <TabPanel>
+                <Tabs>
+                  <TabList>
+                    <Tab>Lifecare Services</Tab>
+                    <Tab>Healthcare Services</Tab>
+                  </TabList>
+                  <TabPanel><ViewPersonalCareByTown/></TabPanel>
+                  <TabPanel></TabPanel>
+                </Tabs>
+              </TabPanel>
+
+              {/* Sub tab 4 - Food & Retails Services */}
+              <TabPanel>
+                <Tabs>
+                  <TabList>
+                    <Tab>Food Services</Tab>
+                    <Tab>Retails Services</Tab>
+                  </TabList>
+                  <TabPanel><ViewHawkersAndEateriesByTown/></TabPanel>
+                  <TabPanel></TabPanel>
+                </Tabs>
+              </TabPanel>
 
             </Tabs>
           </TabPanel>
