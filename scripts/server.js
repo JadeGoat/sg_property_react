@@ -100,7 +100,7 @@ app.get('/api/getCarparkDataByTown', (req, res) => {
 });
 
 app.get('/api/getBusStopData', (req, res) => {
-  const sqlQuery = 'SELECT RoadName, Description, ' +
+  const sqlQuery = 'SELECT CONCAT(Description, " @ ", RoadName) AS label, ' +
                    'CAST(Latitude AS CHAR) as lat, ' +
                    'CAST(Longitude AS CHAR) as lon FROM bus_stop_info';
   db.query(sqlQuery, (err, results) => {
@@ -111,7 +111,7 @@ app.get('/api/getBusStopData', (req, res) => {
 
 app.get('/api/getBusStopDataByTown', (req, res) => {
   const town = req.query.town;
-  const sqlQuery = 'SELECT RoadName, Description, ' +
+  const sqlQuery = 'SELECT CONCAT(Description, " @ ", RoadName) AS label, ' +
                    'CAST(Latitude AS CHAR) as lat, ' +
                    'CAST(Longitude AS CHAR) as lon FROM bus_stop_info WHERE town = ?';
   db.query(sqlQuery, [town], (err, results) => {
@@ -121,7 +121,8 @@ app.get('/api/getBusStopDataByTown', (req, res) => {
 });
 
 app.get('/api/getMrtStationData', (req, res) => {
-  const sqlQuery = 'SELECT StationName, ExitCode, Latitude, Longitude FROM lta_mrt_clean';
+  const sqlQuery = 'SELECT CONCAT(StationName, " (", ExitCode, ")") AS label, ' +
+                   'Latitude as lat, Longitude as lon FROM lta_mrt_clean';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);

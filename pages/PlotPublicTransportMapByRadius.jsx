@@ -11,6 +11,7 @@ const PlotPublicTransportMapByRadius = ({ town }) => {
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
   const [busStopLocationPoints, setBusStopLocationPoints] = useState(null);
+  const [mrtStationLocationPoints, setMrtStationLocationPoints] = useState(null);
   const [radius, ] = useState(2.5); // radius in km
 
   useEffect(() => {
@@ -34,7 +35,15 @@ const PlotPublicTransportMapByRadius = ({ town }) => {
         });
         setBusStopLocationPoints(filteredData)
       }
-  }, [radius, selectedLat, selectedLon, busStopData]);
+
+      if (mrtStationData && mrtStationData.length > 0) {
+        const filteredData = mrtStationData.filter(loc => {
+          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
+          return dist <= radius;
+        });
+        setMrtStationLocationPoints(filteredData)
+      }
+  }, [radius, selectedLat, selectedLon, busStopData, mrtStationData]);
 
   return (
       <div>
@@ -43,7 +52,7 @@ const PlotPublicTransportMapByRadius = ({ town }) => {
             <MapPublicTransport centerCoordinate={[1.3778, 103.8554]} 
                                 zoomValue={13}
                                 busStopLocations={busStopLocationPoints}
-                                mrtStationLocations={mrtStationData}
+                                mrtStationLocations={mrtStationLocationPoints}
                                 newCenter={[selectedLat, selectedLon]}
                                 radius={radius} />:
             <p>Loading map with pins...</p>
