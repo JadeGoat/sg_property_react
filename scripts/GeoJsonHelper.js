@@ -25,6 +25,7 @@ export function extractPostalCodeFromMetaData(geoJsonData) {
         // Look through all table rows and extract cell value where row header is postal code
         let postal_code = null;
         let address = null;
+        let name = null
         rows.forEach(row => {
             const rowDesc = row.querySelectorAll('th');
             const rowValue = row.querySelectorAll('td');
@@ -40,9 +41,12 @@ export function extractPostalCodeFromMetaData(geoJsonData) {
             if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'ADDRESSSTREETNAME') {
                 address = rowValue[0].textContent.trim();
             }
+            if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'NAME') {
+                name = rowValue[0].textContent.trim();
+            }
         });
 
-        return { postal_code, address }
+        return { postal_code, address, name }
     });
 
     return metaPostalCodeData;

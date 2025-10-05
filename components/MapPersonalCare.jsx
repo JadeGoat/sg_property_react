@@ -44,7 +44,7 @@ const MapPersonalCare = ({ centerCoordinate, zoomValue,
 
     const onEachFeature = (feature, layer) => {
       if (feature.address) {
-        layer.bindPopup(feature.address);
+        layer.bindPopup(`${feature.name}<br>Address: ${feature.address}`);
       }
     };
 

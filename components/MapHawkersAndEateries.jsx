@@ -44,10 +44,10 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
 
     const onEachFeature = (feature, layer) => {
       if (feature.address) {
-        layer.bindPopup(`${feature.address} SINGAPORE ${feature.postal_code}`);
+        layer.bindPopup(`${feature.name}<br>Address: ${feature.address} SINGAPORE ${feature.postal_code}`);
       }
       else if (feature.properties && feature.properties.NAME) {
-        layer.bindPopup(feature.properties.NAME);
+        layer.bindPopup(`${feature.properties.NAME}`);
       }
     };
 
