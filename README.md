@@ -61,6 +61,10 @@ npm run dev
 
    ![Alt text](./images/sample_map_personal_care.png)
 
-6. Added Food Services (Hawker Centre and Healthier Eateries) viewable by Town's category or radius from Town's centre
+6. Added Healthcare Services (Chas Clinic) viewable by radius from Town's centre only
+
+7. Added Food Services (Hawker Centre and Healthier Eateries) viewable by Town's category or radius from Town's centre
 
    ![Alt text](./images/sample_map_hawker_eateries.png)
+
+8. Added Retail Services (Supermarket) viewable by radius from Town's centre only
