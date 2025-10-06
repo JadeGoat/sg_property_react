@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Circle } from 'react-leaflet';
-import { RecenterMap } from '../scripts/MapUtils.js'
+import { RecenterMap, createLegend } from '../scripts/MapUtils.js'
 import PinsCarparkLayer from './PinsCarparkLayer';
 import PinsLegendLayer from './LegendLayer';
 import 'leaflet/dist/leaflet.css';
@@ -8,27 +8,10 @@ import '../css/MapCarpark.css'
 const MapCarpark = ({ centerCoordinate, zoomValue, locations, newCenter, radius }) => {
 
     // Customize legend here
-    const legendHtml = `
-        <p><b>Pin Legend</b></p>
-        <section>
-            <div>
-              <img src="../images/marker-icon-red.png"/>
-              <i>Seasonal Only (FOC)</i>
-            </div>
-            <div>
-              <img src="../images/marker-icon-red-dollar.png"/>
-              <i>Seasonal Only</i>
-            </div>
-            <div>
-              <img src="../images/marker-icon-green.png"/>
-              <i>Short Term Parking (FOC)</i>
-            </div>
-            <div>
-              <img src="../images/marker-icon-green-dollar.png"/>
-              <i>Short Term Parking</i>
-            </div>
-        <section>
-      `
+    const legnedIconColorList = ["-red", "-red-dollar", "-green", "-green-dollar"]
+    const legendIconDescList = ["Seasonal Only (FOC)", "Seasonal Only", 
+                                "Short Term Parking (FOC)", "Short Term Parking"]
+    const legendHtml = createLegend(legnedIconColorList, legendIconDescList)
 
     return (
       <MapContainer className='mapCarparkContainer' center={centerCoordinate} zoom={zoomValue}>

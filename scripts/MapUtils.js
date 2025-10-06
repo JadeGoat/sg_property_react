@@ -36,6 +36,28 @@ export function getIcons(multiplier = 1) {
     return { redIcon, redIconWithDollar, greenIcon, greenIconWithDollar, orangeIcon, defaultIcon };
 }
 
+export function createLegend(iconColorList, iconDescList) {
+    
+    // Create the section content
+    let sectionContent = ""
+    const minLength = Math.min(iconColorList.length, iconDescList.length);
+    for (let i = 0; i < minLength; i++) {
+        sectionContent += `<div>
+                                <img src="../images/marker-icon${iconColorList[i]}.png"/>
+                                <i>${iconDescList[i]}</i>
+                            </div>`
+    }
+
+    // Create the html legend
+    const legendHtml = `
+        <p><b>Pin Legend</b></p>
+        <section>
+            ${sectionContent}
+        <section>
+      `
+    return legendHtml
+}
+
 export function RecenterMap({ center }) {
     const map = useMap();
     

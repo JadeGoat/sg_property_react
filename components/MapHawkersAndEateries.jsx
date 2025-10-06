@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, GeoJSON, Circle } from 'react-leaflet';
-import { RecenterMap, createDivIcon } from '../scripts/MapUtils.js'
+import { RecenterMap, createLegend, createDivIcon } from '../scripts/MapUtils.js'
 import PinsLegendLayer from './LegendLayer.jsx';
 import L from 'leaflet';
 import '../css/MapHawkersAndEateries.css'
@@ -8,19 +8,9 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
                                  hawkerCentreData, healthierEateriesData, newCenter, radius }) => {
 
     // Customize legend here
-    const legendHtml = `
-        <p><b>Pin Legend</b></p>
-        <section>
-            <div>
-              <img src="../images/marker-icon-orange.png"/>
-              <i>Hawker Centre</i>
-            </div>
-            <div>
-              <img src="../images/marker-icon.png"/>
-              <i>Healthier Eateries</i>
-            </div>
-        <section>
-      `
+    const legnedIconColorList = ["-orange", ""]
+    const legendIconDescList = ["Hawker Centre", "Healthier Eateries"]
+    const legendHtml = createLegend(legnedIconColorList, legendIconDescList)
 
     const orangePointToLayer = (feature, latlng) => {
       const icon = createDivIcon("-orange", 30, 30)
