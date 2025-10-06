@@ -18,7 +18,7 @@ const PlotPublicTransportMapByRadius = ({ town }) => {
   // - Extracting for GeoJson metadata done on backup
   useEffect(() => {
 
-    // Set carpark data
+    // Set bus stop and mrt station data
     getBusStopData(setBusStopData);
     getMrtStationData(setMrtStationData);
 
