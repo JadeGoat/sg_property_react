@@ -1,5 +1,28 @@
+# # Introdution
+The original intention was to have a high level view of 
+price of the HDB property market. Main goal was to provide additional information to aid in the decision of buying HDB property or town planning. Including private property was possible but not a priority (not in the foreseeable future). 
+
+At later stages, it scaled to provide a better view of supporting infrastructure and amenities around the property (or town).
+
+This project is free for usage, however it should not be commericalize for any use of profit.
+
+# Implementation
+For the map components, there are two types of implementation: client processing vs backend processing. 
+
+Client processing
+1. Pro: Easier update on the React side if there is a change in the format of the GeoJson. con
+
+2. Con: Heavier processing each time different selection is made.
+
+Backend processing
+1. Pro: Less processing and quicker response each time different selection is made.
+
+2. Con: Requires update or running of sg_property_datapipeline in order to take effect.
+
+Remarks: This project serves to illustrate the different implementation, by no means it is a production ready code.
+
 # Setup
-Important Note: To be use together with sg_property_datapipeline project
+Important Note: To be use together with sg_property_datapipeline project. 
 
 #### Installing node packages
 a. Using repo package.json
@@ -40,7 +63,7 @@ node ./scripts/server.js
 npm run dev
 ```
 
-# Feature Log
+# Features Log
 1. Added Property (Resale price) data feature viewable by Year & Town 
 
    ![Alt text](./images/sample_heatmap.png)
