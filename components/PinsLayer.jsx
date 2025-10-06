@@ -20,7 +20,10 @@ const PinsLayer = ( {locations, color} ) => {
                           color==="green" ? greenIcon : 
                           color==="orange" ? orangeIcon: defaultIcon} 
             >
-              <Popup>{loc.label}</Popup>
+              { loc.name ?
+                  <Popup>{loc.name}<br/>{loc.label}</Popup> :
+                  <Popup>{loc.label}</Popup>
+              }
             </Marker>
         ))}
     </div>

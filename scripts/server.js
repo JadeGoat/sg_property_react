@@ -179,8 +179,8 @@ app.get('/api/getDisabilityServicesData', (req, res) => {
 });
 
 app.get('/api/getChasClinicData', (req, res) => {
-  const labelQuery = 'CONCAT(name, "<br>Address: ", addressstreetname, " SINGAPORE ", addresspostalcode) AS label'
-  const sqlQuery = 'SELECT ' + labelQuery + ', lat, lon FROM chas_clinic_clean';
+  const labelQuery = 'CONCAT("Address: ", addressstreetname, " SINGAPORE ", addresspostalcode) AS label'
+  const sqlQuery = 'SELECT name, ' + labelQuery + ', lat, lon FROM chas_clinic_clean';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -204,8 +204,8 @@ app.get('/api/getHealthierEateriesData', (req, res) => {
 });
 
 app.get('/api/getSupermarketsData', (req, res) => {
-  const labelQuery = 'CONCAT(name, "<br>Address: ", addressstreetname, " SINGAPORE ", addresspostalcode) AS label'
-  const sqlQuery = 'SELECT ' + labelQuery + ', lat, lon FROM supermarkets_clean';
+  const labelQuery = 'CONCAT("Address: ", addressstreetname, " SINGAPORE ", addresspostalcode) AS label'
+  const sqlQuery = 'SELECT name, ' + labelQuery + ', lat, lon FROM supermarkets_clean';
   db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
