@@ -5,7 +5,8 @@ import L from 'leaflet';
 import '../css/MapPersonalCare.css'
 
 const MapPersonalCare = ({ centerCoordinate, zoomValue, 
-                           childCareData, elderlyCareData, newCenter, radius }) => {
+                           childCareData, elderlyCareData, disabilityServicesData, 
+                           newCenter, radius }) => {
 
     // Customize legend here
     const legendHtml = `
@@ -18,6 +19,10 @@ const MapPersonalCare = ({ centerCoordinate, zoomValue,
             <div>
               <img src="../images/marker-icon.png"/>
               <i>Elderly Care</i>
+            </div>
+            <div>
+              <img src="../images/marker-icon-green.png"/>
+              <i>Disability Services</i>
             </div>
         <section>
       `
@@ -36,6 +41,16 @@ const MapPersonalCare = ({ centerCoordinate, zoomValue,
       const icon = L.divIcon({
         className: 'custom-icon',
         html: `<img src="../images/marker-icon.png" width=25 height=25 />`,
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+      });
+      return L.marker(latlng, { icon });
+    };
+
+    const greenPointToLayer = (feature, latlng) => {
+      const icon = L.divIcon({
+        className: 'custom-icon',
+        html: `<img src="../images/marker-icon-green.png" width=25 height=25 />`,
         iconSize: [20, 20],
         iconAnchor: [10, 10]
       });
@@ -61,6 +76,9 @@ const MapPersonalCare = ({ centerCoordinate, zoomValue,
         <GeoJSON key={JSON.stringify(elderlyCareData)} 
                  data={elderlyCareData} 
                  pointToLayer={bluePointToLayer} onEachFeature={onEachFeature} />
+        <GeoJSON key={JSON.stringify(disabilityServicesData)} 
+                 data={disabilityServicesData} 
+                 pointToLayer={greenPointToLayer} onEachFeature={onEachFeature} />
         { radius ? 
             <Circle
               center={newCenter}

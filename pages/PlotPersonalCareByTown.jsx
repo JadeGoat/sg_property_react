@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getChildCareData, getElderlyCareData } from '../scripts/RestApiDataSource.js'
+import { getChildCareData, getElderlyCareData, getDisabilityServicesData } from '../scripts/RestApiDataSource.js'
 import MapPersonalCare from '../components/MapPersonalCare.jsx';
 import { extractPostalCodeFromMetaData, filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
@@ -11,8 +11,10 @@ const PlotPersonalCareByTown = ({ town }) => {
 
     const [childCareData, setChildCareData] = useState(null);
     const [elderlyCareData, setElderlyCareData] = useState(null);
+    const [disabilityServicesData, setDisabilityServicesData] = useState(null);
     const [selectedChildCareData, setSelectedChildCareData] = useState(null);
     const [selectedElderlyCareData, setSelectedElderlyCareData] = useState(null);
+    const [selectedDisabilityServicesData, setSelectedDisabilityServicesData] = useState(null);
 
     useEffect(() => {
         const latlon = getTownLatLon(town)
@@ -23,6 +25,7 @@ const PlotPersonalCareByTown = ({ town }) => {
     useEffect(() => {
         getChildCareData(setChildCareData)
         getElderlyCareData(setElderlyCareData);
+        getDisabilityServicesData(setDisabilityServicesData);
     }, []);
 
     useEffect(() => {
@@ -39,7 +42,13 @@ const PlotPersonalCareByTown = ({ town }) => {
         setSelectedElderlyCareData(filteredElderlyCareData);
       };
 
-    }, [childCareData, elderlyCareData, town]);
+      if (disabilityServicesData) {
+        const metaPostalCodeData = extractPostalCodeFromMetaData(disabilityServicesData)
+        const filteredDisabilityServicesData = filterGeoJsonData(disabilityServicesData, metaPostalCodeData, town)
+        setSelectedDisabilityServicesData(filteredDisabilityServicesData);
+      };
+
+    }, [childCareData, elderlyCareData, disabilityServicesData, town]);
 
     return (
         <div>
@@ -48,7 +57,8 @@ const PlotPersonalCareByTown = ({ town }) => {
                 <MapPersonalCare centerCoordinate={[1.3778, 103.8554]} 
                                  zoomValue={13} 
                                  childCareData={selectedChildCareData}
-                                 elderlyCareData={selectedElderlyCareData} 
+                                 elderlyCareData={selectedElderlyCareData}
+                                 disabilityServicesData={selectedDisabilityServicesData} 
                                  newCenter={[selectedLat, selectedLon]} />:
                 <p>Loading map with pins...</p>
             }

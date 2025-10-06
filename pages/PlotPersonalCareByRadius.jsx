@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getChildCareData, getElderlyCareData } from '../scripts/RestApiDataSource.js'
+import { getChildCareData, getElderlyCareData, getDisabilityServicesData } from '../scripts/RestApiDataSource.js'
 import MapPersonalCare from '../components/MapPersonalCare.jsx';
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
@@ -12,8 +12,10 @@ const PlotPersonalCareByRadius = ({ town }) => {
 
     const [childCareData, setChildCareData] = useState(null);
     const [elderlyCareData, setElderlyCareData] = useState(null);
+    const [disabilityServicesData, setDisabilityServicesData] = useState(null);
     const [selectedChildCareData, setSelectedChildCareData] = useState(null);
     const [selectedElderlyCareData, setSelectedElderlyCareData] = useState(null);
+    const [selectedDisabilityServicesData, setSelectedDisabilityServicesData] = useState(null);
     const [radius, ] = useState(2.5); // radius in km
 
     useEffect(() => {
@@ -25,6 +27,7 @@ const PlotPersonalCareByRadius = ({ town }) => {
     useEffect(() => {
         getChildCareData(setChildCareData)
         getElderlyCareData(setElderlyCareData);
+        getDisabilityServicesData(setDisabilityServicesData);
     }, []);
 
     useEffect(() => {
@@ -36,7 +39,7 @@ const PlotPersonalCareByRadius = ({ town }) => {
           return dist <= radius;
         });
         
-        // Extract postal and address from html
+        // Extract postal, address and name from html
         const filteredChildCareData = constructGeoJsonFromFeature(childCareFeatures)
         const metaPostalCodeData = extractPostalCodeFromMetaData(filteredChildCareData)
         
@@ -55,7 +58,7 @@ const PlotPersonalCareByRadius = ({ town }) => {
           return dist <= radius;
         });
 
-        // Extract postal and address from html
+        // Extract postal, address and name from html
         const filteredElderlyCareData = constructGeoJsonFromFeature(elderlyCareFeatures)
         const metaPostalCodeData = extractPostalCodeFromMetaData(filteredElderlyCareData)
        
@@ -64,11 +67,29 @@ const PlotPersonalCareByRadius = ({ town }) => {
             ...item,
             ...metaPostalCodeData[index]
         }));
-
         setSelectedElderlyCareData(constructGeoJsonFromFeature(mergedFeatures));
       };
 
-    }, [radius, selectedLat, selectedLon, childCareData, elderlyCareData]);
+      if (disabilityServicesData) {
+        const disabilityServicesFeatures = disabilityServicesData.features.filter(item => {
+          const loc = item.geometry.coordinates;
+          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc[1], loc[0]);
+          return dist <= radius;
+        });
+
+        // Extract postal, address and name from html
+        const filteredDisabilityServicesData = constructGeoJsonFromFeature(disabilityServicesFeatures)
+        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredDisabilityServicesData)
+       
+        // Merge feature together
+        const mergedFeatures = filteredDisabilityServicesData.features.map((item, index) => ({
+            ...item,
+            ...metaPostalCodeData[index]
+        }));
+        setSelectedDisabilityServicesData(constructGeoJsonFromFeature(mergedFeatures));
+      };
+
+    }, [radius, selectedLat, selectedLon, childCareData, elderlyCareData, disabilityServicesData]);
     
     return (
         <div>
@@ -78,6 +99,7 @@ const PlotPersonalCareByRadius = ({ town }) => {
                                  zoomValue={13} 
                                  childCareData={selectedChildCareData}
                                  elderlyCareData={selectedElderlyCareData} 
+                                 disabilityServicesData={selectedDisabilityServicesData}
                                  newCenter={[selectedLat, selectedLon]} 
                                  radius={radius} />:
                 <p>Loading map with pins...</p>
