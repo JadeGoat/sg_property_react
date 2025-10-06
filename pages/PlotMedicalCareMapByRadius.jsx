@@ -12,7 +12,7 @@ const PlotMedicalCareMapByRadius = ({ town }) => {
   const [chasClinicLocations, setChasClinicLocations] = useState(null);
   const [radius, ] = useState(2.5); // radius in km
 
-  // Example using Csv & GeoJson data on Map Component
+  // Example using GeoJson data on Map Component
   // - Extracting for GeoJson metadata done on backup
   useEffect(() => {
 
