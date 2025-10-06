@@ -1,0 +1,54 @@
+import { useEffect, useState } from 'react';
+import { getChasClinicData } from '../scripts/RestApiDataSource.js'
+import { getTownLatLon } from '../scripts/SgTownHelper.js'
+import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
+import MapMedicalCare from '../components/MapMedicalCare.jsx';
+
+const PlotMedicalCareMapByRadius = ({ town }) => {
+
+  const [chasClinicData, setChasClinicData] = useState(null);
+  const [selectedLat, setSelectedLat] = useState(null);
+  const [selectedLon, setSelectedLon] = useState(null);;
+  const [chasClinicLocations, setChasClinicLocations] = useState(null);
+  const [radius, ] = useState(2.5); // radius in km
+
+  // Example using Csv & GeoJson data on Map Component
+  // - Extracting for GeoJson metadata done on backup
+  useEffect(() => {
+
+    // Set chas clinic data
+    getChasClinicData(setChasClinicData);
+
+    // Set lat, lon
+    const latlon = getTownLatLon(town)
+    setSelectedLat(latlon[0]);
+    setSelectedLon(latlon[1]);
+
+  }, [town]);
+
+  useEffect(() => {
+      if (chasClinicData && chasClinicData.length > 0) {
+        const filteredData = chasClinicData.filter(loc => {
+          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
+          return dist <= radius;
+        });
+        setChasClinicLocations(filteredData)
+      }
+  }, [radius, selectedLat, selectedLon, chasClinicData]);
+
+  return (
+      <div>
+          <h2>By radius from centre</h2>
+          {chasClinicLocations && radius ?
+            <MapMedicalCare centerCoordinate={[1.3778, 103.8554]} 
+                            zoomValue={13}
+                            chasClinicLocations={chasClinicLocations}
+                            newCenter={[selectedLat, selectedLon]}
+                            radius={radius} />:
+            <p>Loading map with pins...</p>
+          }
+      </div>
+  )
+}
+
+export default PlotMedicalCareMapByRadius
