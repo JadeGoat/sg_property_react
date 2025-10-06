@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getHawkerCentreData, getHealthierEateriesData } from '../scripts/RestApiDataSource.js'
-import MapHawkersAndEateries from '../components/MapHawkersAndEateries.jsx';
+import MapFoodServices from '../components/MapFoodServices.jsx';
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
 // Example using GeoJson data on Map Component
 // - Extracting for GeoJson metadata done on client
-const PlotHawkersAndEateriesMapByRadius = ({ town }) => {
+const PlotFoodServicesMapByRadius = ({ town }) => {
 
     const [selectedLat, setSelectedLat] = useState(null);
     const [selectedLon, setSelectedLon] = useState(null);
@@ -69,16 +69,16 @@ const PlotHawkersAndEateriesMapByRadius = ({ town }) => {
         <div>
             <h2>By radius from centre</h2>
             {selectedHawkerCentreData && selectedHealthierEateriesData && radius ?
-                <MapHawkersAndEateries centerCoordinate={[1.3778, 103.8554]} 
-                                       zoomValue={13} 
-                                       hawkerCentreData={selectedHawkerCentreData}
-                                       healthierEateriesData={selectedHealthierEateriesData} 
-                                       newCenter={[selectedLat, selectedLon]}
-                                       radius={radius}  />:
+                <MapFoodServices centerCoordinate={[1.3778, 103.8554]} 
+                                 zoomValue={13} 
+                                 hawkerCentreData={selectedHawkerCentreData}
+                                 healthierEateriesData={selectedHealthierEateriesData} 
+                                 newCenter={[selectedLat, selectedLon]}
+                                 radius={radius}  />:
                 <p>Loading map with pins...</p>
             }
         </div>
     )
 }
 
-export default PlotHawkersAndEateriesMapByRadius
+export default PlotFoodServicesMapByRadius

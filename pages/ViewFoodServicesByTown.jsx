@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { getTownInRental } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
-import PlotHawkersAndEateriesMapByTown  from './PlotHawkersAndEateriesMapByTown.jsx'
-import PlotHawkersAndEateriesMapByRadius  from './PlotHawkersAndEateriesMapByRadius.jsx'
+import PlotFoodServicesMapByTown  from './PlotFoodServicesMapByTown.jsx'
+import PlotFoodServicesMapByRadius  from './PlotFoodServicesMapByRadius.jsx'
 
-const ViewHawkersAndEateriesByTown = () => {
+const ViewFoodServicesByTown = () => {
 
     const [options, setOptions] = useState([])
     const [selectedTown, setSelectedTown] = useState("");
@@ -21,12 +21,12 @@ const ViewHawkersAndEateriesByTown = () => {
                   
         {selectedTown != "" ?
           <div>
-            <PlotHawkersAndEateriesMapByRadius town={selectedTown} />
-            <PlotHawkersAndEateriesMapByTown town={selectedTown} />
+            <PlotFoodServicesMapByRadius town={selectedTown} />
+            <PlotFoodServicesMapByTown town={selectedTown} />
           </div>: <></>
         }
       </div>
     )
 }
 
-export default ViewHawkersAndEateriesByTown
+export default ViewFoodServicesByTown

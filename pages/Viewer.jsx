@@ -7,7 +7,7 @@ import ViewCarparkByTown from './ViewCarparkByTown';
 import ViewPublicTransportByTown from './ViewPublicTransportByTown';
 import ViewPersonalCareByTown from './ViewPersonalCareByTown';
 import ViewMedicalCareByTown from './ViewMedicalCareByTown';
-import ViewHawkersAndEateriesByTown from './ViewHawkersAndEateriesByTown';
+import ViewFoodServicesByTown from './ViewFoodServicesByTown';
 import ViewRetailServicesByTown from './ViewRetailServicesByTown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -92,7 +92,7 @@ const Viewer = () => {
                     <Tab>Food Services</Tab>
                     <Tab>Retail Services</Tab>
                   </TabList>
-                  <TabPanel><ViewHawkersAndEateriesByTown/></TabPanel>
+                  <TabPanel><ViewFoodServicesByTown/></TabPanel>
                   <TabPanel><ViewRetailServicesByTown/></TabPanel>
                 </Tabs>
               </TabPanel>
