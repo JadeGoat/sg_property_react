@@ -1,6 +1,6 @@
 # # Introdution
 The original intention was to have a high level view of 
-price of the HDB property market. Main goal was to provide additional information to aid in the decision of buying HDB property or town planning. Including private property was possible but not a priority (not in the foreseeable future). 
+price of the singapore HDB property market. Main goal was to provide additional information to aid in the decision of buying HDB property or town planning. Including private property was possible but not a priority (not in the foreseeable future). 
 
 At later stages, it scaled to provide a better view of supporting infrastructure and amenities around the property (or town).
 
@@ -19,7 +19,7 @@ Backend processing
 
 2. Con: Requires update or running of sg_property_datapipeline in order to take effect.
 
-Remarks: This project serves to illustrate the different implementation, by no means it is a production ready code.
+Remarks: This project serves to illustrate the different implementation. By no means, it is a production ready code.
 
 # Setup
 Important Note: To be use together with sg_property_datapipeline project. 
