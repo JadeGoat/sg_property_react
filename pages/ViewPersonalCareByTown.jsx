@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getTownInRental } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
-import PlotPersonalCareByTown  from './PlotPersonalCareByTown.jsx'
-import PlotPersonalCareByRadius  from './PlotPersonalCareByRadius.jsx'
+import PlotPersonalCareMapByTown  from './PlotPersonalCareMapByTown.jsx'
+import PlotPersonalCareMapByRadius  from './PlotPersonalCareMapByRadius.jsx'
 
 const ViewPersonalCareByTown = () => {
 
@@ -21,8 +21,8 @@ const ViewPersonalCareByTown = () => {
                   
         {selectedTown != "" ?
           <div>
-            <PlotPersonalCareByRadius town={selectedTown} />
-            <PlotPersonalCareByTown town={selectedTown} />
+            <PlotPersonalCareMapByRadius town={selectedTown} />
+            <PlotPersonalCareMapByTown town={selectedTown} />
           </div>: <></>
         }
       </div>
