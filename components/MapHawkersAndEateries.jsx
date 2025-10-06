@@ -8,9 +8,9 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
                                  hawkerCentreData, healthierEateriesData, newCenter, radius }) => {
 
     // Customize legend here
-    const legnedIconColorList = ["-orange", ""]
+    const legendIconColorList = ["-orange", ""]
     const legendIconDescList = ["Hawker Centre", "Healthier Eateries"]
-    const legendHtml = createLegend(legnedIconColorList, legendIconDescList)
+    const legendHtml = createLegend(legendIconColorList, legendIconDescList)
 
     const orangePointToLayer = (feature, latlng) => {
       const icon = createDivIcon("-orange", 30, 30)

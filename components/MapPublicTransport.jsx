@@ -8,9 +8,9 @@ import '../css/MapBusStop.css'
 const MapPublicTransport = ({ centerCoordinate, zoomValue, busStopLocations, mrtStationLocations, newCenter, radius }) => {
 
     // Customize legend here
-    const legnedIconColorList = ["-green", "-orange"]
+    const legendIconColorList = ["-green", "-orange"]
     const legendIconDescList = ["Bus Stop", "MRT/LRT exits"]
-    const legendHtml = createLegend(legnedIconColorList, legendIconDescList)
+    const legendHtml = createLegend(legendIconColorList, legendIconDescList)
 
     return (
       <MapContainer className='mapBusStopContainer' center={centerCoordinate} zoom={zoomValue}>

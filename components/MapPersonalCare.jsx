@@ -9,9 +9,9 @@ const MapPersonalCare = ({ centerCoordinate, zoomValue,
                            newCenter, radius }) => {
 
     // Customize legend here
-    const legnedIconColorList = ["-orange", "", "-green"]
+    const legendIconColorList = ["-orange", "", "-green"]
     const legendIconDescList = ["Child Care", "Elderly Care", "Disability Services"]
-    const legendHtml = createLegend(legnedIconColorList, legendIconDescList)
+    const legendHtml = createLegend(legendIconColorList, legendIconDescList)
     
     const orangePointToLayer = (feature, latlng) => {
       const icon = createDivIcon("-orange", 30, 30)

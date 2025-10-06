@@ -8,10 +8,10 @@ import '../css/MapCarpark.css'
 const MapCarpark = ({ centerCoordinate, zoomValue, locations, newCenter, radius }) => {
 
     // Customize legend here
-    const legnedIconColorList = ["-red", "-red-dollar", "-green", "-green-dollar"]
+    const legendIconColorList = ["-red", "-red-dollar", "-green", "-green-dollar"]
     const legendIconDescList = ["Seasonal Only (FOC)", "Seasonal Only", 
                                 "Short Term Parking (FOC)", "Short Term Parking"]
-    const legendHtml = createLegend(legnedIconColorList, legendIconDescList)
+    const legendHtml = createLegend(legendIconColorList, legendIconDescList)
 
     return (
       <MapContainer className='mapCarparkContainer' center={centerCoordinate} zoom={zoomValue}>
