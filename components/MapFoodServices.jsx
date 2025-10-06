@@ -2,9 +2,9 @@ import { MapContainer, TileLayer, GeoJSON, Circle } from 'react-leaflet';
 import { RecenterMap, createLegend, createDivIcon } from '../scripts/MapUtils.js'
 import PinsLegendLayer from './LegendLayer.jsx';
 import L from 'leaflet';
-import '../css/MapHawkersAndEateries.css'
+import '../css/MapFoodServices.css'
 
-const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
+const MapFoodServices = ({ centerCoordinate, zoomValue,
                                  hawkerCentreData, healthierEateriesData, newCenter, radius }) => {
 
     // Customize legend here
@@ -32,7 +32,7 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
     };
 
     return (
-      <MapContainer className='mapHawkersAndEateriesContainer' center={centerCoordinate} zoom={zoomValue}>
+      <MapContainer className='mapFoodServicesContainer' center={centerCoordinate} zoom={zoomValue}>
         <RecenterMap center={newCenter} />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -56,4 +56,4 @@ const MapHawkersAndEateries = ({ centerCoordinate, zoomValue,
     )
 }
 
-export default MapHawkersAndEateries
+export default MapFoodServices
