@@ -6,6 +6,8 @@ import { extractPostalCodeFromPropertiesData,
          filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
+// Example using GeoJson data on Map Component
+// - Extracting for GeoJson metadata done on client
 const PlotHawkersAndEateriesMapByTown = ({ town }) => {
 
     const [selectedLat, setSelectedLat] = useState(null);

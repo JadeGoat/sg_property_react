@@ -3,6 +3,8 @@ import { getCarparkDataByTown } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import MapCarpark from '../components/MapCarpark.jsx';
 
+// Example using Csv data on Map Component
+ // - Post processing was done on Csv data
 const PlotCarparkMapByTown = ({ town }) => {
 
   const [data, setData] = useState(null);

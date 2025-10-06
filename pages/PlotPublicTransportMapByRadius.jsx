@@ -14,6 +14,8 @@ const PlotPublicTransportMapByRadius = ({ town }) => {
   const [mrtStationLocationPoints, setMrtStationLocationPoints] = useState(null);
   const [radius, ] = useState(2.5); // radius in km
 
+  // Example using Csv & GeoJson data on Map Component
+  // - Extracting for GeoJson metadata done on backup
   useEffect(() => {
 
     // Set carpark data

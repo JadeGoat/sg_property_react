@@ -12,6 +12,8 @@ const PlotCarparkMapByRadius = ({ town }) => {
   const [locationPoints, setLocationPoints] = useState(null);
   const [radius, ] = useState(2.5); // radius in km
   
+  // Example using Csv data on Map Component
+  // - Post processing was done on Csv data
   useEffect(() => {
 
     // Set carpark data

@@ -4,6 +4,8 @@ import MapPersonalCare from '../components/MapPersonalCare.jsx';
 import { extractPostalCodeFromMetaData, filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
+// Example using GeoJson data on Map Component
+// - Extracting for GeoJson metadata done on client
 const PlotPersonalCareByTown = ({ town }) => {
 
     const [selectedLat, setSelectedLat] = useState(null);
