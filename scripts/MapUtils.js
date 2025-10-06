@@ -1,9 +1,20 @@
 import { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
-import L from 'leaflet';
+import { icon, divIcon } from 'leaflet';
+
+
+export function createDivIcon(iconColor, iconWidth, iconHeight) {
+    const icon = divIcon({
+        className: 'custom-icon',
+        html: `<img src="../images/marker-icon${iconColor}.png" width="${iconWidth}" height="${iconHeight}" />`,
+        iconSize: [iconWidth, iconHeight],
+        iconAnchor: [iconWidth / 2, iconHeight / 2]
+    })
+    return icon
+}
 
 function createIcon(iconDesc, multiplier = 1) {
-    return L.icon({
+    return icon({
         iconUrl: '../images/marker-icon' + iconDesc + '.png',
         shadowUrl: '../images/marker-shadow.png',
         iconSize: [25* multiplier, 41 * multiplier],

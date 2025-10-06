@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, GeoJSON, Circle } from 'react-leaflet';
-import { RecenterMap } from '../scripts/MapUtils.js'
+import { RecenterMap, createDivIcon } from '../scripts/MapUtils.js'
 import PinsLegendLayer from './LegendLayer';
 import L from 'leaflet';
 import '../css/MapPersonalCare.css'
@@ -28,32 +28,17 @@ const MapPersonalCare = ({ centerCoordinate, zoomValue,
       `
 
     const orangePointToLayer = (feature, latlng) => {
-      const icon = L.divIcon({
-        className: 'custom-icon',
-        html: `<img src="../images/marker-icon-orange.png" width=25 height=25 />`,
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
-      });
+      const icon = createDivIcon("-orange", 30, 30)
       return L.marker(latlng, { icon });
     };
 
     const bluePointToLayer = (feature, latlng) => {
-      const icon = L.divIcon({
-        className: 'custom-icon',
-        html: `<img src="../images/marker-icon.png" width=25 height=25 />`,
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
-      });
+      const icon = createDivIcon("", 30, 30)
       return L.marker(latlng, { icon });
     };
 
     const greenPointToLayer = (feature, latlng) => {
-      const icon = L.divIcon({
-        className: 'custom-icon',
-        html: `<img src="../images/marker-icon-green.png" width=25 height=25 />`,
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
-      });
+      const icon = createDivIcon("-green", 30, 30)
       return L.marker(latlng, { icon });
     };
 
