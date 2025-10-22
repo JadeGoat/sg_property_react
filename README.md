@@ -1,6 +1,5 @@
 # # Introdution
-The original intention was to have a high level view of 
-price of the singapore HDB property market. Main goal was to provide additional information to aid in the decision of buying HDB property or town planning. Including private property was possible but not a priority (not in the foreseeable future). 
+The original intention was to have a high level view of price of the singapore HDB property market. Main goal was to provide additional information to aid in the decision of buying HDB property or town planning. Including private property was possible but not a priority (not in the foreseeable future). 
 
 At later stages, it scaled to provide a better view of supporting infrastructure and amenities around the property (or town).
 
