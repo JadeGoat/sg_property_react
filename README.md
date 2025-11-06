@@ -47,7 +47,10 @@ VITE_DB_HOST = <to_fill_in_database_url>
 VITE_DB_USER = <to_fill_in_database_username>
 VITE_DB_PASSWORD = <to_fill_in_database_password>
 VITE_DB_NAME = <to_fill_in_database_name>
-VITE_PORT = <to_fill_in_database_port>
+VITE_DB_PORT = <to_fill_in_database_port>
+
+VITE_OPEN_WEATHER_API = <register_openweathermap_api_key_and_fill_in>
+VITE_TILE_PORT = <to_fill_in_tile_port>
 ```
 
 # Usage

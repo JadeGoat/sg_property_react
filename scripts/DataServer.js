@@ -212,7 +212,7 @@ app.get('/api/getSupermarketsData', (req, res) => {
   });
 });
 
-const PORT = process.env.VITE_PORT || 3001;
+const PORT = process.env.VITE_DB_PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
