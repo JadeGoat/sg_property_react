@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { constructGeoJsonFromData } from './GeoJsonHelper.js'
 
-const host = import.meta.env.VITE_DB_HOST;
-const port = import.meta.env.VITE_PORT;
-const baseUrl = `http://${host}:${port}/api`;
+const db_host = import.meta.env.VITE_DB_HOST;
+const db_port = import.meta.env.VITE_DB_PORT;
+const baseUrl = `http://${db_host}:${db_port}/api`;
 
 export const getRentalDataByYear = async (year, setData) => {
     axios.get(`${baseUrl}/getRentalDataByYear?year=${year}`)

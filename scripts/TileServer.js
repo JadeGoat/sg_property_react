@@ -18,6 +18,7 @@ app.use(cors());
 
 app.get('/tiles/:layer/:z/:x/:y.png', async (req, res) => {
     const { layer, z, x, y } = req.params;
+    const { brightness = 1.2, saturation = 2.0, contrast = 1.0 } = req.query;
     const tileUrl = `https://tile.openweathermap.org/map/${layer}/${z}/${x}/${y}.png?appid=${API_KEY}`;
 
     try {
@@ -26,7 +27,11 @@ app.get('/tiles/:layer/:z/:x/:y.png', async (req, res) => {
 
         // Apply image processing: increase contrast, brightness, etc.
         const processedImage = await sharp(rawImage)
-            .modulate({ brightness: 1.2, saturation: 1.3 }) // tweak values as needed
+            .modulate({ 
+                brightness: parseFloat(brightness), 
+                saturation: parseFloat(saturation),
+            })
+            .linear(parseFloat(contrast), 0)
             .toBuffer();
 
         res.set('Content-Type', 'image/png');

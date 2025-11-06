@@ -113,8 +113,8 @@ const Viewer = () => {
                 <Tab>Clouds</Tab>
                 <Tab>Precipitation</Tab>
                 <Tab>Wind Speed</Tab>
-                {/* <Tab>Temperature</Tab>
-                <Tab>Pressure</Tab> */}
+                <Tab>Temperature</Tab>
+                {/* <Tab>Pressure</Tab> */}
               </TabList>
 
               {/* Sub tab 1 - Clouds */}
@@ -127,7 +127,7 @@ const Viewer = () => {
               <TabPanel><ViewWeatherByWind/></TabPanel>
 
               {/* Sub tab 4 - Temperature */}
-              {/* <TabPanel><ViewWeatherByTemp/></TabPanel> */}
+              <TabPanel><ViewWeatherByTemp/></TabPanel>
 
               {/* Sub tab 5 - Pressure */}
               {/* <TabPanel><ViewWeatherByPressure/></TabPanel> */}
