@@ -54,7 +54,7 @@ VITE_PORT = <to_fill_in_database_port>
 #### Running server
 To read from MySQL database and serves API request
 ```
-node ./scripts/server.js
+node ./scripts/DataServer.js
 ```
 
 #### Running the react client
