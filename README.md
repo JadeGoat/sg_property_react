@@ -33,6 +33,7 @@ b. Using fresh vite@latest package.json
 ```
 npm install
 npm install express mysql2 cors axios dotenv
+npm install sharp
 npm install chart.js react-chartjs-2
 npm install react-leaflet leaflet leaflet.heat
 npm install react-tabs

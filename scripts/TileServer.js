@@ -9,6 +9,8 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 import express from 'express';
 import cors from 'cors';
+import axios from 'axios';
+import sharp from 'sharp';
 
 const API_KEY =  process.env.VITE_OPEN_WEATHER_API;
 const app = express();
