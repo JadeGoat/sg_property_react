@@ -3,7 +3,7 @@ The original intention was to have a high level view of price of the singapore H
 
 At later stages, it scaled to provide a better view of supporting infrastructure and amenities around the property (or town).
 
-Open Weather API was also discovered to have mapping capabilities, hence integrated as part of the viewer. Although it is world-based data and probably not very suitable for Singapore use-case, but it illustrates the usefulness if there is an weather API that have granular data for Singapore use-case. 
+Open Weather API was also discovered to have mapping capabilities, hence integrated as part of the viewer. Although it is world-based data and probably not very suitable for SG use-case, but it illustrates the usefulness if there is an weather API that have granular data for SG use-case. 
 
 Finally, this project is free for usage, however it should not be commericalize for any use of profit.
 
