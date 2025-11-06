@@ -1,22 +1,28 @@
-# # Introdution
+# Introduction
 The original intention was to have a high level view of price of the singapore HDB property market. Main goal was to provide additional information to aid in the decision of buying HDB property or town planning. Including private property was possible but not a priority (not in the foreseeable future). 
 
 At later stages, it scaled to provide a better view of supporting infrastructure and amenities around the property (or town).
 
-This project is free for usage, however it should not be commericalize for any use of profit.
+Open Weather API was also discovered to have mapping capabilities, hence integrated as part of the viewer. Although it is world-based data and probably not very suitable for Singapore use-case, but it illustrates the usefulness if there is an weather API that have granular data for Singapore use-case. 
+
+Finally, this project is free for usage, however it should not be commericalize for any use of profit.
 
 # Implementation
-For the map components, there are two types of implementation: client processing vs backend processing. 
+For <u>Servers</u>, there are two types: the database server, and the map tile server
 
-Client processing
-1. Pro: Easier update on the React side if there is a change in the format of the GeoJson. con
+1. Database server: To retrieve raw data (for client processing) or backend processed data from the SQL database
 
-2. Con: Heavier processing each time different selection is made.
+2. Map Tile server: To encapsulate the api key away from the client, as well as enhancing the images retrieve from the Open Weather Server
 
-Backend processing
-1. Pro: Less processing and quicker response each time different selection is made.
+For <u>Map Components</u>, there are two types of implementation: client processing vs backend processing. 
 
-2. Con: Requires update or running of sg_property_datapipeline in order to take effect.
+1. Client processing
+   - Pro: Easier update on the React side if there is a change in the format of the GeoJson.
+   - Con: Heavier processing each time different selection is made.
+
+2. Backend processing
+   - Pro: Less processing and quicker response each time different selection is made.
+   - Con: Requires update or running of sg_property_datapipeline in order to take effect.
 
 Remarks: This project serves to illustrate the different implementation. By no means, it is a production ready code.
 
@@ -95,3 +101,17 @@ npm run dev
    ![Alt text](./images/sample_map_hawker_eateries.png)
 
 8. Added Retail Services (Supermarket) viewable by radius from Town's centre only
+
+9. Added Weather Map viewable by region's point of view
+
+   <u>Cloud Map</u>
+   ![Alt text](./images/sample_weather_cloud_map.png)
+
+   <u>Precipitation Map</u>
+   ![Alt text](./images/sample_weather_precipitation_map.png)
+
+   <u>Temperature Map</u>
+   ![Alt text](./images/sample_weather_temp_map.png)
+
+   <u>Wind Speed Map</u>
+   ![Alt text](./images/sample_weather_wind_map.png)
