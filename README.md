@@ -97,17 +97,3 @@ npm run dev
    ![Alt text](./images/sample_map_hawker_eateries.png)
 
 8. Added Retail Services (Supermarket) viewable by radius from Town's centre only
-
-9. Added Weather Map viewable by region's point of view
-
-   <u>Cloud Map</u>
-   ![Alt text](./images/sample_weather_cloud_map.png)
-
-   <u>Precipitation Map</u>
-   ![Alt text](./images/sample_weather_precipitation_map.png)
-
-   <u>Temperature Map</u>
-   ![Alt text](./images/sample_weather_temp_map.png)
-
-   <u>Wind Speed Map</u>
-   ![Alt text](./images/sample_weather_wind_map.png)
