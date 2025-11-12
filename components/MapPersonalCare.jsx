@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, GeoJSON, Circle } from 'react-leaflet';
 import { RecenterMap, createLegend, createDivIcon } from '../scripts/MapUtils.js'
 import PinsLegendLayer from './LegendLayer';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import '../css/MapPersonalCare.css'
 
 const MapPersonalCare = ({ centerCoordinate, zoomValue, 
