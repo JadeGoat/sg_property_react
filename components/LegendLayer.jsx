@@ -7,23 +7,24 @@ const LegendLayer = ({ legendHtml }) => {
   const map = useMap();
 
   useEffect(() => {
-    const legend = L.control({ position: 'bottomright' });
+    if (map && legendHtml) {
+      const legend = L.control({ position: 'bottomright' });
 
-    // Add new legend at bottom right
-    legend.onAdd = () => {
-      const div = L.DomUtil.create('div', 'info legend');
-      div.innerHTML = legendHtml;
-      return div;
-    };
+      // Add new legend at bottom right
+      legend.onAdd = () => {
+        const div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML = legendHtml;
+        return div;
+      };
+      legend.addTo(map);
 
-    legend.addTo(map);
-
-    // Remove default legend
-    return () => {
-      legend.remove();
-    };
+      // Remove default legend
+      return () => {
+        legend.remove();
+      };
+    }
     
-  }, [map]);
+  }, [map, legendHtml]);
 
   return null;
 };
