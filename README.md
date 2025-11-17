@@ -3,16 +3,10 @@ The original intention was to have a high level view of price of the singapore H
 
 At later stages, it scaled to provide a better view of supporting infrastructure and amenities around the property (or town).
 
-Open Weather API was also discovered to have mapping capabilities, hence integrated as part of the viewer. Although it is world-based data and probably not very suitable for SG use-case, but it illustrates the usefulness if there is an weather API that have granular data for SG use-case. 
-
 Finally, this project is free for usage, however it should not be commericalize for any use of profit.
 
 # Implementation
-For <u>Servers</u>, there are two types: the database server, and the map tile server
-
-1. Database server: To retrieve raw data (for client processing) or backend processed data from the SQL database
-
-2. Map Tile server: To encapsulate the api key away from the client, as well as enhancing the images retrieve from the Open Weather Server
+For <u>Servers</u>, there is a database script. It is responsible for retrieving raw data (for client processing) or backend processed data from the SQL database
 
 For <u>Map Components</u>, there are two types of implementation: client processing vs backend processing. 
 
