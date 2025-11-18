@@ -1,11 +1,11 @@
-import { MapContainer, TileLayer, Circle } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, Polygon } from 'react-leaflet';
 import { RecenterMap, createLegend } from '../scripts/MapUtils.js'
 import PinsCarparkLayer from './PinsCarparkLayer';
 import PinsLegendLayer from './LegendLayer';
 import 'leaflet/dist/leaflet.css';
 import '../css/MapCarpark.css'
 
-const MapCarpark = ({ centerCoordinate, zoomValue, locations, newCenter, radius }) => {
+const MapCarpark = ({ centerCoordinate, zoomValue, locations, newCenter, radius, townArea }) => {
 
     // Customize legend here
     const legendIconColorList = ["-red", "-red-dollar", "-green", "-green-dollar"]
@@ -25,7 +25,13 @@ const MapCarpark = ({ centerCoordinate, zoomValue, locations, newCenter, radius 
             <Circle
               center={newCenter}
               radius={radius * 1000} // takes in metres, converts km to metres
-              pathOptions={{ color: 'pink', fillColor: 'pink', fillOpacity: 0.3 }}
+              pathOptions={{ color: 'red', fillColor: 'red', weight: 2, fillOpacity: 0.2 }}
+            /> : <></>
+        }
+        { townArea ? 
+            <Polygon
+              positions={townArea}
+              pathOptions={{ color: 'red', fillColor: 'red', weight: 2, fillOpacity: 0.2 }}
             /> : <></>
         }
         <PinsLegendLayer legendHtml={legendHtml} />

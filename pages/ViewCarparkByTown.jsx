@@ -21,7 +21,7 @@ const ViewCarparkByTown = () => {
         {selectedTown != "" ?
           <div>
             <PlotCarparkMapByRadius town={selectedTown} />
-            {/* <PlotCarparkMapByTown town={selectedTown} /> */}
+            <PlotCarparkMapByTown town={selectedTown} />
           </div>: <></>
         }
       </div>

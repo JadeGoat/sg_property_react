@@ -212,6 +212,15 @@ app.get('/api/getSupermarketsData', (req, res) => {
   });
 });
 
+app.get('/api/getTownPlanningArea', (req, res) => {
+  const town = req.query.town;
+  const sqlQuery = 'SELECT town_boundary FROM planning_area WHERE town_area = ?';
+  db.query(sqlQuery, [town], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 const PORT = process.env.VITE_DB_PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

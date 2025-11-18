@@ -160,3 +160,9 @@ export const getSupermarketsData = async (setData) => {
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }
+
+export const getTownPlanningArea = async (town, setData) => {
+    axios.get(`${baseUrl}/getTownPlanningArea?town=${town}`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
+}
