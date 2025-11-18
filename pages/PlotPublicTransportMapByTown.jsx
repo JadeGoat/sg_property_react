@@ -28,8 +28,9 @@ const PlotPublicTransportMapByTown = ({ town, busStopData, mrtStationData }) => 
 
   }, [town]);
 
-  // Format planning area into useable polygon format
   useEffect(() => {
+
+    // Format planning area into useable polygon format
     if (planningArea && planningArea.length > 0) {
       const points_dict = planningArea[0]['town_boundary'][0][0]
       const points_list = points_dict.map(item => ([item.y, item.x]));
@@ -37,20 +38,23 @@ const PlotPublicTransportMapByTown = ({ town, busStopData, mrtStationData }) => 
     }
   }, [planningArea]);
 
-  // Filter bus stop and mrt station data based on polygon area
   useEffect(() => {
-    if (busStopData && busStopData.length > 0) {
-      const filteredData = busStopData.filter(loc => (
-        getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
-      ));
-      setBusStopLocationPoints(filteredData)
-    }
 
-    if (mrtStationData && mrtStationData.length > 0) {
-      const filteredData = mrtStationData.filter(loc => (
-        getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
-      ));
-      setMrtStationLocationPoints(filteredData)
+    // Filter bus stop and mrt station data based on polygon area
+    if (townAreaPoints) {
+      if (busStopData && busStopData.length > 0) {
+        const filteredData = busStopData.filter(loc => (
+          getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
+        ));
+        setBusStopLocationPoints(filteredData)
+      }
+
+      if (mrtStationData && mrtStationData.length > 0) {
+        const filteredData = mrtStationData.filter(loc => (
+          getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
+        ));
+        setMrtStationLocationPoints(filteredData)
+      }
     }
   }, [busStopData, mrtStationData, townAreaPoints]);
 

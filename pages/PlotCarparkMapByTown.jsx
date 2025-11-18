@@ -28,6 +28,7 @@ const PlotCarparkMapByTown = ({ town, carparkData }) => {
   }, [town]);
 
   useEffect(() => {
+    
     // Format planning area into useable polygon format
     if (planningArea && planningArea.length > 0) {
       const points_dict = planningArea[0]['town_boundary'][0][0]
@@ -37,6 +38,7 @@ const PlotCarparkMapByTown = ({ town, carparkData }) => {
   }, [planningArea]);
 
   useEffect(() => {
+
     // Filter carpark data based on polygon area
     if (carparkData && carparkData.length > 0 && townAreaPoints) {
       const filteredData = carparkData.filter(loc => (
