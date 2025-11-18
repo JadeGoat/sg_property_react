@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getChasClinicData, getTownInPlanningArea } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
+import PlotMedicalCareMapByTown from './PlotMedicalCareMapByTown.jsx'
 import PlotMedicalCareMapByRadius from './PlotMedicalCareMapByRadius.jsx'
 
 const ViewMedicalCareByTown = () => {
+
     const [options, setOptions] = useState([])
     const [selectedTown, setSelectedTown] = useState("");
     const [chasClinicData, setChasClinicData] = useState(null);
@@ -21,7 +23,10 @@ const ViewMedicalCareByTown = () => {
                   
         {selectedTown != "" ?
           <div>
-            <PlotMedicalCareMapByRadius town={selectedTown} chasClinicData={chasClinicData}/>
+            <PlotMedicalCareMapByRadius town={selectedTown} 
+                                        chasClinicData={chasClinicData}/>
+            <PlotMedicalCareMapByTown town={selectedTown} 
+                                      chasClinicData={chasClinicData}/>
           </div>: <></>
         }
       </div>
