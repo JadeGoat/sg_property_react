@@ -9,6 +9,7 @@ const sgTowns = {
     "Boon Lay":	[1.3410, 103.7070],
     "Central": [1.2903, 103.8519],
     "Changi":	[1.3570, 103.9870],
+    "Changi Bay":	[1.320, 104.030],
     "Choa Chu Kang": [1.3850, 103.7450],
     "Clementi": [1.3151, 103.7656],
     "Downtown Core":	[1.2920, 103.8510],
