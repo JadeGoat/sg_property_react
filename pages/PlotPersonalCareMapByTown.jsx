@@ -22,18 +22,21 @@ const PlotPersonalCareByTown = ({ town, childCareData, elderlyCareData, disabili
 
     useEffect(() => {
 
+      // To rework
       if (childCareData) {
         const metaPostalCodeData = extractPostalCodeFromMetaData(childCareData)
         const filteredChildCareData = filterGeoJsonData(childCareData, metaPostalCodeData, town)
         setSelectedChildCareData(filteredChildCareData);
       };
 
+      // To rework
       if (elderlyCareData) {
         const metaPostalCodeData = extractPostalCodeFromMetaData(elderlyCareData)
         const filteredElderlyCareData = filterGeoJsonData(elderlyCareData, metaPostalCodeData, town)
         setSelectedElderlyCareData(filteredElderlyCareData);
       };
 
+      // To rework
       if (disabilityServicesData) {
         const metaPostalCodeData = extractPostalCodeFromMetaData(disabilityServicesData)
         const filteredDisabilityServicesData = filterGeoJsonData(disabilityServicesData, metaPostalCodeData, town)

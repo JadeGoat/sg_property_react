@@ -22,12 +22,14 @@ const PlotFoodServicesMapByTown = ({ town, hawkerCentreData, healthierEateriesDa
 
     useEffect(() => {
 
+      // To rework
       if (hawkerCentreData) {
         const metaPostalCodeData = extractPostalCodeFromPropertiesData(hawkerCentreData)
         const filteredHawkerCentreData = filterGeoJsonData(hawkerCentreData, metaPostalCodeData, town)
         setSelectedHawkerCentreData(filteredHawkerCentreData);
       };
 
+      // To rework
       if (healthierEateriesData) {
         const metaPostalCodeData = extractPostalCodeFromMetaData(healthierEateriesData)
         const filteredHealthierEateriesData = filterGeoJsonData(healthierEateriesData, metaPostalCodeData, town)
