@@ -161,8 +161,23 @@ export const getSupermarketsData = async (setData) => {
          .catch(error => console.error('Error retrieving data:', error))
 }
 
+export const getTownInPlanningArea = async (setData) => {
+    axios.get(`${baseUrl}/getTownInPlanningArea`)
+         .then(response => {
+            const data = response.data;
+            setData(data.map(item => item.town_area));
+         })
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
 export const getTownPlanningArea = async (town, setData) => {
     axios.get(`${baseUrl}/getTownPlanningArea?town=${town}`)
+         .then(response => setData(response.data))
+         .catch(error => console.error('Error retrieving data:', error))
+}
+
+export const getAllTownPlanningArea = async (setData) => {
+    axios.get(`${baseUrl}/getAllTownPlanningArea`)
          .then(response => setData(response.data))
          .catch(error => console.error('Error retrieving data:', error))
 }

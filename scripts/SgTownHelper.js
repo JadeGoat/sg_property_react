@@ -6,24 +6,48 @@ const sgTowns = {
     "Bukit Merah": [1.2776, 103.8198],
     "Bukit Panjang": [1.3784, 103.7642],
     "Bukit Timah": [1.3294, 103.8021],
+    "Boon Lay":	[1.3410, 103.7070],
     "Central": [1.2903, 103.8519],
+    "Changi":	[1.3570, 103.9870],
     "Choa Chu Kang": [1.3850, 103.7450],
     "Clementi": [1.3151, 103.7656],
+    "Downtown Core":	[1.2920, 103.8510],
     "Geylang": [1.3160, 103.8860],
     "Hougang": [1.3711, 103.8864],
     "Jurong East": [1.3331, 103.7430],
     "Jurong West": [1.3521, 103.7074],
+    "Kallang":	[1.3100, 103.8710],
     "Kallang/Whampoa": [1.3089, 103.8660],
+    "Lim Chu Kang":	[1.4230, 103.7090],
+    "Mandai":	[1.4180, 103.8150],
+    "Marina South":	[1.2800, 103.8700],
+    "Marina East":	[1.2950, 103.8790],
     "Marine Parade": [1.3039, 103.9057],
+    "Museum":	[1.2960, 103.8480],
+    "Newton":	[1.3120, 103.8390],
+    "Novena":	[1.3200, 103.8430],
+    "Orchard":	[1.3040, 103.8310],
+    "Outram":	[1.2810, 103.8390],
     "Pasir Ris": [1.3736, 103.9497],
+    "Paya Lebar":	[1.3540, 103.9110],
+    "Pioneer":	[1.3220, 103.6950],
     "Punggol": [1.4043, 103.9020],
     "Queenstown": [1.2946, 103.8030],
+    "River Valley":	[1.2950, 103.8360],
+    "Rochor":	[1.3070, 103.8530],
+    "Seletar":	[1.3990, 103.8740],
     "Sembawang": [1.4491, 103.8185],
     "Sengkang": [1.3911, 103.8950],
     "Serangoon": [1.3644, 103.8701],
+    "Simpang":	[1.4420, 103.8350],
+    "Singapore River":	[1.2890, 103.8460],
+    "Straits View":	[1.2700, 103.8600],
+    "Sungei Kadut":	[1.4180, 103.7470],
+    "Tanglin":	[1.3120, 103.8160],
     "Tampines": [1.3496, 103.9568],
     "Tengah": [1.3587, 103.7295],
     "Toa Payoh": [1.3345, 103.8490],
+    "Tuas":	[1.3210, 103.6350],
     "Woodlands": [1.4380, 103.7865],
     "Yishun": [1.4294, 103.8355]
 };
@@ -150,4 +174,22 @@ export function getTownLatLon(town) {
 function findOriginalKey(searchKey) {
   const upperSearch = searchKey.toUpperCase();
   return Object.keys(sgTowns).find(key => key.toUpperCase() === upperSearch);
+}
+
+export function getPlanningTownName(town) { 
+  var planning_town = town
+
+  // TODO: Review this part again
+  if (town == "CENTRAL") {
+    // TODO: need to combined muliple planning area
+    // TANGLIN, RIVER VALLLEY, ORCHARD, MUSEUM, SINGAPORE RIVER, OUTRAM, DOWNTOWN CORE, 
+    // NEWTON, STRAITS VIEW, MARINA SOUTH, MARINA EAST
+    planning_town = "DOWNTOWN CORE"
+    return planning_town
+  }
+  else if (town == "KALLANG/WHAMPOA") {
+    planning_town = "KALLANG"
+    return planning_town
+  }
+  return planning_town
 }

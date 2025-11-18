@@ -212,10 +212,29 @@ app.get('/api/getSupermarketsData', (req, res) => {
   });
 });
 
+app.get('/api/getTownInPlanningArea', (req, res) => {
+  const sqlQuery = 'SELECT DISTINCT(town_area) FROM planning_area ' +
+                   'WHERE town_area NOT LIKE "%CATCHMENT%" ' +
+                   'AND town_area NOT LIKE "%ISLANDS%" ' +
+                   'ORDER BY town_area ASC;';
+  db.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
 app.get('/api/getTownPlanningArea', (req, res) => {
   const town = req.query.town;
   const sqlQuery = 'SELECT town_boundary FROM planning_area WHERE town_area = ?';
   db.query(sqlQuery, [town], (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/api/getAllTownPlanningArea', (req, res) => {
+  const sqlQuery = 'SELECT town_area, town_boundary FROM planning_area';
+  db.query(sqlQuery, (err, results) => {
     if (err) throw err;
     res.json(results);
   });

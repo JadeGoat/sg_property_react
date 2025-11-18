@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCarparkData, getTownPlanningArea } from '../scripts/RestApiDataSource.js'
-import { getTownLatLon } from '../scripts/SgTownHelper.js'
+import { getTownLatLon, getPlanningTownName } from '../scripts/SgTownHelper.js'
 import { getPointsInPolygon } from '../scripts/MapUtils.js'
 import MapCarpark from '../components/MapCarpark.jsx';
 
@@ -17,8 +17,11 @@ const PlotCarparkMapByTown = ({ town }) => {
 
   useEffect(() => {
 
+    // Set planning area
+    const planningTownName = getPlanningTownName(town)
+    getTownPlanningArea(planningTownName, setPlanningArea)
+
     // Set carpark data
-    getTownPlanningArea(town, setPlanningArea)
     getCarparkData(setData);
     
     // Set lat, lon
@@ -38,11 +41,9 @@ const PlotCarparkMapByTown = ({ town }) => {
 
   useEffect(() => {
       if (data && data.length > 0 && townAreaPoints) {
-        const filteredData = data.filter(loc => {
-          const pt = [loc.lat, loc.lon]
-          const result = getPointsInPolygon(pt, townAreaPoints)
-          return result
-        });
+        const filteredData = data.filter(loc => (
+          getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
+        ));
         setLocationPoints(filteredData)
       }
   }, [data, townAreaPoints]);
@@ -58,6 +59,7 @@ const PlotCarparkMapByTown = ({ town }) => {
                         townArea={townAreaPoints}/>:
             <p>Loading map with pins...</p>
           }
+          
       </div>
   )
 }
