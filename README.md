@@ -84,12 +84,16 @@ npm run dev
 
    ![Alt text](./images/sample_map_personal_care.png)
 
-6. Added Healthcare Services (Chas Clinic) viewable by radius from Town's centre only
+6. Added Healthcare Services (Chas Clinic) viewable by Town's category or radius from Town's centre
+
+   ![Alt text](./images/sample_map_health_care.png)
 
 7. Added Food Services (Hawker Centre and Healthier Eateries) viewable by Town's category or radius from Town's centre
 
    ![Alt text](./images/sample_map_hawker_eateries.png)
 
-8. Added Retail Services (Supermarket) viewable by radius from Town's centre only
+8. Added Retail Services (Supermarket) viewable by Town's category or radius from Town's centre
+
+   ![Alt text](./images/sample_map_supermarket.png)
 
 9. Rework the viewable by Town's category using planning area instead of postal code and added all sub-category with viewable by Town's category (less lifecare services and food services)
