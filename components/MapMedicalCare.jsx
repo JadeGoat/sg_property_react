@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Circle } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, Polygon } from 'react-leaflet';
 import { RecenterMap, createLegend } from '../scripts/MapUtils.js'
 import PinsLayer from './PinsLayer.jsx';
 import PinsLegendLayer from './LegendLayer.jsx';
