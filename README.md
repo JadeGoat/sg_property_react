@@ -91,3 +91,5 @@ npm run dev
    ![Alt text](./images/sample_map_hawker_eateries.png)
 
 8. Added Retail Services (Supermarket) viewable by radius from Town's centre only
+
+9. Rework the viewable by Town's category using planning area instead of postal code and added all sub-category with viewable by Town's category
