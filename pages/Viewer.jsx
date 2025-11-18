@@ -46,7 +46,7 @@ const Viewer = () => {
                   <Tab>Property</Tab>
                   <Tab>Transport</Tab>
                   <Tab>Lifecare & Healthcare</Tab>
-                  <Tab>Food & Retail Services</Tab>
+                  <Tab>Food & Retail</Tab>
               </TabList>
 
               {/* Sub tab 1 - Property */}

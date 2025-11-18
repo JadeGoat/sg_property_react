@@ -92,4 +92,4 @@ npm run dev
 
 8. Added Retail Services (Supermarket) viewable by radius from Town's centre only
 
-9. Rework the viewable by Town's category using planning area instead of postal code and added all sub-category with viewable by Town's category (WIP for lifecare & Healthcare, food & retail services)
+9. Rework the viewable by Town's category using planning area instead of postal code and added all sub-category with viewable by Town's category (less lifecare services and food services)
