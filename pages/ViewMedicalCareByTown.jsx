@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getTownInRental } from '../scripts/RestApiDataSource.js'
+import { getTownInPlanningArea } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
 import PlotMedicalCareMapByRadius from './PlotMedicalCareMapByRadius.jsx'
 
@@ -8,7 +8,7 @@ const ViewMedicalCareByTown = () => {
     const [selectedTown, setSelectedTown] = useState("");
 
     useEffect(() => {
-        getTownInRental(setOptions);
+        getTownInPlanningArea(setOptions);
     }, []);
 
     return (
