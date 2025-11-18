@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { getTownInPlanningArea } from '../scripts/RestApiDataSource.js'
+import { getChasClinicData, getTownInPlanningArea } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
 import PlotMedicalCareMapByRadius from './PlotMedicalCareMapByRadius.jsx'
 
 const ViewMedicalCareByTown = () => {
     const [options, setOptions] = useState([])
     const [selectedTown, setSelectedTown] = useState("");
+    const [chasClinicData, setChasClinicData] = useState(null);
 
     useEffect(() => {
         getTownInPlanningArea(setOptions);
+        getChasClinicData(setChasClinicData);
     }, []);
 
     return (
@@ -19,7 +21,7 @@ const ViewMedicalCareByTown = () => {
                   
         {selectedTown != "" ?
           <div>
-            <PlotMedicalCareMapByRadius town={selectedTown} />
+            <PlotMedicalCareMapByRadius town={selectedTown} chasClinicData={chasClinicData}/>
           </div>: <></>
         }
       </div>

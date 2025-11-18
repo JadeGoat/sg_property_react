@@ -20,8 +20,6 @@ const PlotFoodServicesMapByRadius = ({ town, hawkerCentreData, healthierEateries
         setSelectedLon(latlon[1]);
     }, [town]);
 
-    
-
     useEffect(() => {
 
       if (hawkerCentreData) {

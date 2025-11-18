@@ -13,7 +13,6 @@ const PlotRetailServicesMapByRadius = ({ town, supermarketsData }) => {
   const [radius, ] = useState(2.5); // radius in km
 
   useEffect(() => {
-    // Set lat, lon
     const latlon = getTownLatLon(town)
     setSelectedLat(latlon[0]);
     setSelectedLon(latlon[1]);

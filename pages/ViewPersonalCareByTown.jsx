@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getChildCareData, getElderlyCareData, getDisabilityServicesData } from '../scripts/RestApiDataSource.js'
 import { getTownInPlanningArea } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
 import PlotPersonalCareMapByTown  from './PlotPersonalCareMapByTown.jsx'
@@ -8,9 +9,15 @@ const ViewPersonalCareByTown = () => {
 
     const [options, setOptions] = useState([])
     const [selectedTown, setSelectedTown] = useState("");
+    const [childCareData, setChildCareData] = useState(null);
+    const [elderlyCareData, setElderlyCareData] = useState(null);
+    const [disabilityServicesData, setDisabilityServicesData] = useState(null);
 
     useEffect(() => {
         getTownInPlanningArea(setOptions);
+        getChildCareData(setChildCareData)
+        getElderlyCareData(setElderlyCareData);
+        getDisabilityServicesData(setDisabilityServicesData);
     }, []);
 
     return (
@@ -21,8 +28,14 @@ const ViewPersonalCareByTown = () => {
                   
         {selectedTown != "" ?
           <div>
-            <PlotPersonalCareMapByRadius town={selectedTown} />
-            <PlotPersonalCareMapByTown town={selectedTown} />
+            <PlotPersonalCareMapByRadius town={selectedTown}
+                                         childCareData={childCareData}
+                                         elderlyCareData={elderlyCareData}
+                                         disabilityServicesData={disabilityServicesData} />
+            <PlotPersonalCareMapByTown town={selectedTown} 
+                                       childCareData={childCareData}
+                                       elderlyCareData={elderlyCareData}
+                                       disabilityServicesData={disabilityServicesData} />
           </div>: <></>
         }
       </div>

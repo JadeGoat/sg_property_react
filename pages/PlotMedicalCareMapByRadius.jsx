@@ -1,25 +1,19 @@
 import { useEffect, useState } from 'react';
-import { getChasClinicData } from '../scripts/RestApiDataSource.js'
+import {  } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import MapMedicalCare from '../components/MapMedicalCare.jsx';
 
-const PlotMedicalCareMapByRadius = ({ town }) => {
+// Example using GeoJson data on Map Component
+// - Extracting for GeoJson metadata done on backup
+const PlotMedicalCareMapByRadius = ({ town, chasClinicData }) => {
 
-  const [chasClinicData, setChasClinicData] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);;
   const [chasClinicLocations, setChasClinicLocations] = useState(null);
   const [radius, ] = useState(2.5); // radius in km
 
-  // Example using GeoJson data on Map Component
-  // - Extracting for GeoJson metadata done on backup
   useEffect(() => {
-
-    // Set chas clinic data
-    getChasClinicData(setChasClinicData);
-
-    // Set lat, lon
     const latlon = getTownLatLon(town)
     setSelectedLat(latlon[0]);
     setSelectedLon(latlon[1]);

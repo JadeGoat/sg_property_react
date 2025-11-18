@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react';
-import { getChildCareData, getElderlyCareData, getDisabilityServicesData } from '../scripts/RestApiDataSource.js'
+import { } from '../scripts/RestApiDataSource.js'
 import MapPersonalCare from '../components/MapPersonalCare.jsx';
 import { extractPostalCodeFromMetaData, filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
 // Example using GeoJson data on Map Component
 // - Extracting for GeoJson metadata done on client
-const PlotPersonalCareByTown = ({ town }) => {
+const PlotPersonalCareByTown = ({ town, childCareData, elderlyCareData, disabilityServicesData }) => {
 
     const [selectedLat, setSelectedLat] = useState(null);
     const [selectedLon, setSelectedLon] = useState(null);
-
-    const [childCareData, setChildCareData] = useState(null);
-    const [elderlyCareData, setElderlyCareData] = useState(null);
-    const [disabilityServicesData, setDisabilityServicesData] = useState(null);
     const [selectedChildCareData, setSelectedChildCareData] = useState(null);
     const [selectedElderlyCareData, setSelectedElderlyCareData] = useState(null);
     const [selectedDisabilityServicesData, setSelectedDisabilityServicesData] = useState(null);
@@ -23,12 +19,6 @@ const PlotPersonalCareByTown = ({ town }) => {
         setSelectedLat(latlon[0]);
         setSelectedLon(latlon[1]);
     }, [town]);
-
-    useEffect(() => {
-        getChildCareData(setChildCareData)
-        getElderlyCareData(setElderlyCareData);
-        getDisabilityServicesData(setDisabilityServicesData);
-    }, []);
 
     useEffect(() => {
 
