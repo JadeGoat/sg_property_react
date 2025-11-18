@@ -7,7 +7,7 @@ import '../css/MapPersonalCare.css'
 
 const MapPersonalCare = ({ centerCoordinate, zoomValue, 
                            childCareData, elderlyCareData, disabilityServicesData, 
-                           newCenter, radius }) => {
+                           newCenter, radius, townArea }) => {
 
     // Customize legend here
     const legendIconColorList = ["-orange", "", "-green"]
@@ -55,7 +55,13 @@ const MapPersonalCare = ({ centerCoordinate, zoomValue,
             <Circle
               center={newCenter}
               radius={radius * 1000} // takes in metres, converts km to metres
-              pathOptions={{ color: 'pink', fillColor: 'pink', fillOpacity: 0.3 }}
+              pathOptions={{ color: 'red', fillColor: 'red', weight: 2, fillOpacity: 0.2 }}
+            /> : <></>
+        }
+        { townArea ? 
+            <Polygon
+              positions={townArea}
+              pathOptions={{ color: 'red', fillColor: 'red', weight: 2, fillOpacity: 0.2 }}
             /> : <></>
         }
         <PinsLegendLayer legendHtml={legendHtml} />

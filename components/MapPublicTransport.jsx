@@ -31,11 +31,11 @@ const MapPublicTransport = ({ centerCoordinate, zoomValue,
             /> : <></>
         }
         { townArea ? 
-              <Polygon
-                positions={townArea}
-                pathOptions={{ color: 'red', fillColor: 'red', weight: 2, fillOpacity: 0.2 }}
-              /> : <></>
-          }
+            <Polygon
+              positions={townArea}
+              pathOptions={{ color: 'red', fillColor: 'red', weight: 2, fillOpacity: 0.2 }}
+            /> : <></>
+        }
         <PinsLegendLayer legendHtml={legendHtml} />
       </MapContainer>
     );
