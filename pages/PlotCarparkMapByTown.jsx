@@ -31,21 +31,23 @@ const PlotCarparkMapByTown = ({ town }) => {
 
   }, [town]);
 
+  // Format planning area into useable polygon format
   useEffect(() => {
-      if (planningArea && planningArea.length > 0) {
-        const points_dict = planningArea[0]['town_boundary'][0][0]
-        const points_list = points_dict.map(item => ([item.y, item.x]));
-        setTownAreaPoints(points_list)
-      }
+    if (planningArea && planningArea.length > 0) {
+      const points_dict = planningArea[0]['town_boundary'][0][0]
+      const points_list = points_dict.map(item => ([item.y, item.x]));
+      setTownAreaPoints(points_list)
+    }
   }, [data, planningArea]);
 
+  // Filter carpark data based on polygon area
   useEffect(() => {
-      if (data && data.length > 0 && townAreaPoints) {
-        const filteredData = data.filter(loc => (
-          getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
-        ));
-        setLocationPoints(filteredData)
-      }
+    if (data && data.length > 0 && townAreaPoints) {
+      const filteredData = data.filter(loc => (
+        getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
+      ));
+      setLocationPoints(filteredData)
+    }
   }, [data, townAreaPoints]);
 
   return (
@@ -56,7 +58,7 @@ const PlotCarparkMapByTown = ({ town }) => {
                         zoomValue={13}
                         locations={locationPoints}
                         newCenter={[selectedLat, selectedLon]} 
-                        townArea={townAreaPoints}/>:
+                        townArea={townAreaPoints} />:
             <p>Loading map with pins...</p>
           }
           

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getTownInRental } from '../scripts/RestApiDataSource.js'
+import { getTownInPlanningArea } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
+import PlotPublicTransportMapByTown from './PlotPublicTransportMapByTown.jsx'
 import PlotPublicTransportMapByRadius from './PlotPublicTransportMapByRadius.jsx'
 
 const ViewPublicTransportByTown = () => {
@@ -8,7 +9,7 @@ const ViewPublicTransportByTown = () => {
     const [selectedTown, setSelectedTown] = useState("");
 
     useEffect(() => {
-        getTownInRental(setOptions);
+        getTownInPlanningArea(setOptions);
     }, []);
 
     return (
@@ -20,6 +21,7 @@ const ViewPublicTransportByTown = () => {
         {selectedTown != "" ?
           <div>
             <PlotPublicTransportMapByRadius town={selectedTown} />
+            <PlotPublicTransportMapByTown town={selectedTown} />
           </div>: <></>
         }
       </div>
