@@ -44,7 +44,6 @@ const PlotMedicalCareMapByTown = ({ town, chasClinicData }) => {
       const filteredData = chasClinicData.filter(loc => (
         getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
       ));
-      console.log(filteredData)
       setChasClinicLocations(filteredData)
     }
   }, [chasClinicData, townAreaPoints]);
