@@ -9,7 +9,7 @@ const PlotRetailServicesMapByRadius = ({ town, supermarketsData }) => {
 
   const [supermarketsLocations, setSupermarketsLocations] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
-  const [selectedLon, setSelectedLon] = useState(null);;
+  const [selectedLon, setSelectedLon] = useState(null);
   const [radius, ] = useState(2.5); // radius in km
 
   useEffect(() => {

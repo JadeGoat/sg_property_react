@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getSupermarketsData, getTownInPlanningArea } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
+import PlotRetailServicesMapByTown from './PlotRetailServicesMapByTown.jsx'
 import PlotRetailServicesMapByRadius from './PlotRetailServicesMapByRadius.jsx'
 
 const ViewRetailServicesByTown = () => {
@@ -21,7 +22,10 @@ const ViewRetailServicesByTown = () => {
                   
         {selectedTown != "" ?
           <div>
-            <PlotRetailServicesMapByRadius town={selectedTown} supermarketsData={supermarketsData} />
+            <PlotRetailServicesMapByRadius town={selectedTown} 
+                                           supermarketsData={supermarketsData} />
+            <PlotRetailServicesMapByTown town={selectedTown} 
+                                         supermarketsData={supermarketsData} />
           </div>: <></>
         }
       </div>
