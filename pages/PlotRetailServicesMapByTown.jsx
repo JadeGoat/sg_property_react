@@ -40,7 +40,7 @@ const PlotRetailServicesMapByTown = ({ town, supermarketsData }) => {
   useEffect(() => {
 
     // Filter supermarket data based on polygon area
-    if (supermarketsData && supermarketsData.length > 0) {
+    if (supermarketsData && supermarketsData.length > 0 && townAreaPoints) {
       const filteredData = supermarketsData.filter(loc => (
         getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
       ));
