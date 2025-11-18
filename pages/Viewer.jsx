@@ -45,7 +45,7 @@ const Viewer = () => {
               <TabList>
                   <Tab>Property</Tab>
                   <Tab>Transport</Tab>
-                  <Tab>Lifecare & Healthcare Care</Tab>
+                  <Tab>Lifecare & Healthcare</Tab>
                   <Tab>Food & Retail Services</Tab>
               </TabList>
 
