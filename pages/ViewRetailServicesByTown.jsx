@@ -5,6 +5,7 @@ import PlotRetailServicesMapByTown from './PlotRetailServicesMapByTown.jsx'
 import PlotRetailServicesMapByRadius from './PlotRetailServicesMapByRadius.jsx'
 
 const ViewRetailServicesByTown = () => {
+  
     const [options, setOptions] = useState([])
     const [selectedTown, setSelectedTown] = useState("");
     const [supermarketsData, setSupermarketsData] = useState(null);
