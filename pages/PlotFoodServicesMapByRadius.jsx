@@ -22,6 +22,7 @@ const PlotFoodServicesMapByRadius = ({ town, hawkerCentreData, healthierEateries
 
     useEffect(() => {
 
+      // Filter hawker centre data based on radius
       if (hawkerCentreData) {
         const hawkerFeatures = hawkerCentreData.features.filter(item => {
           const loc = item.geometry.coordinates;
@@ -35,6 +36,7 @@ const PlotFoodServicesMapByRadius = ({ town, hawkerCentreData, healthierEateries
         setSelectedHawkerCentreData(filteredHawkerCentreData);
       };
 
+      // Filter healthier eateries data based on radius
       if (healthierEateriesData) {
         const eateriesFeatures = healthierEateriesData.features.filter(item => {
           const loc = item.geometry.coordinates;

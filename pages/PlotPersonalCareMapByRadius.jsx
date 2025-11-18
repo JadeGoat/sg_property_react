@@ -23,6 +23,7 @@ const PlotPersonalCareByRadius = ({ town, childCareData, elderlyCareData, disabi
 
     useEffect(() => {
       
+      // Filter child care data based on radius
       if (childCareData) {
         const childCareFeatures = childCareData.features.filter(item => {
           const loc = item.geometry.coordinates;
@@ -41,7 +42,8 @@ const PlotPersonalCareByRadius = ({ town, childCareData, elderlyCareData, disabi
         }));
         setSelectedChildCareData(constructGeoJsonFromFeature(mergedFeatures));
       };
-
+      
+      // Filter elderly care data based on radius
       if (elderlyCareData) {
         const elderlyCareFeatures = elderlyCareData.features.filter(item => {
           const loc = item.geometry.coordinates;

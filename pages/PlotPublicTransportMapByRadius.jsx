@@ -1,50 +1,43 @@
 import { useEffect, useState } from 'react';
-import { getBusStopData, getMrtStationData } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import MapPublicTransport from '../components/MapPublicTransport.jsx';
 
-const PlotPublicTransportMapByRadius = ({ town }) => {
+// Example using Csv & GeoJson data on Map Component
+// - Extracting for GeoJson metadata done on backup
+const PlotPublicTransportMapByRadius = ({ town, busStopData, mrtStationData }) => {
 
-  const [busStopData, setBusStopData] = useState(null);
-  const [mrtStationData, setMrtStationData] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
   const [busStopLocationPoints, setBusStopLocationPoints] = useState(null);
   const [mrtStationLocationPoints, setMrtStationLocationPoints] = useState(null);
   const [radius, ] = useState(2.5); // radius in km
 
-  // Example using Csv & GeoJson data on Map Component
-  // - Extracting for GeoJson metadata done on backup
   useEffect(() => {
-
-    // Set bus stop and mrt station data
-    getBusStopData(setBusStopData);
-    getMrtStationData(setMrtStationData);
-
-    // Set lat, lon
     const latlon = getTownLatLon(town)
     setSelectedLat(latlon[0]);
     setSelectedLon(latlon[1]);
-
   }, [town]);
 
   useEffect(() => {
-      if (busStopData && busStopData.length > 0) {
-        const filteredData = busStopData.filter(loc => {
-          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
-          return dist <= radius;
-        });
-        setBusStopLocationPoints(filteredData)
-      }
 
-      if (mrtStationData && mrtStationData.length > 0) {
-        const filteredData = mrtStationData.filter(loc => {
-          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
-          return dist <= radius;
-        });
-        setMrtStationLocationPoints(filteredData)
-      }
+    // Filter bus stop data based on radius
+    if (busStopData && busStopData.length > 0) {
+      const filteredData = busStopData.filter(loc => {
+        const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
+        return dist <= radius;
+      });
+      setBusStopLocationPoints(filteredData)
+    }
+
+    // Filter mrt station data based on radius
+    if (mrtStationData && mrtStationData.length > 0) {
+      const filteredData = mrtStationData.filter(loc => {
+        const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
+        return dist <= radius;
+      });
+      setMrtStationLocationPoints(filteredData)
+    }
   }, [radius, selectedLat, selectedLon, busStopData, mrtStationData]);
 
   return (

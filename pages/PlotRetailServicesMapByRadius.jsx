@@ -20,13 +20,15 @@ const PlotRetailServicesMapByRadius = ({ town, supermarketsData }) => {
   }, [town]);
 
   useEffect(() => {
-      if (supermarketsData && supermarketsData.length > 0) {
-        const filteredData = supermarketsData.filter(loc => {
-          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
-          return dist <= radius;
-        });
-        setSupermarketsLocations(filteredData)
-      }
+
+    // Filter supermarket data based on radius
+    if (supermarketsData && supermarketsData.length > 0) {
+      const filteredData = supermarketsData.filter(loc => {
+        const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
+        return dist <= radius;
+      });
+      setSupermarketsLocations(filteredData)
+    }
   }, [radius, selectedLat, selectedLon, supermarketsData]);
 
   return (

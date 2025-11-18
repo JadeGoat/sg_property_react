@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { getBusStopData, getMrtStationData, getTownPlanningArea } from '../scripts/RestApiDataSource.js'
+import { getTownPlanningArea } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon, getPlanningTownName } from '../scripts/SgTownHelper.js'
 import { getPointsInPolygon } from '../scripts/MapUtils.js'
 import MapPublicTransport from '../components/MapPublicTransport.jsx';
 
 // Example using Csv & GeoJson data on Map Component
   // - Extracting for GeoJson metadata done on backup
-const PlotPublicTransportMapByTown = ({ town }) => {
+const PlotPublicTransportMapByTown = ({ town, busStopData, mrtStationData }) => {
 
-  const [busStopData, setBusStopData] = useState(null);
-  const [mrtStationData, setMrtStationData] = useState(null);
   const [planningArea, setPlanningArea] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
@@ -22,10 +20,6 @@ const PlotPublicTransportMapByTown = ({ town }) => {
     // Set planning area
     const planningTownName = getPlanningTownName(town)
     getTownPlanningArea(planningTownName, setPlanningArea)
-
-    // Set bus stop and mrt station data
-    getBusStopData(setBusStopData);
-    getMrtStationData(setMrtStationData);
     
     // Set lat, lon
     const latlon = getTownLatLon(town)

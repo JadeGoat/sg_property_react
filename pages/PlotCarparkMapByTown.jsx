@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
-import { getCarparkData, getTownPlanningArea } from '../scripts/RestApiDataSource.js'
+import { getTownPlanningArea } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon, getPlanningTownName } from '../scripts/SgTownHelper.js'
 import { getPointsInPolygon } from '../scripts/MapUtils.js'
 import MapCarpark from '../components/MapCarpark.jsx';
 
 // Example using Csv data on Map Component
 // - Post processing was done on Csv data
-const PlotCarparkMapByTown = ({ town }) => {
+const PlotCarparkMapByTown = ({ town, carparkData }) => {
 
-  const [data, setData] = useState(null);
   const [planningArea, setPlanningArea] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
@@ -21,9 +20,6 @@ const PlotCarparkMapByTown = ({ town }) => {
     const planningTownName = getPlanningTownName(town)
     getTownPlanningArea(planningTownName, setPlanningArea)
 
-    // Set carpark data
-    getCarparkData(setData);
-    
     // Set lat, lon
     const latlon = getTownLatLon(town)
     setSelectedLat(latlon[0]);
@@ -31,24 +27,24 @@ const PlotCarparkMapByTown = ({ town }) => {
 
   }, [town]);
 
-  // Format planning area into useable polygon format
   useEffect(() => {
+    // Format planning area into useable polygon format
     if (planningArea && planningArea.length > 0) {
       const points_dict = planningArea[0]['town_boundary'][0][0]
       const points_list = points_dict.map(item => ([item.y, item.x]));
       setTownAreaPoints(points_list)
     }
-  }, [data, planningArea]);
+  }, [planningArea]);
 
-  // Filter carpark data based on polygon area
   useEffect(() => {
-    if (data && data.length > 0 && townAreaPoints) {
-      const filteredData = data.filter(loc => (
+    // Filter carpark data based on polygon area
+    if (carparkData && carparkData.length > 0 && townAreaPoints) {
+      const filteredData = carparkData.filter(loc => (
         getPointsInPolygon([loc.lat, loc.lon], townAreaPoints)
       ));
       setLocationPoints(filteredData)
     }
-  }, [data, townAreaPoints]);
+  }, [carparkData, townAreaPoints]);
 
   return (
       <div>

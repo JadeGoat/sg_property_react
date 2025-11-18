@@ -21,13 +21,15 @@ const PlotMedicalCareMapByRadius = ({ town, chasClinicData }) => {
   }, [town]);
 
   useEffect(() => {
-      if (chasClinicData && chasClinicData.length > 0) {
-        const filteredData = chasClinicData.filter(loc => {
-          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
-          return dist <= radius;
-        });
-        setChasClinicLocations(filteredData)
-      }
+    
+    // Filter chas clinic data based on radius
+    if (chasClinicData && chasClinicData.length > 0) {
+      const filteredData = chasClinicData.filter(loc => {
+        const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
+        return dist <= radius;
+      });
+      setChasClinicLocations(filteredData)
+    }
   }, [radius, selectedLat, selectedLon, chasClinicData]);
 
   return (

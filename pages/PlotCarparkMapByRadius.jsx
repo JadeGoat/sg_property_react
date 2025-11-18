@@ -27,13 +27,14 @@ const PlotCarparkMapByRadius = ({ town }) => {
   }, [town]);
 
   useEffect(() => {
-      if (data && data.length > 0) {
-        const filteredData = data.filter(loc => {
-          const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
-          return dist <= radius;
-        });
-        setLocationPoints(filteredData)
-      }
+    // Filter carpark data based on radius
+    if (data && data.length > 0) {
+      const filteredData = data.filter(loc => {
+        const dist = getDistanceFromLatLonInKm(selectedLat, selectedLon, loc.lat, loc.lon);
+        return dist <= radius;
+      });
+      setLocationPoints(filteredData)
+    }
   }, [radius, selectedLat, selectedLon, data]);
 
   return (
