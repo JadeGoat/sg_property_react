@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { getHawkerCentreData, getHealthierEateriesData } from '../scripts/RestApiDataSource.js'
 import MapFoodServices from '../components/MapFoodServices.jsx';
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
@@ -7,13 +6,10 @@ import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
 // Example using GeoJson data on Map Component
 // - Extracting for GeoJson metadata done on client
-const PlotFoodServicesMapByRadius = ({ town }) => {
+const PlotFoodServicesMapByRadius = ({ town, hawkerCentreData, healthierEateriesData }) => {
 
     const [selectedLat, setSelectedLat] = useState(null);
     const [selectedLon, setSelectedLon] = useState(null);
-
-    const [hawkerCentreData, setHawkerCentreData] = useState(null);
-    const [healthierEateriesData, setHealthierEateriesData] = useState(null);
     const [selectedHawkerCentreData, setSelectedHawkerCentreData] = useState(null);
     const [selectedHealthierEateriesData, setSelectedHealthierEateriesData] = useState(null);
     const [radius, ] = useState(2.5); // radius in km
@@ -24,10 +20,7 @@ const PlotFoodServicesMapByRadius = ({ town }) => {
         setSelectedLon(latlon[1]);
     }, [town]);
 
-    useEffect(() => {
-        getHawkerCentreData(setHawkerCentreData)
-        getHealthierEateriesData(setHealthierEateriesData);
-    }, []);
+    
 
     useEffect(() => {
 

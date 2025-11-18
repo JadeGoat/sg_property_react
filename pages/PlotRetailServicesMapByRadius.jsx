@@ -1,24 +1,18 @@
 import { useEffect, useState } from 'react';
-import { getSupermarketsData } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
 import MapRetailServices from '../components/MapRetailServices.jsx';
 
-const PlotRetailServicesMapByRadius = ({ town }) => {
+// Example using GeoJson data on Map Component
+// // - Extracting for GeoJson metadata done on backup
+const PlotRetailServicesMapByRadius = ({ town, supermarketsData }) => {
 
-  const [supermarketsData, setSupermarketsData] = useState(null);
+  const [supermarketsLocations, setSupermarketsLocations] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);;
-  const [supermarketsLocations, setSupermarketsLocations] = useState(null);
   const [radius, ] = useState(2.5); // radius in km
 
-  // Example using GeoJson data on Map Component
-  // - Extracting for GeoJson metadata done on backup
   useEffect(() => {
-
-    // Set supermarkets data
-    getSupermarketsData(setSupermarketsData);
-
     // Set lat, lon
     const latlon = getTownLatLon(town)
     setSelectedLat(latlon[0]);

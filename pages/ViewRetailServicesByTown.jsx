@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { getTownInPlanningArea } from '../scripts/RestApiDataSource.js'
+import { getSupermarketsData, getTownInPlanningArea } from '../scripts/RestApiDataSource.js'
 import DropDown from '../components/DropDown.jsx'
 import PlotRetailServicesMapByRadius from './PlotRetailServicesMapByRadius.jsx'
 
 const ViewRetailServicesByTown = () => {
     const [options, setOptions] = useState([])
     const [selectedTown, setSelectedTown] = useState("");
+    const [supermarketsData, setSupermarketsData] = useState(null);
 
     useEffect(() => {
         getTownInPlanningArea(setOptions);
+        getSupermarketsData(setSupermarketsData);
     }, []);
 
     return (
@@ -19,7 +21,7 @@ const ViewRetailServicesByTown = () => {
                   
         {selectedTown != "" ?
           <div>
-            <PlotRetailServicesMapByRadius town={selectedTown} />
+            <PlotRetailServicesMapByRadius town={selectedTown} supermarketsData={supermarketsData} />
           </div>: <></>
         }
       </div>

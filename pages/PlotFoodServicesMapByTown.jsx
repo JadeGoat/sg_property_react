@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { getHawkerCentreData, getHealthierEateriesData } from '../scripts/RestApiDataSource.js'
 import MapFoodServices from '../components/MapFoodServices.jsx';
 import { extractPostalCodeFromPropertiesData, 
          extractPostalCodeFromMetaData, 
@@ -8,13 +7,10 @@ import { getTownLatLon } from '../scripts/SgTownHelper.js'
 
 // Example using GeoJson data on Map Component
 // - Extracting for GeoJson metadata done on client
-const PlotFoodServicesMapByTown = ({ town }) => {
+const PlotFoodServicesMapByTown = ({ town, hawkerCentreData, healthierEateriesData }) => {
 
     const [selectedLat, setSelectedLat] = useState(null);
     const [selectedLon, setSelectedLon] = useState(null);
-
-    const [hawkerCentreData, setHawkerCentreData] = useState(null);
-    const [healthierEateriesData, setHealthierEateriesData] = useState(null);
     const [selectedHawkerCentreData, setSelectedHawkerCentreData] = useState(null);
     const [selectedHealthierEateriesData, setSelectedHealthierEateriesData] = useState(null);
 
@@ -23,11 +19,6 @@ const PlotFoodServicesMapByTown = ({ town }) => {
         setSelectedLat(latlon[0]);
         setSelectedLon(latlon[1]);
     }, [town]);
-
-    useEffect(() => {
-        getHawkerCentreData(setHawkerCentreData)
-        getHealthierEateriesData(setHealthierEateriesData);
-    }, []);
 
     useEffect(() => {
 
