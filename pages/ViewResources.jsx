@@ -9,13 +9,13 @@ const ViewResources = () => {
     useEffect(() => {
         getAllTownPlanningArea(setPlanningArea)
     }, []);
-    console.log(planningArea)
+
     return (
       <div>                  
         { planningArea ?
             <div>
-              <MapPlanningArea centerCoordinate={[1.3778, 103.8554]} 
-                               zoomValue={13} 
+              <MapPlanningArea centerCoordinate={[1.3578, 103.8454]} 
+                               zoomValue={11} 
                                planningArea={planningArea}/>
             </div>: <></>
         }

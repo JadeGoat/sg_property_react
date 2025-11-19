@@ -1,11 +1,17 @@
+import { useState } from 'react';
 import { MapContainer, TileLayer, Polygon, Tooltip, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import '../css/MapCarpark.css'
+import '../css/MapPlanningArea.css'
 
 const MapPlanningArea = ({ centerCoordinate, zoomValue, planningArea }) => {
 
-    return (
-      <MapContainer className='mapCarparkContainer' center={centerCoordinate} zoom={zoomValue}>
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredTownName, setHoveredTownName] = useState(" ");
+
+  return (
+    <div>
+      <h4>Selected area: {hoveredTownName}</h4>
+      <MapContainer className='mapPlanningAreaContainer' center={centerCoordinate} zoom={zoomValue}>
         <TileLayer
           attribution='&copy; OpenStreetMap contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -19,15 +25,25 @@ const MapPlanningArea = ({ centerCoordinate, zoomValue, planningArea }) => {
                     <Polygon
                         key={idx}
                         positions={latLngs}
-                        pathOptions={{ color: 'red', fillColor: 'red', weight: 2, fillOpacity: 0.2 }}>
-                            <Tooltip>{name}</Tooltip>
+                        pathOptions={{ color: hoveredIndex === idx ? 'green': 'red', 
+                                        fillColor: hoveredIndex === idx ? 'green': 'red', 
+                                        weight: 2, 
+                                        fillOpacity: 0.2 
+                        }}
+                        eventHandlers={{
+                          mouseover: () => { setHoveredIndex(idx)
+                                            setHoveredTownName(name) },
+                          mouseout: () => {  setHoveredIndex(null)
+                                             setHoveredTownName(" ") },
+                        }}>
                             <Popup>{name}</Popup>
                     </Polygon>
                 );
             }): <></>
         }
       </MapContainer>
-    );
+    </div>
+  );
 };
 
 export default MapPlanningArea;

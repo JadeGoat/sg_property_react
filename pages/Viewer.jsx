@@ -104,7 +104,12 @@ const Viewer = () => {
 
           <TabPanel>
             {/* Main tab - Resources */}
-            <TabPanel><ViewResources/></TabPanel>
+            <Tabs>
+                <TabList>
+                  <Tab>Planning Area</Tab>
+                </TabList>
+                <TabPanel><ViewResources/></TabPanel>
+            </Tabs>
           </TabPanel>
         </Tabs>
     </div>
