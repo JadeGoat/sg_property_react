@@ -117,7 +117,7 @@ export const getElderlyCareData = async (setData) => {
     axios.get(`${baseUrl}/getElderlyCareData`)
          .then(response => {
             const data = response.data;
-             setData(constructGeoJsonFromData(data));
+            setData(constructGeoJsonFromData(data));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
@@ -126,7 +126,7 @@ export const getDisabilityServicesData = async (setData) => {
     axios.get(`${baseUrl}/getDisabilityServicesData`)
          .then(response => {
             const data = response.data;
-             setData(constructGeoJsonFromData(data));
+            setData(constructGeoJsonFromData(data));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
@@ -141,7 +141,7 @@ export const getHawkerCentreData = async (setData) => {
     axios.get(`${baseUrl}/getHawkerCentreData`)
          .then(response => {
             const data = response.data;
-             setData(constructGeoJsonFromData(data));
+            setData(constructGeoJsonFromData(data));
          })
          .catch(error => console.error('Error retrieving year data:', error))
 }
@@ -172,7 +172,11 @@ export const getTownInPlanningArea = async (setData) => {
 
 export const getTownPlanningArea = async (town, setData) => {
     axios.get(`${baseUrl}/getTownPlanningArea?town=${town}`)
-         .then(response => setData(response.data))
+         .then(response => {
+            const pointsDict = response.data[0]['town_boundary'][0][0]
+            const pointsList = pointsDict.map(item => ([item.y, item.x]));
+            setData(pointsList)
+         })
          .catch(error => console.error('Error retrieving data:', error))
 }
 

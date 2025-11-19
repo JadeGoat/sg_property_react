@@ -8,7 +8,6 @@ import MapCarpark from '../components/MapCarpark.jsx';
 // - Post processing was done on Csv data
 const PlotCarparkMapByTown = ({ town, carparkData }) => {
 
-  const [planningArea, setPlanningArea] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
   const [locationPoints, setLocationPoints] = useState(null);
@@ -17,7 +16,7 @@ const PlotCarparkMapByTown = ({ town, carparkData }) => {
   useEffect(() => {
 
     // Set planning area
-    getTownPlanningArea(town, setPlanningArea)
+    getTownPlanningArea(town, setTownAreaPoints)
 
     // Set lat, lon
     const latlon = getTownLatLon(town)
@@ -25,16 +24,6 @@ const PlotCarparkMapByTown = ({ town, carparkData }) => {
     setSelectedLon(latlon[1]);
 
   }, [town]);
-
-  useEffect(() => {
-    
-    // Format planning area into useable polygon format
-    if (planningArea && planningArea.length > 0) {
-      const points_dict = planningArea[0]['town_boundary'][0][0]
-      const points_list = points_dict.map(item => ([item.y, item.x]));
-      setTownAreaPoints(points_list)
-    }
-  }, [planningArea]);
 
   useEffect(() => {
 

@@ -11,7 +11,6 @@ import MapFoodServices from '../components/MapFoodServices.jsx';
 // - Extracting for GeoJson metadata done on client
 const PlotFoodServicesMapByTown = ({ town, hawkerCentreData, healthierEateriesData }) => {
 
-  const [planningArea, setPlanningArea] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
   const [selectedHawkerCentreData, setSelectedHawkerCentreData] = useState(null);
@@ -19,24 +18,16 @@ const PlotFoodServicesMapByTown = ({ town, hawkerCentreData, healthierEateriesDa
   const [townAreaPoints, setTownAreaPoints] = useState(null);
 
   useEffect(() => {
+
     // Set planning area
-    getTownPlanningArea(town, setPlanningArea)
+    getTownPlanningArea(town, setTownAreaPoints)
     
     // Set lat, lon
     const latlon = getTownLatLon(town)
     setSelectedLat(latlon[0]);
     setSelectedLon(latlon[1]);
-  }, [town]);
 
-  useEffect(() => {
-  
-    // Format planning area into useable polygon format
-    if (planningArea && planningArea.length > 0) {
-      const points_dict = planningArea[0]['town_boundary'][0][0]
-      const points_list = points_dict.map(item => ([item.y, item.x]));
-      setTownAreaPoints(points_list)
-    }
-  }, [planningArea]);
+  }, [town]);
 
   useEffect(() => {
 

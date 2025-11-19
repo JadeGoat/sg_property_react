@@ -8,7 +8,6 @@ import MapRetailServices from '../components/MapRetailServices.jsx';
 // - Post processing was done on Csv data
 const PlotRetailServicesMapByTown = ({ town, supermarketsData }) => {
 
-  const [planningArea, setPlanningArea] = useState(null);
   const [supermarketsLocations, setSupermarketsLocations] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
@@ -17,7 +16,7 @@ const PlotRetailServicesMapByTown = ({ town, supermarketsData }) => {
   useEffect(() => {
 
     // Set planning area
-    getTownPlanningArea(town, setPlanningArea)
+    getTownPlanningArea(town, setTownAreaPoints)
 
     // Set lat, lon
     const latlon = getTownLatLon(town)
@@ -25,16 +24,6 @@ const PlotRetailServicesMapByTown = ({ town, supermarketsData }) => {
     setSelectedLon(latlon[1]);
 
   }, [town]);
-
-  useEffect(() => {
-    
-    // Format planning area into useable polygon format
-    if (planningArea && planningArea.length > 0) {
-      const points_dict = planningArea[0]['town_boundary'][0][0]
-      const points_list = points_dict.map(item => ([item.y, item.x]));
-      setTownAreaPoints(points_list)
-    }
-  }, [planningArea]);
 
   useEffect(() => {
 

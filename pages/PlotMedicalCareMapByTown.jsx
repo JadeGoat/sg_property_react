@@ -8,7 +8,6 @@ import MapMedicalCare from '../components/MapMedicalCare.jsx';
 // - Extracting for GeoJson metadata done on backup
 const PlotMedicalCareMapByTown = ({ town, chasClinicData }) => {
 
-  const [planningArea, setPlanningArea] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);;
   const [chasClinicLocations, setChasClinicLocations] = useState(null);
@@ -17,7 +16,7 @@ const PlotMedicalCareMapByTown = ({ town, chasClinicData }) => {
   useEffect(() => {
 
     // Set planning area
-    getTownPlanningArea(town, setPlanningArea)
+    getTownPlanningArea(town, setTownAreaPoints)
 
     // Set lat, lon
     const latlon = getTownLatLon(town)
@@ -25,16 +24,6 @@ const PlotMedicalCareMapByTown = ({ town, chasClinicData }) => {
     setSelectedLon(latlon[1]);
 
   }, [town]);
-
-  useEffect(() => {
-    
-    // Format planning area into useable polygon format
-    if (planningArea && planningArea.length > 0) {
-      const points_dict = planningArea[0]['town_boundary'][0][0]
-      const points_list = points_dict.map(item => ([item.y, item.x]));
-      setTownAreaPoints(points_list)
-    }
-  }, [planningArea]);
 
   useEffect(() => {
 

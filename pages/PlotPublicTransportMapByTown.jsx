@@ -8,7 +8,6 @@ import MapPublicTransport from '../components/MapPublicTransport.jsx';
   // - Extracting for GeoJson metadata done on backup
 const PlotPublicTransportMapByTown = ({ town, busStopData, mrtStationData }) => {
 
-  const [planningArea, setPlanningArea] = useState(null);
   const [selectedLat, setSelectedLat] = useState(null);
   const [selectedLon, setSelectedLon] = useState(null);
   const [busStopLocationPoints, setBusStopLocationPoints] = useState(null);
@@ -18,7 +17,7 @@ const PlotPublicTransportMapByTown = ({ town, busStopData, mrtStationData }) => 
   useEffect(() => {
 
     // Set planning area
-    getTownPlanningArea(town, setPlanningArea)
+    getTownPlanningArea(town, setTownAreaPoints)
     
     // Set lat, lon
     const latlon = getTownLatLon(town)
@@ -26,16 +25,6 @@ const PlotPublicTransportMapByTown = ({ town, busStopData, mrtStationData }) => 
     setSelectedLon(latlon[1]);
 
   }, [town]);
-
-  useEffect(() => {
-
-    // Format planning area into useable polygon format
-    if (planningArea && planningArea.length > 0) {
-      const points_dict = planningArea[0]['town_boundary'][0][0]
-      const points_list = points_dict.map(item => ([item.y, item.x]));
-      setTownAreaPoints(points_list)
-    }
-  }, [planningArea]);
 
   useEffect(() => {
 
