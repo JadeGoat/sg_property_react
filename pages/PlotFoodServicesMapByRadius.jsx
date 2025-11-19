@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import MapFoodServices from '../components/MapFoodServices.jsx';
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
-import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
+import { extractAndMerge } from '../scripts/GeoJsonHelper.js'
+import MapFoodServices from '../components/MapFoodServices.jsx';
 
 // Example using GeoJson data on Map Component
 // - Extracting for GeoJson metadata done on client
@@ -44,14 +44,7 @@ const PlotFoodServicesMapByRadius = ({ town, hawkerCentreData, healthierEateries
         });
 
         // Extract postal and address from html
-        const filteredHealthierEateriesData = constructGeoJsonFromFeature(eateriesFeatures)
-        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredHealthierEateriesData)
-
-        // Merge feature together
-        const mergedFeatures = filteredHealthierEateriesData.features.map((item, index) => ({
-            ...item,
-            ...metaPostalCodeData[index]
-        }));
+        const mergedFeatures = extractAndMerge(eateriesFeatures)
         setSelectedHealthierEateriesData(mergedFeatures);
       };
 

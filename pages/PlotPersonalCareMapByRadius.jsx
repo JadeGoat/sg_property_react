@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import MapPersonalCare from '../components/MapPersonalCare.jsx';
 import { getDistanceFromLatLonInKm } from '../scripts/MapUtils.js'
-import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
+import { extractAndMerge } from '../scripts/GeoJsonHelper.js'
+import MapPersonalCare from '../components/MapPersonalCare.jsx';
 
 // Example using GeoJson data on Map Component
 // - Extracting for GeoJson metadata done on client
@@ -32,15 +32,8 @@ const PlotPersonalCareByRadius = ({ town, childCareData, elderlyCareData, disabi
         });
         
         // Extract postal, address and name from html
-        const filteredChildCareData = constructGeoJsonFromFeature(childCareFeatures)
-        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredChildCareData)
-        
-        // Merge feature together
-        const mergedFeatures = filteredChildCareData.features.map((item, index) => ({
-            ...item,
-            ...metaPostalCodeData[index]
-        }));
-        setSelectedChildCareData(constructGeoJsonFromFeature(mergedFeatures));
+        const mergedFeatures = extractAndMerge(childCareFeatures)
+        setSelectedChildCareData(mergedFeatures);
       };
       
       // Filter elderly care data based on radius
@@ -52,15 +45,8 @@ const PlotPersonalCareByRadius = ({ town, childCareData, elderlyCareData, disabi
         });
 
         // Extract postal, address and name from html
-        const filteredElderlyCareData = constructGeoJsonFromFeature(elderlyCareFeatures)
-        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredElderlyCareData)
-       
-        // Merge feature together
-        const mergedFeatures = filteredElderlyCareData.features.map((item, index) => ({
-            ...item,
-            ...metaPostalCodeData[index]
-        }));
-        setSelectedElderlyCareData(constructGeoJsonFromFeature(mergedFeatures));
+        const mergedFeatures = extractAndMerge(elderlyCareFeatures)
+        setSelectedElderlyCareData(mergedFeatures);
       };
 
       if (disabilityServicesData) {
@@ -71,15 +57,8 @@ const PlotPersonalCareByRadius = ({ town, childCareData, elderlyCareData, disabi
         });
 
         // Extract postal, address and name from html
-        const filteredDisabilityServicesData = constructGeoJsonFromFeature(disabilityServicesFeatures)
-        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredDisabilityServicesData)
-       
-        // Merge feature together
-        const mergedFeatures = filteredDisabilityServicesData.features.map((item, index) => ({
-            ...item,
-            ...metaPostalCodeData[index]
-        }));
-        setSelectedDisabilityServicesData(constructGeoJsonFromFeature(mergedFeatures));
+        const mergedFeatures = extractAndMerge(disabilityServicesFeatures)
+        setSelectedDisabilityServicesData(mergedFeatures);
       };
 
     }, [radius, selectedLat, selectedLon, childCareData, elderlyCareData, disabilityServicesData]);
