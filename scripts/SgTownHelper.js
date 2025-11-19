@@ -6,7 +6,7 @@ const sgTowns = {
     "Bukit Merah": [1.2776, 103.8198],
     "Bukit Panjang": [1.3784, 103.7642],
     "Bukit Timah": [1.3294, 103.8021],
-    "Boon Lay":	[1.3410, 103.7070],
+    "Boon Lay":	[1.325, 103.7116],
     "Central": [1.2903, 103.8519],
     "Changi":	[1.3570, 103.9870],
     "Changi Bay":	[1.320, 104.030],

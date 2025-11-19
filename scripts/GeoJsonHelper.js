@@ -1,18 +1,16 @@
 import { getTownFromPostal } from './SgTownHelper.js'
 
-export function extractFromPropertiesGeometryData(geoJsonData) {
-    const metaData = geoJsonData.features.map(item => [item.properties, item.geometry]);
-    const extractedData = metaData.map(item => {
+export function extractPostalCodeFromPropertiesData(geoJsonData) {
+    const metaData = geoJsonData.features.map(item => item.properties);
+    const metaPostalCodeData = metaData.map(item => {
         const result = {
-            "postal_code": item[0].ADDRESSPOSTALCODE,
-            "address": item[0].ADDRESSSTREETNAME,
-            "name": item[0].NAME,
-            "lat": item[1].coordinates[1],
-            "lon": item[1].coordinates[0],
+            "postal_code": item.ADDRESSPOSTALCODE,
+            "address": item.ADDRESSSTREETNAME,
+            "name": item.NAME,
         }
         return result;
     });
-    return extractedData;
+    return metaPostalCodeData;
 }
 
 export function extractPostalCodeFromMetaData(geoJsonData) {
@@ -20,39 +18,61 @@ export function extractPostalCodeFromMetaData(geoJsonData) {
     const parser = new DOMParser();
     const metaData = geoJsonData.features.map(item => item.properties);
     const metaPostalCodeData = metaData.map(item => {
-
-        // Parse the html content in the meta block
-        const doc =  parser.parseFromString(item.Description, 'text/html');
-        const rows = doc.querySelectorAll('table tr');
-
-        // Look through all table rows and extract cell value where row header is postal code
-        let postal_code = null;
-        let address = null;
-        let name = null
-        rows.forEach(row => {
-            const rowDesc = row.querySelectorAll('th');
-            const rowValue = row.querySelectorAll('td');
-            if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'ADDRESSPOSTALCODE') {
-                const tempValue =  rowValue[0].textContent.trim()
-                if (tempValue.length === 5) {
-                    postal_code = "0" + rowValue[0].textContent.trim();
-                }
-                else {
-                    postal_code = rowValue[0].textContent.trim();
-                }
-            }
-            if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'ADDRESSSTREETNAME') {
-                address = rowValue[0].textContent.trim();
-            }
-            if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'NAME') {
-                name = rowValue[0].textContent.trim();
-            }
-        });
-
-        return { postal_code, address, name }
+        const result = extractFromDescription(parser, item.Description)
+        return result
     });
 
     return metaPostalCodeData;
+}
+
+function extractFromDescription(parser, htmlText) {
+
+    // Parse the html content in the meta block
+    const doc =  parser.parseFromString(htmlText, 'text/html');
+    const rows = doc.querySelectorAll('table tr');
+
+    // Look through all table rows and extract cell value where row header is postal code
+    let postal_code = null;
+    let address = null;
+    let name = null
+    rows.forEach(row => {
+        const rowDesc = row.querySelectorAll('th');
+        const rowValue = row.querySelectorAll('td');
+        if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'ADDRESSPOSTALCODE') {
+            const tempValue =  rowValue[0].textContent.trim()
+            if (tempValue.length === 5) {
+                postal_code = "0" + rowValue[0].textContent.trim();
+            }
+            else {
+                postal_code = rowValue[0].textContent.trim();
+            }
+        }
+        if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'ADDRESSSTREETNAME') {
+            address = rowValue[0].textContent.trim();
+        }
+        if (rowValue.length && rowDesc.length && rowDesc[0].textContent.trim() === 'NAME') {
+            name = rowValue[0].textContent.trim();
+        }
+    });
+
+    return {
+        "postal_code": postal_code,
+        "address": address,
+        "name": name
+    }
+}
+
+export function extractAndMerge(geoJsonFeature) {
+    
+    const geoJsonData = constructGeoJsonFromFeature(geoJsonFeature)
+    const metaPostalCodeData = extractPostalCodeFromMetaData(geoJsonData)
+
+    // Merge feature together
+    const mergedGeoJsonData = geoJsonData.features.map((item, index) => ({
+        ...item,
+        ...metaPostalCodeData[index]
+    }));
+    return mergedGeoJsonData
 }
 
 export function filterGeoJsonData(geoJsonData, postalCodeData, selectedTown) {
