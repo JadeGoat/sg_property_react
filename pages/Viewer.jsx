@@ -9,6 +9,7 @@ import ViewPersonalCareByTown from './ViewPersonalCareByTown';
 import ViewMedicalCareByTown from './ViewMedicalCareByTown';
 import ViewFoodServicesByTown from './ViewFoodServicesByTown';
 import ViewRetailServicesByTown from './ViewRetailServicesByTown';
+import ViewResources from './ViewResources';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
@@ -21,6 +22,7 @@ const Viewer = () => {
           <TabList>
             <Tab>View By Year</Tab>
             <Tab>View By Town</Tab>
+            <Tab>Resources</Tab>
           </TabList>
 
           <TabPanel>
@@ -98,6 +100,11 @@ const Viewer = () => {
               </TabPanel>
 
             </Tabs>
+          </TabPanel>
+
+          <TabPanel>
+            {/* Main tab - Resources */}
+            <TabPanel><ViewResources/></TabPanel>
           </TabPanel>
         </Tabs>
     </div>
