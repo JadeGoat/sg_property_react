@@ -32,8 +32,7 @@ const PlotFoodServicesMapByRadius = ({ town, hawkerCentreData, healthierEateries
 
         // No need to extract postal and address from html
         // as the geojson is a different format
-        const filteredHawkerCentreData = constructGeoJsonFromFeature(hawkerFeatures)
-        setSelectedHawkerCentreData(filteredHawkerCentreData);
+        setSelectedHawkerCentreData(hawkerFeatures);
       };
 
       // Filter healthier eateries data based on radius
@@ -53,7 +52,7 @@ const PlotFoodServicesMapByRadius = ({ town, hawkerCentreData, healthierEateries
             ...item,
             ...metaPostalCodeData[index]
         }));
-        setSelectedHealthierEateriesData(constructGeoJsonFromFeature(mergedFeatures));
+        setSelectedHealthierEateriesData(mergedFeatures);
       };
 
     }, [radius, selectedLat, selectedLon, hawkerCentreData, healthierEateriesData]);

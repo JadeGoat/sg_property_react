@@ -65,7 +65,8 @@ const PlotPersonalCareByTown = ({ town, childCareData, elderlyCareData, disabili
                                 childCareData={selectedChildCareData}
                                 elderlyCareData={selectedElderlyCareData}
                                 disabilityServicesData={selectedDisabilityServicesData} 
-                                newCenter={[selectedLat, selectedLon]} />:
+                                newCenter={[selectedLat, selectedLon]} 
+                                townArea={townAreaPoints} />:
               <p>Loading map with pins...</p>
           }
       </div>

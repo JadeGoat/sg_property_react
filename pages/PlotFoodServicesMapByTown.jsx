@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getTownPlanningArea } from '../scripts/RestApiDataSource.js'
-import { extractFromPropertiesGeometryData } from '../scripts/GeoJsonHelper.js'
-import { extractFromDescriptionGeometryData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getPointsInPolygon } from '../scripts/MapUtils.js'
+import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
 import MapFoodServices from '../components/MapFoodServices.jsx';
 
 // Example using GeoJson data on Map Component
@@ -32,20 +31,34 @@ const PlotFoodServicesMapByTown = ({ town, hawkerCentreData, healthierEateriesDa
 
     if (townAreaPoints) {
       if (hawkerCentreData) {
-        const metaData = extractFromPropertiesGeometryData(hawkerCentreData)
-        const filteredHawkerCentreData = metaData.filter(item => {
-          getPointsInPolygon([item.lat, item.lon], townAreaPoints)
+        const filteredHawkerCentreData = hawkerCentreData.features.filter(item => {
+          const loc = item.geometry.coordinates;
+          const validPoint = getPointsInPolygon([loc[1], loc[0]], townAreaPoints)
+          return validPoint;
         });
+
+        // No need to extract postal and address from html
+        // as the geojson is a different format
         setSelectedHawkerCentreData(filteredHawkerCentreData);
       };
 
       if (healthierEateriesData) {
-        console.log(healthierEateriesData)
-        const metaData = extractFromDescriptionGeometryData(healthierEateriesData)
-        const filteredHealthierEateriesData = metaData.filter(item => {
-          getPointsInPolygon([item.lat, item.lon], townAreaPoints)
+        const eateriesFeatures = healthierEateriesData.features.filter(item => {
+          const loc = item.geometry.coordinates;
+          const validPoint = getPointsInPolygon([loc[1], loc[0]], townAreaPoints)
+          return validPoint;
         });
-        setSelectedHealthierEateriesData(filteredHealthierEateriesData);
+
+        // Extract postal and address from html
+        const filteredHealthierEateriesData = constructGeoJsonFromFeature(eateriesFeatures)
+        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredHealthierEateriesData)
+
+        // Merge feature together
+        const mergedFeatures = filteredHealthierEateriesData.features.map((item, index) => ({
+            ...item,
+            ...metaPostalCodeData[index]
+        }));
+        setSelectedHealthierEateriesData(mergedFeatures);
       };
     }
 
@@ -59,7 +72,8 @@ const PlotFoodServicesMapByTown = ({ town, hawkerCentreData, healthierEateriesDa
                              zoomValue={13} 
                              hawkerCentreData={selectedHawkerCentreData}
                              healthierEateriesData={selectedHealthierEateriesData} 
-                             newCenter={[selectedLat, selectedLon]} />:
+                             newCenter={[selectedLat, selectedLon]} 
+                             townArea={townAreaPoints} />:
             <p>Loading map with pins...</p>
         }
     </div>
