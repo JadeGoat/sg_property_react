@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getTownPlanningArea } from '../scripts/RestApiDataSource.js'
-import { extractFromPropertiesGeometryData,
-         extractPostalCodeFromMetaData, 
-         filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
+import { extractFromPropertiesGeometryData } from '../scripts/GeoJsonHelper.js'
+import { extractFromDescriptionGeometryData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getPointsInPolygon } from '../scripts/MapUtils.js'
 import MapFoodServices from '../components/MapFoodServices.jsx';
@@ -31,22 +30,24 @@ const PlotFoodServicesMapByTown = ({ town, hawkerCentreData, healthierEateriesDa
 
   useEffect(() => {
 
-    // To rework
-    if (hawkerCentreData) {
-      const metaData = extractFromPropertiesGeometryData(hawkerCentreData)
-      const filteredHawkerCentreData = metaData.filter(item => {
-        console.log(townAreaPoints)
-        getPointsInPolygon([item.lat, item.lon], townAreaPoints)
-      });
-      setSelectedHawkerCentreData(filteredHawkerCentreData);
-    };
+    if (townAreaPoints) {
+      if (hawkerCentreData) {
+        const metaData = extractFromPropertiesGeometryData(hawkerCentreData)
+        const filteredHawkerCentreData = metaData.filter(item => {
+          getPointsInPolygon([item.lat, item.lon], townAreaPoints)
+        });
+        setSelectedHawkerCentreData(filteredHawkerCentreData);
+      };
 
-    // To rework
-    // if (healthierEateriesData) {
-    //   const metaPostalCodeData = extractPostalCodeFromMetaData(healthierEateriesData)
-    //   const filteredHealthierEateriesData = filterGeoJsonData(healthierEateriesData, metaPostalCodeData, town)
-    //   setSelectedHealthierEateriesData(filteredHealthierEateriesData);
-    // };
+      if (healthierEateriesData) {
+        console.log(healthierEateriesData)
+        const metaData = extractFromDescriptionGeometryData(healthierEateriesData)
+        const filteredHealthierEateriesData = metaData.filter(item => {
+          getPointsInPolygon([item.lat, item.lon], townAreaPoints)
+        });
+        setSelectedHealthierEateriesData(filteredHealthierEateriesData);
+      };
+    }
 
   }, [hawkerCentreData, healthierEateriesData, townAreaPoints]);
 

@@ -17,7 +17,6 @@ const PlotMedicalCareMapByRadius = ({ town, chasClinicData }) => {
     const latlon = getTownLatLon(town)
     setSelectedLat(latlon[0]);
     setSelectedLon(latlon[1]);
-
   }, [town]);
 
   useEffect(() => {
