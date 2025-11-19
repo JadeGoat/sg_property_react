@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getTownPlanningArea } from '../scripts/RestApiDataSource.js'
-import { extractFromPropertiesGeometryData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getPointsInPolygon } from '../scripts/MapUtils.js'
+import { extractAndMerge } from '../scripts/GeoJsonHelper.js'
 import MapPersonalCare from '../components/MapPersonalCare.jsx';
 
 // Example using GeoJson data on Map Component
@@ -30,27 +30,39 @@ const PlotPersonalCareByTown = ({ town, childCareData, elderlyCareData, disabili
 
     if (townAreaPoints) {
       if (childCareData) {
-        const metaData = extractFromPropertiesGeometryData(childCareData)
-        const filteredChildCareData = metaData.filter(item => {
-          getPointsInPolygon([item.lat, item.lon], townAreaPoints)
+        const filteredChildCareData = childCareData.features.filter(item => {
+          const loc = item.geometry.coordinates;
+          const validPoint = getPointsInPolygon([loc[1], loc[0]], townAreaPoints)
+          return validPoint;
         });
-        setSelectedChildCareData(filteredChildCareData);
+
+        // Extract postal and address from html
+        const mergedFeatures = extractAndMerge(filteredChildCareData)
+        setSelectedChildCareData(mergedFeatures);
       };
 
       if (elderlyCareData) {
-        const metaData = extractFromPropertiesGeometryData(elderlyCareData)
-        const filteredElderlyCareData = metaData.filter(item => {
-          getPointsInPolygon([item.lat, item.lon], townAreaPoints)
+        const filteredElderlyCareData = elderlyCareData.features.filter(item => {
+          const loc = item.geometry.coordinates;
+          const validPoint = getPointsInPolygon([loc[1], loc[0]], townAreaPoints)
+          return validPoint;
         });
-        setSelectedElderlyCareData(filteredElderlyCareData);
+
+        // Extract postal and address from html
+        const mergedFeatures = extractAndMerge(filteredElderlyCareData)
+        setSelectedElderlyCareData(mergedFeatures);
       };
 
       if (disabilityServicesData) {
-        const metaData = extractFromPropertiesGeometryData(disabilityServicesData)
-        const filteredDisabilityServicesData = metaData.filter(item => {
-          getPointsInPolygon([item.lat, item.lon], townAreaPoints)
+        const filteredDisabilityServicesData = disabilityServicesData.features.filter(item => {
+          const loc = item.geometry.coordinates;
+          const validPoint = getPointsInPolygon([loc[1], loc[0]], townAreaPoints)
+          return validPoint;
         });
-        setSelectedDisabilityServicesData(filteredDisabilityServicesData);
+
+        // Extract postal and address from html
+        const mergedFeatures = extractAndMerge(filteredDisabilityServicesData)
+        setSelectedDisabilityServicesData(mergedFeatures);
       };
     }
 

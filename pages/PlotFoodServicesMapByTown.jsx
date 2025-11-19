@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getTownPlanningArea } from '../scripts/RestApiDataSource.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getPointsInPolygon } from '../scripts/MapUtils.js'
-import { constructGeoJsonFromFeature, extractPostalCodeFromMetaData } from '../scripts/GeoJsonHelper.js'
+import { extractAndMerge } from '../scripts/GeoJsonHelper.js'
 import MapFoodServices from '../components/MapFoodServices.jsx';
 
 // Example using GeoJson data on Map Component
@@ -50,14 +50,7 @@ const PlotFoodServicesMapByTown = ({ town, hawkerCentreData, healthierEateriesDa
         });
 
         // Extract postal and address from html
-        const filteredHealthierEateriesData = constructGeoJsonFromFeature(eateriesFeatures)
-        const metaPostalCodeData = extractPostalCodeFromMetaData(filteredHealthierEateriesData)
-
-        // Merge feature together
-        const mergedFeatures = filteredHealthierEateriesData.features.map((item, index) => ({
-            ...item,
-            ...metaPostalCodeData[index]
-        }));
+        const mergedFeatures = extractAndMerge(eateriesFeatures)
         setSelectedHealthierEateriesData(mergedFeatures);
       };
     }
