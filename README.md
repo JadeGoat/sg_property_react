@@ -1,7 +1,15 @@
 # Introduction
-The original intention was to have a high level view of price of the singapore HDB property market. Main goal was to provide additional information to aid in the decision of buying HDB property or town planning. Including private property was possible but not a priority (not in the foreseeable future). 
+The original intention was to have a high level view of price of the singapore HDB property market. Main goal was to provide additional information to aid in the decision of buying HDB property or town planning. Including private property was possible but not a priority (not in the foreseeable future). Currently, HDB BTO data are not easily available (only 3rd party website or stats published in PDF), will including HDB BTO data when it is more assessible.
 
-At later stages, it scaled to provide a better view of supporting infrastructure and amenities around the property (or town).
+At later stages, it scaled to provide a better view of supporting infrastructure and amenities around the property (or town). 
+- Carpark (Seasonal/Short Term Parking, FOC/non-FOC) 
+- Public Transport (Bus stop & MRT/LRT)
+- Lifecare (Child/Elderly Care & Disability Services)
+- Healthcare (Chas Clinic)
+- Food (Hawker & Eateries)
+- Retail (Supermarket)
+
+Planning area from onemap api (polygon map) is included to replace the original postal code method when selecting by town's category. The planning area data is retrieve from the database, where in the sg_property_datapipeline project download the polygon map using download_planning_area script.
 
 Finally, this project is free for usage, however it should not be commericalize for any use of profit.
 
@@ -21,9 +29,13 @@ For <u>Map Components</u>, there are two types of implementation: client process
 Remarks: This project serves to illustrate the different implementation. By no means, it is a production ready code.
 
 # Setup
-Important Note: To be use together with sg_property_datapipeline project. 
+#### 1. Database
+To be use together with sg_property_datapipeline project
 
-#### Installing node packages
+- sg_property_datapipeline project populate the database 
+- running of DataServer script to retrieve from database
+
+#### 2. Installing node packages
 a. Using repo package.json
 ```
 npm install
@@ -39,7 +51,7 @@ npm install react-leaflet leaflet leaflet.heat
 npm install react-tabs
 ```
 
-#### Preparing .env file
+#### 3. Preparing .env file
 Creating .env in root folder with the following fields
 
 IMPORTANT: There must be "VITE_" prefix in the names
@@ -97,3 +109,5 @@ npm run dev
    ![Alt text](./images/sample_map_supermarket.png)
 
 9. Rework the viewable by Town's category using planning area instead of postal code and added all sub-category with viewable by Town's category
+
+10. Added planning area under resources tab.
