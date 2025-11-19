@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getTownPlanningArea } from '../scripts/RestApiDataSource.js'
-import { getTownLatLon, getPlanningTownName } from '../scripts/SgTownHelper.js'
+import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getPointsInPolygon } from '../scripts/MapUtils.js'
 import MapRetailServices from '../components/MapRetailServices.jsx';
 
@@ -17,8 +17,7 @@ const PlotRetailServicesMapByTown = ({ town, supermarketsData }) => {
   useEffect(() => {
 
     // Set planning area
-    const planningTownName = getPlanningTownName(town)
-    getTownPlanningArea(planningTownName, setPlanningArea)
+    getTownPlanningArea(town, setPlanningArea)
 
     // Set lat, lon
     const latlon = getTownLatLon(town)

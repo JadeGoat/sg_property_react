@@ -1,56 +1,77 @@
 import { useEffect, useState } from 'react';
-import MapFoodServices from '../components/MapFoodServices.jsx';
-import { extractPostalCodeFromPropertiesData, 
+import { getTownPlanningArea } from '../scripts/RestApiDataSource.js'
+import { extractFromPropertiesGeometryData,
          extractPostalCodeFromMetaData, 
          filterGeoJsonData } from '../scripts/GeoJsonHelper.js'
 import { getTownLatLon } from '../scripts/SgTownHelper.js'
+import { getPointsInPolygon } from '../scripts/MapUtils.js'
+import MapFoodServices from '../components/MapFoodServices.jsx';
 
 // Example using GeoJson data on Map Component
 // - Extracting for GeoJson metadata done on client
 const PlotFoodServicesMapByTown = ({ town, hawkerCentreData, healthierEateriesData }) => {
 
-    const [selectedLat, setSelectedLat] = useState(null);
-    const [selectedLon, setSelectedLon] = useState(null);
-    const [selectedHawkerCentreData, setSelectedHawkerCentreData] = useState(null);
-    const [selectedHealthierEateriesData, setSelectedHealthierEateriesData] = useState(null);
+  const [planningArea, setPlanningArea] = useState(null);
+  const [selectedLat, setSelectedLat] = useState(null);
+  const [selectedLon, setSelectedLon] = useState(null);
+  const [selectedHawkerCentreData, setSelectedHawkerCentreData] = useState(null);
+  const [selectedHealthierEateriesData, setSelectedHealthierEateriesData] = useState(null);
+  const [townAreaPoints, setTownAreaPoints] = useState(null);
 
-    useEffect(() => {
-        const latlon = getTownLatLon(town)
-        setSelectedLat(latlon[0]);
-        setSelectedLon(latlon[1]);
-    }, [town]);
+  useEffect(() => {
+    // Set planning area
+    getTownPlanningArea(town, setPlanningArea)
+    
+    // Set lat, lon
+    const latlon = getTownLatLon(town)
+    setSelectedLat(latlon[0]);
+    setSelectedLon(latlon[1]);
+  }, [town]);
 
-    useEffect(() => {
+  useEffect(() => {
+  
+    // Format planning area into useable polygon format
+    if (planningArea && planningArea.length > 0) {
+      const points_dict = planningArea[0]['town_boundary'][0][0]
+      const points_list = points_dict.map(item => ([item.y, item.x]));
+      setTownAreaPoints(points_list)
+    }
+  }, [planningArea]);
 
-      // To rework
-      if (hawkerCentreData) {
-        const metaPostalCodeData = extractPostalCodeFromPropertiesData(hawkerCentreData)
-        const filteredHawkerCentreData = filterGeoJsonData(hawkerCentreData, metaPostalCodeData, town)
-        setSelectedHawkerCentreData(filteredHawkerCentreData);
-      };
+  useEffect(() => {
 
-      // To rework
-      if (healthierEateriesData) {
-        const metaPostalCodeData = extractPostalCodeFromMetaData(healthierEateriesData)
-        const filteredHealthierEateriesData = filterGeoJsonData(healthierEateriesData, metaPostalCodeData, town)
-        setSelectedHealthierEateriesData(filteredHealthierEateriesData);
-      };
+    // To rework
+    if (hawkerCentreData) {
+      const metaData = extractFromPropertiesGeometryData(hawkerCentreData)
+      const filteredHawkerCentreData = metaData.filter(item => {
+        console.log(townAreaPoints)
+        getPointsInPolygon([item.lat, item.lon], townAreaPoints)
+      });
+      setSelectedHawkerCentreData(filteredHawkerCentreData);
+    };
 
-    }, [hawkerCentreData, healthierEateriesData, town]);
+    // To rework
+    // if (healthierEateriesData) {
+    //   const metaPostalCodeData = extractPostalCodeFromMetaData(healthierEateriesData)
+    //   const filteredHealthierEateriesData = filterGeoJsonData(healthierEateriesData, metaPostalCodeData, town)
+    //   setSelectedHealthierEateriesData(filteredHealthierEateriesData);
+    // };
 
-    return (
-        <div>
-            <h2>By category</h2>
-            {selectedHawkerCentreData && selectedHealthierEateriesData ?
-                <MapFoodServices centerCoordinate={[1.3778, 103.8554]} 
-                                 zoomValue={13} 
-                                 hawkerCentreData={selectedHawkerCentreData}
-                                 healthierEateriesData={selectedHealthierEateriesData} 
-                                 newCenter={[selectedLat, selectedLon]} />:
-                <p>Loading map with pins...</p>
-            }
-        </div>
-    )
+  }, [hawkerCentreData, healthierEateriesData, townAreaPoints]);
+
+  return (
+    <div>
+        <h2>By category</h2>
+        {selectedHawkerCentreData && selectedHealthierEateriesData ?
+            <MapFoodServices centerCoordinate={[1.3778, 103.8554]} 
+                             zoomValue={13} 
+                             hawkerCentreData={selectedHawkerCentreData}
+                             healthierEateriesData={selectedHealthierEateriesData} 
+                             newCenter={[selectedLat, selectedLon]} />:
+            <p>Loading map with pins...</p>
+        }
+    </div>
+  )
 }
 
 export default PlotFoodServicesMapByTown

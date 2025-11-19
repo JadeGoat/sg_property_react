@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getTownPlanningArea } from '../scripts/RestApiDataSource.js'
-import { getTownLatLon, getPlanningTownName } from '../scripts/SgTownHelper.js'
+import { getTownLatLon } from '../scripts/SgTownHelper.js'
 import { getPointsInPolygon } from '../scripts/MapUtils.js'
 import MapPublicTransport from '../components/MapPublicTransport.jsx';
 
@@ -18,8 +18,7 @@ const PlotPublicTransportMapByTown = ({ town, busStopData, mrtStationData }) => 
   useEffect(() => {
 
     // Set planning area
-    const planningTownName = getPlanningTownName(town)
-    getTownPlanningArea(planningTownName, setPlanningArea)
+    getTownPlanningArea(town, setPlanningArea)
     
     // Set lat, lon
     const latlon = getTownLatLon(town)
