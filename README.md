@@ -96,4 +96,4 @@ npm run dev
 
    ![Alt text](./images/sample_map_supermarket.png)
 
-9. Rework the viewable by Town's category using planning area instead of postal code and added all sub-category with viewable by Town's category (less lifecare services and food services)
+9. Rework the viewable by Town's category using planning area instead of postal code and added all sub-category with viewable by Town's category
