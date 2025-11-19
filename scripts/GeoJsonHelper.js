@@ -72,7 +72,7 @@ export function extractAndMerge(geoJsonFeature) {
         ...item,
         ...metaPostalCodeData[index]
     }));
-    return mergedGeoJsonData
+    return constructGeoJsonFromFeature(mergedGeoJsonData)
 }
 
 export function filterGeoJsonData(geoJsonData, postalCodeData, selectedTown) {
