@@ -1,16 +1,18 @@
 import { getTownFromPostal } from './SgTownHelper.js'
 
-export function extractPostalCodeFromPropertiesData(geoJsonData) {
-    const metaData = geoJsonData.features.map(item => item.properties);
-    const metaPostalCodeData = metaData.map(item => {
+export function extractFromPropertiesGeometryData(geoJsonData) {
+    const metaData = geoJsonData.features.map(item => [item.properties, item.geometry]);
+    const extractedData = metaData.map(item => {
         const result = {
-            "postal_code": item.ADDRESSPOSTALCODE,
-            "address": item.ADDRESSSTREETNAME,
-            "name": item.NAME,
+            "postal_code": item[0].ADDRESSPOSTALCODE,
+            "address": item[0].ADDRESSSTREETNAME,
+            "name": item[0].NAME,
+            "lat": item[1].coordinates[1],
+            "lon": item[1].coordinates[0],
         }
         return result;
     });
-    return metaPostalCodeData;
+    return extractedData;
 }
 
 export function extractPostalCodeFromMetaData(geoJsonData) {

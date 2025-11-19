@@ -176,21 +176,3 @@ function findOriginalKey(searchKey) {
   const upperSearch = searchKey.toUpperCase();
   return Object.keys(sgTowns).find(key => key.toUpperCase() === upperSearch);
 }
-
-export function getPlanningTownName(town) { 
-  var planning_town = town
-
-  // TODO: Review this part again
-  if (town == "CENTRAL") {
-    // TODO: need to combined muliple planning area
-    // TANGLIN, RIVER VALLLEY, ORCHARD, MUSEUM, SINGAPORE RIVER, OUTRAM, DOWNTOWN CORE, 
-    // NEWTON, STRAITS VIEW, MARINA SOUTH, MARINA EAST
-    planning_town = "DOWNTOWN CORE"
-    return planning_town
-  }
-  else if (town == "KALLANG/WHAMPOA") {
-    planning_town = "KALLANG"
-    return planning_town
-  }
-  return planning_town
-}
